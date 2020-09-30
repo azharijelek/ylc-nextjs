@@ -1,4 +1,3 @@
-const withPWA = require('next-pwa')
 
 // module.exports = {
 //     devIndicators: {
@@ -6,6 +5,7 @@ const withPWA = require('next-pwa')
 //     },
 // }
 
+const withPWA = require('next-pwa')
 module.exports = withPWA({
     webpack(config, { dev }) {
         if (dev) {
@@ -27,9 +27,9 @@ module.exports = withPWA({
     pwa: {
         dest: 'public'
     },
-    compress: true,
-    trailingSlash: true,
-    target: 'server',
-    poweredByHeader: false,
-    generateEtags: false,
+    // compress: true,
+    // trailingSlash: true,
+    // target: 'server',
+    // poweredByHeader: false,
+    // generateEtags: false,
 })

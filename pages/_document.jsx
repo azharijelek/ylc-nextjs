@@ -10,9 +10,7 @@ class MyDocument extends Document {
 
     return (
       <Html>
-        <Head>
-          <meta charSet="utf-8" />
-          
+        <Head>          
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link
             rel="stylesheet"
