@@ -1,7 +1,7 @@
 import React from 'react';
+import dynamic from 'next/dynamic'
 import { makeStyles } from '@material-ui/core/styles';
 import Head from 'next/head'
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar'
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
@@ -10,9 +10,16 @@ import SearchIcon from '@material-ui/icons/Search';
 import $router from 'next/router'
 import '../styles/globals.css'
 
+// Dynamic imports:
+const AppBar = dynamic( 
+  () => import('@material-ui/core/AppBar'), 
+  {ssr: false}  
+)
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    paddingTop: 60
   },
   mainheader: {
     borderBottom: '1px solid #ED1B33',
@@ -23,9 +30,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function reportWebVitals(metric) {
-  console.log(metric)
-}
+// export function reportWebVitals(metric) {
+//   console.log(metric)
+// }
 
 function MyApp({ Component, pageProps }) {
   const classes = useStyles();
@@ -34,21 +41,19 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Your Life Choices</title>
         <link rel="manifest" href="/manifest.json" />
-        <link href='/favicon-16x16.png' rel='icon' type='image/png' sizes='16x16' />
-        <link href='/favicon-32x32.png' rel='icon' type='image/png' sizes='32x32' />
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB"/>
       </Head>
       <div className={classes.root}>
-        <AppBar className={classes.mainheader} color="default" position="static">
+        <AppBar className={classes.mainheader} color="default" position="fixed">
           <Toolbar>
-            <div onClick={() => $router.push('/')} className={classes.title}>
+            <div onClick={() => $router.push('/')}  className={classes.title}>
               <img src="/static/logo.svg" width="165"/>
             </div>
-            <IconButton color="inherit" aria-label="search">
+            <IconButton onClick={() => $router.push('/about')} color="inherit" aria-label="search">
               <SearchIcon />
             </IconButton>
-            <IconButton edge="end" color="inherit" aria-label="menu">
+            <IconButton onClick={() => $router.push('/blog')} edge="end" color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton>
           </Toolbar>

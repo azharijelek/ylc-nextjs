@@ -12,10 +12,6 @@ class MyDocument extends Document {
       <Html>
         <Head>          
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Material+Icons"
-          />
           <style jsx global>
             {`
               html,
@@ -29,7 +25,6 @@ class MyDocument extends Document {
                 box-sizing: border-box;
               }
               body {
-                font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
                 font-size: 1rem;
                 margin: 0;
               }

@@ -1,16 +1,12 @@
-import React from 'react'
+
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Toolbar from '@material-ui/core/Toolbar'
-import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
-import Hidden from '@material-ui/core/Hidden'
-import Link from '@material-ui/core/Link'
 import Container from '@material-ui/core/Container'
 import Head from 'next/head'
 import { spacing } from '@material-ui/system';
@@ -29,7 +25,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundImage: 'url(https://source.unsplash.com/user/erondu)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center'
@@ -62,15 +57,6 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch(`${process.env.WP_API_URL}/posts`)
-  const data = await res.json()
-
-  // Pass data to the page via props
-  return { props: { data } }
-}
-
 const Blog = (data) => {
   const classes = useStyles()
   const posts = data.data;
@@ -88,7 +74,6 @@ const Blog = (data) => {
           {/* Sub featured posts */}
           <Box pt={3}>
             <Grid container spacing={4}>
-              {/* <pre>{JSON.stringify(jsonfile, null, 2)}</pre> */}
               {posts.map(post => (
                 <Grid item key={post.id} xs={12} md={6}>
                   <Card className={classes.card}>
@@ -114,6 +99,18 @@ const Blog = (data) => {
       </Container>
     </>
   )
+}
+
+export async function getStaticProps() {
+  // Fetch data from external API
+  const res = await fetch(`${process.env.WP_API_URL}/posts`)
+  const data = await res.json()
+
+  // Pass data to the page via props
+  return { 
+    props: { data },
+    revalidate: 3600,
+  }
 }
 
 export default Blog
