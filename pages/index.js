@@ -57,43 +57,28 @@ const useStyles = makeStyles(theme => ({
     flex: 1
   },
   cardMedia: {
-    width: 160
+    height: 0,
+    paddingTop: '56.25%', // 16:9
   }
 }))
 
-const featuredPosts = [
-  {
-    title: 'Featured post',
-    date: 'Nov 12',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.'
-  },
-  {
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.'
-  }
-]
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`${process.env.WP_API_URL}/posts`)
+  const data = await res.json()
 
-const Blog = () => {
+  // Pass data to the page via props
+  return { props: { data } }
+}
+
+const Blog = (data) => {
   const classes = useStyles()
+  const posts = data.data;
 
   return (
     <>
       <Head>
-          <title>Home</title>
-          <meta charset='utf-8' />
-          <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-          <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
-          <meta name='description' content='Description' />
-          <meta name='keywords' content='Keywords' />
-
-          <link rel="manifest" href="/manifest.json" />
-          <link href='/favicon-16x16.png' rel='icon' type='image/png' sizes='16x16' />
-          <link href='/favicon-32x32.png' rel='icon' type='image/png' sizes='32x32' />
-          <link rel="apple-touch-icon" href="/apple-icon.png"></link>
-          <meta name="theme-color" content="#317EFB"/>
+          <title>Your Life Choices</title>
       </Head>
 
       <CssBaseline />
@@ -103,35 +88,23 @@ const Blog = () => {
           {/* Sub featured posts */}
           <Box pt={3}>
             <Grid container spacing={4}>
-              {featuredPosts.map(post => (
-                <Grid item key={post.title} xs={12} md={6}>
-                  <CardActionArea component="a" href="#">
-                    <Card className={classes.card}>
-                      <div className={classes.cardDetails}>
-                        <CardContent>
-                          <Typography component="h2" variant="h5">
-                            {post.title}
-                          </Typography>
-                          <Typography variant="subtitle1" color="textSecondary">
-                            {post.date}
-                          </Typography>
-                          <Typography variant="subtitle1" paragraph>
-                            {post.description}
-                          </Typography>
-                          <Typography variant="subtitle1" color="primary">
-                            Continue reading...
-                          </Typography>
-                        </CardContent>
-                      </div>
-                      <Hidden xsDown>
-                        <CardMedia
-                          className={classes.cardMedia}
-                          image="https://source.unsplash.com/random"
-                          title="Image title"
-                        />
-                      </Hidden>
-                    </Card>
-                  </CardActionArea>
+              {/* <pre>{JSON.stringify(jsonfile, null, 2)}</pre> */}
+              {posts.map(post => (
+                <Grid item key={post.id} xs={12} md={6}>
+                  <Card className={classes.card}>
+                    <CardActionArea component="a" href="#">
+                      <img src={post.featured_img} alt="" loading="lazy" height="200"/>
+                      <CardContent>
+                        <Typography component="h2" variant="h5">
+                          {post.title}
+                        </Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
+                          {post.date_gmt}
+                        </Typography>
+                        {/* <div dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}></div> */}
+                      </CardContent>
+                      </CardActionArea>
+                  </Card>
                 </Grid>
               ))}
             </Grid>
