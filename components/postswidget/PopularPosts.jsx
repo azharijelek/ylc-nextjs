@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import PostList from './PostList'
 
-const url = 'https://azhdev.com/wp-json/ylc/v1/posts?per_page=10&page=2'
+const url = process.env.WP_API_URL+'/posts?per_page=10&page=2'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 function removeDomain(str) {
