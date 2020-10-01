@@ -6,5 +6,8 @@ module.exports = withPWA({
     dest: 'public',
     register: true,
     scope: '/',
+  },
+  env: {
+    'WP_API_URL': process.env.WP_API_URL
   }
 })
