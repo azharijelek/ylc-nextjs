@@ -2,12 +2,14 @@ import React from 'react';
 import dynamic from 'next/dynamic'
 import { makeStyles } from '@material-ui/core/styles';
 import Head from 'next/head'
+import Logo from '@/components/Logo'
 import Toolbar from '@material-ui/core/Toolbar'
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import $router from 'next/router'
+import Link from 'next/link'
 import '../styles/globals.css'
 
 // Dynamic imports:
@@ -48,7 +50,9 @@ function MyApp({ Component, pageProps }) {
         <AppBar className={classes.mainheader} color="default" position="fixed">
           <Toolbar>
             <div onClick={() => $router.push('/')}  className={classes.title}>
-              <img src="/static/logo.svg" width="165"/>
+              <Link href="/">
+                <a><Logo/></a>
+              </Link>
             </div>
             <IconButton onClick={() => $router.push('/about')} color="inherit" aria-label="search">
               <SearchIcon />

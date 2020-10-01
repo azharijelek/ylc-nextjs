@@ -110,7 +110,7 @@ export async function getStaticProps() {
   // Pass data to the page via props
   return { 
     props: { data },
-    revalidate: 3600,
+    revalidate: 300,
   }
 }
 
