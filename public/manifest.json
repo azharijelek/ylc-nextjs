@@ -1,8 +1,8 @@
 {
-    "short_name": "azh",
-    "name": "azhari",
+    "short_name": "Lite YLC",
+    "name": "Your Life Choices",
     "lang": "en",
-    "description": "lorem ipsum",
+    "description": "Lorem Ipsum Dolor Sit Amet",
     "start_url": "/?source=pwa",
     "background_color": "#ffffff",
     "theme_color": "#ED1B33",
