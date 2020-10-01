@@ -15,7 +15,7 @@ import '../styles/globals.css'
 // Dynamic imports:
 const AppBar = dynamic( 
   () => import('@material-ui/core/AppBar'), 
-  {ssr: false}  
+  {ssr: true}  
 )
 const Drawer = dynamic( 
   () => import('@material-ui/core/Drawer'), 
