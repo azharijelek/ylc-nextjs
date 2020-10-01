@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Blog = (data) => {
+const Home = (data) => {
   const classes = useStyles()
   const posts = data.data;
 
@@ -72,9 +72,10 @@ const Blog = (data) => {
       <Container maxWidth="lg">
         <main>
           {/* Sub featured posts */}
+          {/* <pre>{ JSON.stringify(posts,null,2) }</pre> */}
           <Box pt={3}>
             <Grid container spacing={4}>
-              {posts.map(post => (
+              {posts[0].featured_img ? posts.map(post => (
                 <Grid item key={post.id} xs={12} md={6}>
                   <Card className={classes.card}>
                     <CardActionArea component="a" href="#">
@@ -86,12 +87,11 @@ const Blog = (data) => {
                         <Typography variant="subtitle1" color="textSecondary">
                           {post.date_gmt}
                         </Typography>
-                        {/* <div dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}></div> */}
                       </CardContent>
                       </CardActionArea>
                   </Card>
                 </Grid>
-              ))}
+              )) : ''}
             </Grid>
           </Box>
           {/* End sub featured posts */}
@@ -103,7 +103,8 @@ const Blog = (data) => {
 
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await fetch(`${process.env.WP_API_URL}/posts`)
+  const res = await fetch(`${process.env.WP_API_URL}/posts/`)
+  //const res = await fetch('https://azhdev.com/wp-json/wp/v2/posts?per_page=5')
   const data = await res.json()
 
   // Pass data to the page via props
@@ -113,4 +114,4 @@ export async function getStaticProps() {
   }
 }
 
-export default Blog
+export default Home
