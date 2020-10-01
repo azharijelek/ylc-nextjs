@@ -103,7 +103,7 @@ const Home = (data) => {
 
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await fetch(`${process.env.WP_API_URL}/posts/`)
+  const res = await fetch('https://azhdev.com/wp-json/ylc/v1/posts/')
   //const res = await fetch('https://azhdev.com/wp-json/wp/v2/posts?per_page=5')
   const data = await res.json()
 
