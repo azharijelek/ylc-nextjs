@@ -67,6 +67,7 @@ const Home = (data) => {
       <main id="site-content">
 
           <Box pt={3}>
+            {/* Render Post Slider */}
             <HorizontalScroll>
               {posts.length > 0 ? posts.map(post => (
               <article className="item" key={'slider-'+post.id}>
@@ -82,7 +83,10 @@ const Home = (data) => {
           <style jsx>{`
             .item {
               flex: 0 0 auto;
-              padding: 0 15px;
+              padding: 0 15px 0 0;
+              &:first-of-type {
+                padding-left: 15px;
+              }
             }
           `}</style>
           

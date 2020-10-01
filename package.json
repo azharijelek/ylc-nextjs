@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 4200",
+    "dev": "NODE_ENV=development next dev --port 4200",
     "build": "next build",
-    "start": "next start --port 8000"
+    "start": "NODE_ENV=production next start --port 8000"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
