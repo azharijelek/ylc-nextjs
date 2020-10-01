@@ -1,7 +1,5 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Head from 'next/head'
 
@@ -71,21 +69,9 @@ const About = () => {
         <>
             <Head>
                 <title>About</title>
-                <meta property="og:title" content="My page title" key="title" />
             </Head>
             <Container maxWidth="lg">
-                <Toolbar className={classes.toolbar}>
-                    <Typography
-                        component="h2"
-                        variant="h5"
-                        color="inherit"
-                        align="center"
-                        noWrap
-                        className={classes.toolbarTitle}
-                    >
-                        About
-                    </Typography>
-                </Toolbar>
+
                 <main>
                     <p>Lorem ipsyum diolor sit amet</p>
                 </main>

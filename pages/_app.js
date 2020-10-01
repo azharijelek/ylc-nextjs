@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
 import $router from 'next/router'
+import {useRouter} from 'next/router'
 import Link from 'next/link'
 import '../styles/globals.css'
 
@@ -34,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
   mainheader: {
     borderBottom: '1px solid #ED1B33',
     boxShadow: 'none!important'
+  },
+  logoH1: {
+    margin: 0,
   },
   title: {
     flexGrow: 1,
@@ -91,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
 
 function MyApp({ Component, pageProps }) {
   const classes = useStyles();
+  const router = useRouter()
   
   const [open, setOpen] = React.useState(false);
 
@@ -153,6 +158,28 @@ function MyApp({ Component, pageProps }) {
     },
   ]
   
+  const HomeLogo = () => {
+    return (
+      <h1 className={classes.logoH1}>
+        <Link href="/">
+          <a title="Your Life Choices" title="Go to Your Life Choices Home">
+            <img src='/static/logo.svg' width="165" alt="Your Life Choices"/>
+          </a>
+        </Link>
+      </h1>
+    )
+  }
+
+  const InnerPageLogo = () => {
+    return (
+      <Link href="/">
+        <a title="Your Life Choices" title="Go to Your Life Choices Home">
+          <img src='/static/logo.svg' width="165" alt="Your Life Choices"/>
+        </a>
+      </Link>
+    )
+  }
+
   return (
     <>
       <Head>
@@ -165,11 +192,11 @@ function MyApp({ Component, pageProps }) {
         <AppBar className={classes.mainheader} color="default" position="fixed">
           <Toolbar>
             <div onClick={() => $router.push('/')}  className={classes.title}>
-              <Link href="/">
-                <a>
-                  <img src='/static/logo.svg' width="165" alt=""/>
-                </a>
-              </Link>
+              { router.pathname == '/'
+                ? <HomeLogo/>
+                : <InnerPageLogo/>
+              }
+              
             </div>
             <IconButton onClick={() => $router.push('/about')} color="inherit" aria-label="search">
               <SearchIcon />
@@ -179,6 +206,9 @@ function MyApp({ Component, pageProps }) {
             </IconButton>
           </Toolbar>
         </AppBar>
+
+        {/* <div><pre>{JSON.stringify($router, null, 2)}</pre></div> */}
+        
         <Drawer
           className={classes.drawer}
           anchor="right"

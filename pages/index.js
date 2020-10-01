@@ -1,16 +1,11 @@
 
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import Container from '@material-ui/core/Container'
 import Head from 'next/head'
 import { spacing } from '@material-ui/system';
 import Box from '@material-ui/core/Box';
+import HorizontalScroll from '@/components/HorizontalScroll'
+import HeroCard from '@/components/HeroCard'
 
 
 const useStyles = makeStyles(theme => ({
@@ -69,42 +64,37 @@ const Home = (data) => {
 
       <CssBaseline />
 
-      <Container maxWidth="lg">
-        <main>
-          {/* Sub featured posts */}
-          {/* <pre>{ JSON.stringify(posts,null,2) }</pre> */}
+      <main id="site-content">
+
           <Box pt={3}>
-            <Grid container spacing={4}>
-              {posts[0].featured_img ? posts.map(post => (
-                <Grid item key={post.id} xs={12} md={6}>
-                  <Card className={classes.card}>
-                    <CardActionArea component="a" href="#">
-                      <img src={post.featured_img} alt="" loading="lazy" height="200"/>
-                      <CardContent>
-                        <Typography component="h2" variant="h5">
-                          {post.title}
-                        </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
-                          {post.date_gmt}
-                        </Typography>
-                      </CardContent>
-                      </CardActionArea>
-                  </Card>
-                </Grid>
+            <HorizontalScroll>
+              {posts.length > 0 ? posts.map(post => (
+              <article className="item" key={'slider-'+post.id}>
+                <HeroCard
+                  thumbnail={post.featured_img}
+                  title={post.title}
+                />
+              </article>
               )) : ''}
-            </Grid>
+            </HorizontalScroll>
           </Box>
-          {/* End sub featured posts */}
+
+          <style jsx>{`
+            .item {
+              flex: 0 0 auto;
+              padding: 0 15px;
+            }
+          `}</style>
+          
+          {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
         </main>
-      </Container>
     </>
   )
 }
 
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await fetch('https://azhdev.com/wp-json/ylc/v1/posts/')
-  //const res = await fetch('https://azhdev.com/wp-json/wp/v2/posts?per_page=5')
+  const res = await fetch('https://azhdev.com/wp-json/ylc/v1/posts?per_page=10')
   const data = await res.json()
 
   // Pass data to the page via props
