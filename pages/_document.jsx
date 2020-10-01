@@ -11,7 +11,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>          
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta name="theme-color" content='#ED1B33' />
           <style jsx global>
             {`
               html,

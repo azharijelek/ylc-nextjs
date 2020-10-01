@@ -4,7 +4,7 @@
     "lang": "en",
     "description": "lorem ipsum",
     "start_url": "/?source=pwa",
-    "background_color": "#ED1B33",
+    "background_color": "#ffffff",
     "theme_color": "#ED1B33",
     "dir": "ltr",
     "display": "standalone",
