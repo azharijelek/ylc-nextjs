@@ -6,7 +6,12 @@ import { spacing } from '@material-ui/system';
 import Box from '@material-ui/core/Box';
 import HorizontalScroll from '@/components/HorizontalScroll'
 import HeroCard from '@/components/HeroCard'
+import dynamic from 'next/dynamic'
 
+const PopularPosts = dynamic( 
+  () => import('@/components/postswidget/PopularPosts'), 
+  {ssr: false}  
+)
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -66,18 +71,24 @@ const Home = (data) => {
 
       <main id="site-content">
 
-          <Box pt={3}>
-            {/* Render Post Slider */}
+          {/* Render Post Slider */}
+          <Box my={3}>
             <HorizontalScroll>
-              {posts.length > 0 ? posts.map(post => (
+              {posts.length > 0 && posts.map(post => (
               <article className="item" key={'slider-'+post.id}>
                 <HeroCard
                   thumbnail={post.featured_img}
                   title={post.title}
                 />
               </article>
-              )) : ''}
+              ))}
             </HorizontalScroll>
+          </Box>
+          
+          {/* Popular Posts */}
+          <Box my={3} px={2}>
+            <h4 className="ylc-widgethead">MOST POPULAR</h4>
+            <PopularPosts/>
           </Box>
 
           <style jsx>{`
@@ -98,7 +109,7 @@ const Home = (data) => {
 
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await fetch('https://azhdev.com/wp-json/ylc/v1/posts?per_page=10')
+  const res = await fetch('https://azhdev.com/wp-json/ylc/v1/posts?per_page=5')
   const data = await res.json()
 
   // Pass data to the page via props

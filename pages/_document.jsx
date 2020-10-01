@@ -18,6 +18,8 @@ class MyDocument extends Document {
               body {
                 height: 100%;
                 width: 100%;
+                margin: 0;
+                padding: 0;
               }
               *,
               *:after,
@@ -27,6 +29,14 @@ class MyDocument extends Document {
               body {
                 font-size: 1rem;
                 margin: 0;
+              }
+              a {
+                color: inherit;
+                text-decoration: none!important;
+              }
+              .my-0 {
+                margin-top: 0!important;
+                margin-bottom: 0!important;
               }
             `}
           </style>

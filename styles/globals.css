@@ -18,3 +18,15 @@ a {
   margin-top: 0!important;
   margin-bottom: 0!important;
 }
+
+.ylc-widgethead {
+  font-size: 20px;
+  border-left: 5px solid #ED1B33;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px !important;
+  margin-top: 0;
+}
