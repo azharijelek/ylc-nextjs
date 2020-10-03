@@ -75,7 +75,7 @@ const Home = (data) => {
           <Box my={3}>
             <HorizontalScroll>
               {posts.length > 0 && posts.map(post => (
-              <article className="item" key={'slider-'+post.id}>
+              <article className="slide-item" key={'slider-'+post.id}>
                 <HeroCard
                   thumbnail={post.featured_img}
                   title={post.title}
@@ -92,7 +92,7 @@ const Home = (data) => {
           </Box>
 
           <style jsx>{`
-            .item {
+            .slide-item {
               flex: 0 0 auto;
               padding: 0 15px 0 0;
               &:first-of-type {
