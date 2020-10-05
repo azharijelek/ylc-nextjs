@@ -6,7 +6,7 @@ import Box from '@material-ui/core/Box';
 import HorizontalScroll from '@/components/HorizontalScroll'
 import HeroCard from '@/components/HeroCard'
 import dynamic from 'next/dynamic'
-import fetch from 'isomorphic-unfetch'
+import isofetch from 'isomorphic-unfetch'
 
 const PopularPosts = dynamic( 
   () => import('@/components/postswidget/PopularPosts'), 
@@ -88,10 +88,10 @@ const Home = (data) => {
           {/* Popular Posts */}
           <Box my={3} px={2}>
             <h4 className="ylc-widgethead">MOST POPULAR</h4>
-            <PopularPosts
-             per_page="5"
+            {/* <PopularPosts
+             per_page="4"
              paged="2"
-            />
+            /> */}
           </Box>
 
           <style jsx>{`
@@ -112,7 +112,7 @@ const Home = (data) => {
 
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await fetch(process.env.WP_API_URL+'/posts?per_page=5')
+  const res = await isofetch(process.env.WP_API_URL+'/posts?per_page=5')
   const data = await res.json()
 
   // Pass data to the page via props
