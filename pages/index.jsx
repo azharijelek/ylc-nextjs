@@ -109,9 +109,9 @@ const Home = (data) => {
   )
 }
 
+import fetch from 'isomorphic-fetch'
 export async function getStaticProps() {
   // Fetch data from external API
-  require('isomorphic-fetch');
   const res = await fetch(process.env.WP_API_URL+'/posts?per_page=5')
   const data = await res.json()
 
