@@ -1,14 +1,16 @@
 import useSWR from 'swr'
 import PostList from './PostList'
 
-const url = process.env.WP_API_URL+'/posts?per_page=10&page=2'
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
-
 function removeDomain(str) {
     return str.replace(/^.*\/\/[^\/]+/, '');
 }
 
-export default function PopularPosts() {
+export default function PopularPosts(props) {
+    let per_page = props.per_page ? props.per_page : '4';
+    let paged = props.paged ? props.paged : '1';
+    
+    const url = process.env.WP_API_URL+`/posts?per_page=${per_page}&page=${paged}`
+    const fetcher = (...args) => fetch(...args).then((res) => res.json())
     const { data, result, error } = useSWR(url, fetcher)
 
     if (error) return <div>failed to load</div>

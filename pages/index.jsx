@@ -2,7 +2,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Head from 'next/head'
-import { spacing } from '@material-ui/system';
 import Box from '@material-ui/core/Box';
 import HorizontalScroll from '@/components/HorizontalScroll'
 import HeroCard from '@/components/HeroCard'
@@ -88,7 +87,10 @@ const Home = (data) => {
           {/* Popular Posts */}
           <Box my={3} px={2}>
             <h4 className="ylc-widgethead">MOST POPULAR</h4>
-            <PopularPosts/>
+            <PopularPosts
+             per_page="5"
+             paged="2"
+            />
           </Box>
 
           <style jsx>{`
