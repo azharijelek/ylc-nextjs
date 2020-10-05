@@ -185,7 +185,6 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Your Life Choices</title>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB"/>
       </Head>
       <div className={classes.root}>

@@ -2,85 +2,79 @@
     "short_name": "Lite YLC",
     "name": "Your Life Choices",
     "lang": "en",
-    "description": "Lorem Ipsum Dolor Sit Amet",
-    "start_url": "/?source=pwa",
-    "background_color": "#ffffff",
-    "theme_color": "#ED1B33",
+    "description": "YourLifeChoices provides information for Australians 50 years and over",
+    "start_url": "/",
+    "background_color": "#ed1b33",
+    "theme_color": "#ed1b33",
     "dir": "ltr",
-    "display": "standalone",
-    "orientation": "any",
+    "display": "fullscreen",
+    "orientation": "portrait",
     "icons": [
      {
-      "src": "/icons/android-icon-192x192-dunplab-manifest-11123.png",
+      "src": "/android-icon-192x192-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "192x192"
      },
      {
-      "src": "/icons/apple-icon-180x180-dunplab-manifest-11123.png",
+      "src": "/apple-icon-180x180-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "180x180"
      },
      {
-      "src": "/icons/apple-icon-152x152-dunplab-manifest-11123.png",
+      "src": "/apple-icon-152x152-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "152x152"
      },
      {
-      "src": "/icons/apple-icon-144x144-dunplab-manifest-11123.png",
+      "src": "/apple-icon-144x144-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "144x144"
      },
      {
-      "src": "/icons/apple-icon-120x120-dunplab-manifest-11123.png",
+      "src": "/apple-icon-120x120-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "120x120"
      },
      {
-      "src": "/icons/apple-icon-114x114-dunplab-manifest-11123.png",
+      "src": "/apple-icon-114x114-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "114x114"
      },
      {
-      "src": "/icons/favicon-96x96-dunplab-manifest-11123.png",
+      "src": "/favicon-96x96-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "96x96"
      },
      {
-      "src": "/icons/apple-icon-76x76-dunplab-manifest-11123.png",
+      "src": "/apple-icon-76x76-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "76x76"
      },
      {
-      "src": "/icons/apple-icon-72x72-dunplab-manifest-11123.png",
+      "src": "/apple-icon-72x72-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "72x72"
      },
      {
-      "src": "/icons/apple-icon-60x60-dunplab-manifest-11123.png",
+      "src": "/apple-icon-60x60-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "60x60"
      },
      {
-      "src": "/icons/apple-icon-57x57-dunplab-manifest-11123.png",
+      "src": "/apple-icon-57x57-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "57x57"
      },
      {
-      "src": "/icons/favicon-32x32-dunplab-manifest-11123.png",
+      "src": "/favicon-32x32-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "32x32"
      },
      {
-      "src": "/icons/favicon-16x16-dunplab-manifest-11123.png",
+      "src": "/favicon-16x16-dunplab-manifest-18305.png",
       "type": "image/png",
       "sizes": "16x16"
-     },
-     {
-      "src": "/icons/favicon-192x192-dunplab-manifest-11123.png",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
      }
     ],
-    "prefer_related_applications": false
+    "prefer_related_applications": "false"
    }
