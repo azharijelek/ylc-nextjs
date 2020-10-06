@@ -8,7 +8,11 @@ import HeroCard from '@/components/HeroCard'
 import dynamic from 'next/dynamic'
 
 const PopularPosts = dynamic( 
-  () => import('@/components/postswidget/PopularPosts'), 
+  () => import('@/components/home_widgets/PopularPosts'), 
+  {ssr: false}  
+)
+const RecentNews = dynamic( 
+  () => import('@/components/home_widgets/RecentNews'), 
   {ssr: false}  
 )
 
@@ -85,12 +89,27 @@ const Home = (data) => {
           </Box>
           
           {/* Popular Posts */}
-          <Box my={3} px={2}>
+          <Box my={4} px={2}>
             <h4 className="ylc-widgethead">MOST POPULAR</h4>
             <PopularPosts
-             per_page="5"
-             paged="2"
+             per_page="4"
             />
+          </Box>
+
+          {/* Recent News */}
+          <Box my={4}>
+            <Box px={2}>
+              <h4 className="ylc-widgethead">RECENT NEWS</h4>
+            </Box>
+            
+            <HorizontalScroll>
+              <RecentNews
+                offset="5"
+                per_page="8"
+                page="1"
+                show_categories={1}
+              />
+            </HorizontalScroll>
           </Box>
 
           <style jsx>{`
