@@ -33,8 +33,8 @@ export default function PostList(props) {
                 .postDetail {
                     h4 {
                         margin: 0;
-                        font-size: 18px;
-                        line-height: 25px;
+                        font-size: 16px;
+                        line-height: 20px;
                     }
                 }
                 .media {

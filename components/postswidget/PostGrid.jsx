@@ -7,10 +7,13 @@ import Link from 'next/link'
  */
 export default function PostGrid(props) {
     let thumbnail = `${process.env.IMG_OPT_URL}/283x140,crop,quality=medium/${props.thumbnail}`
+    let catLink = props.categories.slug
+    let catName = props.categories.name
     return (
         <>
             <article className={'post-grid post-'+props.id}>
                 <div className="post-grid--thumb">
+                    <Link href={catLink}><a className="cat-badge">{catName}</a></Link>
                     <Link href={props.permalink}><a><img src={thumbnail} alt={props.title} width="60" height="60" loading="lazy"/></a></Link>
                 </div>
                 <div className="postDetail">
@@ -19,9 +22,6 @@ export default function PostGrid(props) {
             </article>
 
             <style jsx>{`
-                // div .post-grid:first-of-type {
-                //     padding-left: 15px;
-                // }
                 .post-grid {
                     .post-grid--thumb {
                         width: 100%;
@@ -32,6 +32,20 @@ export default function PostGrid(props) {
                         background: #e0e0e0;
                         border-radius: 8px;
                         line-height: 0;
+                        position: relative;
+
+                        .cat-badge {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            height: 20px;
+                            line-height: 20px;
+                            background: #4F4F4F;
+                            color: #fff;
+                            display: inline-block;
+                            padding: 0 5px;
+                        }
+                        
                         img {
                             object-fit: cover!important;
                             width: 100%!important;
@@ -39,7 +53,7 @@ export default function PostGrid(props) {
                         }
                     }
                     h4 {
-                        font-size: 18px;
+                        font-size: 16px;
                         margin-top: 10px;
                     }
                 }

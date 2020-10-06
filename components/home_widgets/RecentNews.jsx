@@ -44,6 +44,7 @@ export default function RecentNews(props) {
                         title={post.title}
                         thumbnail={post.featured_img}
                         permalink={post.permalink}
+                        categories={post.categories}
                         key={'post-'+post.id}
                     />
                 </div>

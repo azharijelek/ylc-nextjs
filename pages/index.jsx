@@ -101,7 +101,7 @@ const Home = (data) => {
             <Box px={2}>
               <h4 className="ylc-widgethead">RECENT NEWS</h4>
             </Box>
-
+            
             <HorizontalScroll>
               <RecentNews
                 offset="5"
