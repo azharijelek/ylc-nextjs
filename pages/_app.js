@@ -184,7 +184,8 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Your Life Choices</title>
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/manifest.json"></link>
+        <link rel="icon" href="/favicon.ico"></link>
         <link rel="apple-touch-icon" href="/icons/apple-icon-180x180-dunplab-manifest-18305.png"></link>
         <meta name="theme-color" content="#317EFB"/>
       </Head>

@@ -3,7 +3,7 @@
     "name": "Your Life Choices",
     "lang": "en",
     "description": "YourLifeChoices provides information for Australians 50 years and over",
-    "start_url": "/",
+    "start_url": "https://m.azhdev.com",
     "scope": "/",
     "background_color": "#ed1b33",
     "theme_color": "#ed1b33",
