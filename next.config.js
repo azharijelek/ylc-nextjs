@@ -8,6 +8,7 @@ module.exports = withPWA({
     scope: '/',
   },
   env: {
-    'WP_API_URL': process.env.WP_API_URL
+    'WP_API_URL': process.env.WP_API_URL,
+    'IMG_OPT_URL': process.env.IMG_OPT_URL,
   }
 })

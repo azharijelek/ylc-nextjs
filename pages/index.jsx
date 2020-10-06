@@ -6,10 +6,13 @@ import Box from '@material-ui/core/Box';
 import HorizontalScroll from '@/components/HorizontalScroll'
 import HeroCard from '@/components/HeroCard'
 import dynamic from 'next/dynamic'
-import isofetch from 'isomorphic-unfetch'
 
 const PopularPosts = dynamic( 
-  () => import('@/components/postswidget/PopularPosts'), 
+  () => import('@/components/home_widgets/PopularPosts'), 
+  {ssr: false}  
+)
+const RecentNews = dynamic( 
+  () => import('@/components/home_widgets/RecentNews'), 
   {ssr: false}  
 )
 
@@ -86,12 +89,27 @@ const Home = (data) => {
           </Box>
           
           {/* Popular Posts */}
-          <Box my={3} px={2}>
+          <Box my={4} px={2}>
             <h4 className="ylc-widgethead">MOST POPULAR</h4>
-            {/* <PopularPosts
+            <PopularPosts
              per_page="4"
-             paged="2"
-            /> */}
+            />
+          </Box>
+
+          {/* Recent News */}
+          <Box my={4}>
+            <Box px={2}>
+              <h4 className="ylc-widgethead">RECENT NEWS</h4>
+            </Box>
+
+            <HorizontalScroll>
+              <RecentNews
+                offset="5"
+                per_page="8"
+                page="1"
+                show_categories={1}
+              />
+            </HorizontalScroll>
           </Box>
 
           <style jsx>{`
@@ -112,7 +130,7 @@ const Home = (data) => {
 
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await isofetch(process.env.WP_API_URL+'/posts?per_page=5')
+  const res = await fetch(process.env.WP_API_URL+'/posts?per_page=5')
   const data = await res.json()
 
   // Pass data to the page via props
