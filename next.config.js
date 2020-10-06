@@ -10,5 +10,6 @@ module.exports = withPWA({
   env: {
     'WP_API_URL': process.env.WP_API_URL,
     'IMG_OPT_URL': process.env.IMG_OPT_URL,
-  }
+  },
+  trailingSlash: true,
 })
