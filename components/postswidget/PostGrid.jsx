@@ -6,7 +6,7 @@ import Link from 'next/link'
  * @param {*} props id, title, thumbnail, permalink
  */
 export default function PostGrid(props) {
-    let thumbnail = `${process.env.IMG_OPT_URL}/283x140,crop,quality=medium/${props.thumbnail}`
+    let thumbnail = `${props.thumbnail}&h=140`
     let catLink = props.categories.slug
     let catName = props.categories.name
     return (

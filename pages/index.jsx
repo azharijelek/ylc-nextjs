@@ -9,7 +9,7 @@ import dynamic from 'next/dynamic'
 
 const PopularPosts = dynamic( 
   () => import('@/components/home_widgets/PopularPosts'), 
-  {ssr: false}  
+  {ssr: true}  
 )
 const RecentNews = dynamic( 
   () => import('@/components/home_widgets/RecentNews'), 

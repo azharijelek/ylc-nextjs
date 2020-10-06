@@ -6,7 +6,7 @@ import Link from 'next/link'
  * @param {*} props id, title, thumbnail, permalink
  */
 export default function PostList(props) {
-    let thumbnail = `${process.env.IMG_OPT_URL}/60x60,crop,quality=medium/${props.thumbnail}`
+    let thumbnail = `${props.thumbnail}&h=60`
     return (
         <>
             <article id={'post-'+props.id} className={'post post-'+props.id}>
