@@ -9,7 +9,7 @@ export default function PopularPosts(props) {
     let per_page = props.per_page ? props.per_page : '4';
     let paged = props.paged ? props.paged : '1';
     
-    const url = process.env.WP_API_URL+`/popularposts?per_page=${per_page}&page=${paged}`
+    const url = process.env.WP_API_URL+`/ylc/v1/popularposts?per_page=${per_page}&page=${paged}`
     const fetcher = (...args) => fetch(...args).then((res) => res.json())
     const { data, result, error } = useSWR(url, fetcher)
 

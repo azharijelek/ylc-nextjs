@@ -9,7 +9,7 @@ import dynamic from 'next/dynamic'
 
 const PopularPosts = dynamic( 
   () => import('@/components/home_widgets/PopularPosts'), 
-  {ssr: true}  
+  {ssr: false}  
 )
 const RecentNews = dynamic( 
   () => import('@/components/home_widgets/RecentNews'), 
@@ -75,9 +75,10 @@ const Home = (data) => {
       <main id="site-content">
 
           {/* Render Post Slider */}
+          {/* { JSON.stringify(posts, null, 2) } */}
           <Box my={3}>
             <HorizontalScroll>
-              {posts.length > 0 && posts.map(post => (
+              {posts && posts.map(post => (
               <article className="slide-item" key={'slider-'+post.id}>
                 <HeroCard
                   thumbnail={post.featured_img}
@@ -104,7 +105,7 @@ const Home = (data) => {
             
             <HorizontalScroll>
               <RecentNews
-                offset="5"
+                offset="6"
                 per_page="8"
                 page="1"
                 show_categories={1}
@@ -130,7 +131,7 @@ const Home = (data) => {
 
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await fetch(process.env.WP_API_URL+'/posts?per_page=5')
+  const res = await fetch(process.env.WP_API_URL+'/ylc/v1/posts?per_page=5')
   const data = await res.json()
 
   // Pass data to the page via props

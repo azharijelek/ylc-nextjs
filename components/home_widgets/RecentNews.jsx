@@ -11,7 +11,7 @@ export default function RecentNews(props) {
     //const url = process.env.WP_API_URL+`/posts?offset=${offset}&per_page=${per_page}&page=${paged}&show_categories=${show_categories}`
     const queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
 
-    const url = process.env.WP_API_URL + `/posts?${queryString}`
+    const url = process.env.WP_API_URL + `/ylc/v1/posts?${queryString}`
     const fetcher = (...args) => fetch(...args).then((res) => res.json())
     const { data, result, error } = useSWR(url, fetcher)
 
