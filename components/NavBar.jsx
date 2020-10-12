@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useUser from '@/lib/useUser'
 import Avatar from '@material-ui/core/Avatar';
+import fetchJson from '@/lib/fetchJson'
 
 const drawerWidth = '90%'
 const red = '#ED1B33'
@@ -104,11 +105,7 @@ export default function NavBar(props) {
         )
     }
 
-    const { user } = useUser()
-
-    // if (!user || user.isLoggedIn === false) {
-    //     return <>loading...</>
-    // }
+    const { user, mutateUser } = useUser()
     
     return (
         <>
@@ -152,6 +149,21 @@ export default function NavBar(props) {
                         <Link href="/member/login/">
                             <a href="/member/login/" onClick={handleDrawerClose} className="signUpButton">Sign In</a>
                         </Link>
+                    }
+
+                    { user && user.isLoggedIn === true &&
+                        <a
+                            href="/api/logout"
+                            className="signUpButton"
+                            onClick={async (e) => {
+                                e.preventDefault();
+                                handleDrawerClose();
+                                await mutateUser(fetchJson('/api/logout'))
+                                $router.push('/');
+                            }}
+                        >
+                            Logout
+                        </a>
                     }
 
                     {/* Close Button */}

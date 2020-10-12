@@ -11,17 +11,17 @@ export default withSession(async (req, res) => {
   }
 
   try {
-    const res = await UserServices.login(payload);
+    const response = await UserServices.login(payload);
+    const data = await response.data
 
-    if( res.status == 200 ) {
-        const data = await res.data
-    
+    if( response.status == 200 ) {
         req.session.set('user', data)
         await req.session.save()
-        res.json(user)
+        res.json(data)
     }
   } catch (error) {
     const { response: fetchResponse } = error
-    res.status(fetchResponse?.status || 500).json(error.data)
+    res.status(fetchResponse?.status || 500).json(error)
+    //res.json(error)
   }
 })

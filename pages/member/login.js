@@ -11,7 +11,7 @@ export default function Login() {
     
     const [values, setValues] = React.useState({
         username: '',
-        password: '',
+        password: ''
     });
     
     const handleChange = (prop) => (event) => {
@@ -24,11 +24,14 @@ export default function Login() {
     })
     
     const [errorMsg, setErrorMsg] = React.useState('')
+    const [loading, setLoading] = React.useState('')
     
     /**
      * Handle Login
      */
     const onSubmit = async () => {
+        setLoading(true);
+        
         const payload = {
             username: values.username,
             password: values.password
@@ -41,10 +44,13 @@ export default function Login() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
               })
-            )
+            ).then(() => {
+                setLoading(false);
+            })
         } catch (error) {
-            console.error('An unexpected error happened:', error)
-            setErrorMsg(error.data.message)
+            //console.error('An unexpected error happened:', error)
+            setErrorMsg('Credentials failed, please check your login details again.')
+            setLoading(false)
         }
     }
 
@@ -56,16 +62,9 @@ export default function Login() {
             <Container maxWidth="lg">
 
                 <main>
-                    {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
-
-                    {/* <h1>
-                        Count: <span>{counter}</span>
-                    </h1>
-                    <button onClick={() => dispatch(incrementCount())}>+1</button>
-                    <button onClick={() => dispatch(decrementCount())}>-1</button>
-                    <button onClick={() => dispatch(resetCount())}>Reset</button> */}
-                    
+                   
                     <h1 className="text-center">Login to YourLifeChoices Account</h1>
+                    
                     <Box my={3}>
                         <TextField
                         type="text"
@@ -90,7 +89,9 @@ export default function Login() {
                         />
                     </Box>
 
-                    {errorMsg}
+                    {errorMsg && 
+                        <div style={{marginBottom: 20, color: 'red'}}>{errorMsg}</div>
+                    }
 
                     <Button
                     color="primary" 
@@ -100,7 +101,7 @@ export default function Login() {
                     type="submit"
                     onClick={() => { onSubmit() }}
                     fullWidth>
-                        Sign In
+                        {loading == true ? 'Loading' : 'Sign In'}
                     </Button>
                 </main>
             </Container>

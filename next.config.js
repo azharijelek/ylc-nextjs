@@ -12,5 +12,6 @@ module.exports = withPWA({
     'IMG_OPT_URL': process.env.IMG_OPT_URL,
     'SECRET_COOKIE_PASSWORD': process.env.SECRET_COOKIE_PASSWORD,
   },
-  trailingSlash: true,
+  generateEtags: false
+  //trailingSlash: true,
 })
