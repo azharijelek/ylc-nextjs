@@ -20,12 +20,8 @@ export default function Login() {
         setValues({ ...values, [prop]: event.target.value });
     };
 
-    // Redux Persist
-    const counter = useSelector((state) => state.count)
-    const dispatch = useDispatch()
-
     const { mutateUser } = useUser({
-        redirectTo: '/profile-sg',
+        redirectTo: '/',
         redirectIfFound: true,
     })
     
@@ -33,7 +29,6 @@ export default function Login() {
     
     /**
      * Handle Login
-     * @param {*} e 
      */
     const onSubmit = async () => {
         const payload = {
@@ -53,18 +48,6 @@ export default function Login() {
             console.error('An unexpected error happened:', error)
             setErrorMsg(error.data.message)
         }
-        
-        // try {
-        //     const res = await UserServices.login(payload);
-
-        //     if( res.status == 200 ) {
-        //         const data = await res.data
-        //         console.log(data);
-        //         localStorage.setItem('token', );
-        //     }
-        // } catch (error) {
-        //     console.log(error);
-        // }
     }
 
     return (
@@ -77,12 +60,12 @@ export default function Login() {
                 <main>
                     {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
 
-                    <h1>
+                    {/* <h1>
                         Count: <span>{counter}</span>
                     </h1>
                     <button onClick={() => dispatch(incrementCount())}>+1</button>
                     <button onClick={() => dispatch(decrementCount())}>-1</button>
-                    <button onClick={() => dispatch(resetCount())}>Reset</button>
+                    <button onClick={() => dispatch(resetCount())}>Reset</button> */}
                     
                     <h1 className="text-center">Login to YourLifeChoices Account</h1>
                     <Box my={3}>

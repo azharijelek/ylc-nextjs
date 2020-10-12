@@ -5,16 +5,14 @@ import NavBar from '@/components/NavBar'
 import '../styles/globals.css'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../theme';
-
-// State management
-import { useStore } from '@/store'
-import { Provider } from 'react-redux'
-import { persistStore } from 'redux-persist'
-import { PersistGate } from 'redux-persist/integration/react'
-
-
 import { SWRConfig } from 'swr'
 import fetch from '../lib/fetchJson'
+
+// State management
+// import { useStore } from '@/store'
+// import { Provider } from 'react-redux'
+// import { persistStore } from 'redux-persist'
+// import { PersistGate } from 'redux-persist/integration/react'
 
 /**
  * YLC App
@@ -29,10 +27,10 @@ function ylcApp({ Component, pageProps }) {
 		}
 	}, []);
 
-	const store = useStore(pageProps.initialReduxState)
-	const persistor = persistStore(store, {}, function () {
-		persistor.persist()
-	});
+	// const store = useStore(pageProps.initialReduxState)
+	// const persistor = persistStore(store, {}, function () {
+	// 	persistor.persist()
+	// });
 
 	return (
 		<>
@@ -53,12 +51,12 @@ function ylcApp({ Component, pageProps }) {
 						console.error(err)
 						},
 					}}>
-						<Provider store={store}>
-							<PersistGate loading={<div>loading</div>} persistor={persistor}>
+						{/* <Provider store={store}>
+							<PersistGate loading={<div>loading</div>} persistor={persistor}> */}
 								<NavBar/>
 								<Component {...pageProps} />
-							</PersistGate>
-						</Provider>
+							{/* </PersistGate>
+						</Provider> */}
 					</SWRConfig>
 				</div>
 			</ThemeProvider>
