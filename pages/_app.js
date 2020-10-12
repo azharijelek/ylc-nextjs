@@ -3,16 +3,14 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import Head from 'next/head'
 import NavBar from '@/components/NavBar'
 import '../styles/globals.css'
-import CssBaseline from '@material-ui/core/CssBaseline';
+//import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../theme';
 import { SWRConfig } from 'swr'
 import fetch from '../lib/fetchJson'
 
-// State management
-// import { useStore } from '@/store'
-// import { Provider } from 'react-redux'
-// import { persistStore } from 'redux-persist'
-// import { PersistGate } from 'redux-persist/integration/react'
+// export function reportWebVitals(metric) {
+// 	console.log(metric)
+// }
 
 /**
  * YLC App
@@ -27,11 +25,6 @@ function ylcApp({ Component, pageProps }) {
 		}
 	}, []);
 
-	// const store = useStore(pageProps.initialReduxState)
-	// const persistor = persistStore(store, {}, function () {
-	// 	persistor.persist()
-	// });
-
 	return (
 		<>
 			<Head>
@@ -43,7 +36,7 @@ function ylcApp({ Component, pageProps }) {
 			</Head>
 			<ThemeProvider theme={theme}>
 				<div className="root">
-					<CssBaseline />
+					{/* <CssBaseline /> */}
 					<SWRConfig
 						value={{
 						fetcher: fetch,

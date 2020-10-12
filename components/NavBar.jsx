@@ -173,7 +173,7 @@ export default function NavBar(props) {
             <style jsx global>{`
                 .mainheader {
                     border-bottom: 1px solid #ED1B33;
-                    background: #fff;
+                    background-color: #fff!important;
                     box-shadow: none!important;
                     .ylc-avatar {
                         margin-right: 10px;
