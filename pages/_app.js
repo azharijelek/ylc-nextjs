@@ -6,6 +6,16 @@ import '../styles/globals.css'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../theme';
 
+// State management
+import { useStore } from '@/store'
+import { Provider } from 'react-redux'
+import { persistStore } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+
+
+import { SWRConfig } from 'swr'
+import fetch from '../lib/fetchJson'
+
 /**
  * YLC App
  * @param {Component, pageProps} param0 
@@ -19,6 +29,11 @@ function ylcApp({ Component, pageProps }) {
 		}
 	}, []);
 
+	const store = useStore(pageProps.initialReduxState)
+	const persistor = persistStore(store, {}, function () {
+		persistor.persist()
+	});
+
 	return (
 		<>
 			<Head>
@@ -30,9 +45,21 @@ function ylcApp({ Component, pageProps }) {
 			</Head>
 			<ThemeProvider theme={theme}>
 				<div className="root">
-					<NavBar/>
 					<CssBaseline />
-					<Component {...pageProps} />
+					<SWRConfig
+						value={{
+						fetcher: fetch,
+						onError: (err) => {
+						console.error(err)
+						},
+					}}>
+						<Provider store={store}>
+							<PersistGate loading={<div>loading</div>} persistor={persistor}>
+								<NavBar/>
+								<Component {...pageProps} />
+							</PersistGate>
+						</Provider>
+					</SWRConfig>
 				</div>
 			</ThemeProvider>
 
