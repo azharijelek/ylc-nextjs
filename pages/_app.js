@@ -51,12 +51,8 @@ function ylcApp({ Component, pageProps }) {
 						console.error(err)
 						},
 					}}>
-						{/* <Provider store={store}>
-							<PersistGate loading={<div>loading</div>} persistor={persistor}> */}
-								<NavBar/>
-								<Component {...pageProps} />
-							{/* </PersistGate>
-						</Provider> */}
+						<NavBar/>
+						<Component {...pageProps} />
 					</SWRConfig>
 				</div>
 			</ThemeProvider>
