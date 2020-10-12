@@ -2,7 +2,6 @@ import React from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Head from 'next/head'
 import NavBar from '@/components/NavBar'
-import '../styles/globals.css'
 //import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../theme';
 import { SWRConfig } from 'swr'
@@ -50,11 +49,49 @@ function ylcApp({ Component, pageProps }) {
 				</div>
 			</ThemeProvider>
 
-			<style jsx>{`
+			<style jsx global>{`
 				.root {
 					flex-grow: 1;
 					padding-top: 60px;
 				}
+				body,html {
+					padding: 0;
+					margin: 0;
+					font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif
+				}
+				
+				a {
+					color: inherit;
+					text-decoration: none!important
+				}
+				
+				* {
+					-moz-box-sizing: border-box;
+					box-sizing: border-box
+				}
+				
+				.my-0 {
+					margin-top: 0!important;
+					margin-bottom: 0!important
+				}
+				
+				.ylc-widgethead {
+					font-size: 20px;
+					border-left: 5px solid #ed1b33;
+					font-weight: 700;
+					letter-spacing: .03em;
+					padding-left: 10px;
+					display: -moz-box;
+					display: flex;
+					-moz-box-align: center;
+					align-items: center;
+					margin-bottom: 15px!important;
+					margin-top: 0
+				}
+				
+				.text-center {
+					text-align: center
+				}				
 			`}</style>
 		</>
 	)
