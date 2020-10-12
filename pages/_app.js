@@ -3,9 +3,9 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import Head from 'next/head'
 import NavBar from '@/components/NavBar'
 //import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from '../theme';
+import theme from '@/theme';
 import { SWRConfig } from 'swr'
-import fetch from '../lib/fetchJson'
+import fetch from '@/lib/fetchJson'
 
 // export function reportWebVitals(metric) {
 // 	console.log(metric)

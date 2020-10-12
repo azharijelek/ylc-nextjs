@@ -14,11 +14,9 @@ export default withSession(async (req, res) => {
     const response = await UserServices.login(payload);
     const data = await response.data
 
-    if( response.status == 200 ) {
-        req.session.set('user', data)
-        await req.session.save()
-        res.json(data)
-    }
+    req.session.set('user', data)
+    await req.session.save()
+    res.json(data)
   } catch (error) {
     const { response: fetchResponse } = error
     res.status(fetchResponse?.status || 500).json(error)

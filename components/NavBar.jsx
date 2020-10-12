@@ -145,13 +145,11 @@ export default function NavBar(props) {
             >
                 <div className="drawerHead">
                     {/* LOGIN BUTTON */}
-                    { !user || user.isLoggedIn === false &&
+                    { !user || user.isLoggedIn === false ?
                         <Link href="/member/login/">
                             <a href="/member/login/" onClick={handleDrawerClose} className="signUpButton">Sign In</a>
                         </Link>
-                    }
-
-                    { user && user.isLoggedIn === true &&
+                    : 
                         <a
                             href="/api/logout"
                             className="signUpButton"
@@ -159,7 +157,7 @@ export default function NavBar(props) {
                                 e.preventDefault();
                                 handleDrawerClose();
                                 await mutateUser(fetchJson('/api/logout'))
-                                $router.push('/');
+                                $router.push('/member/login');
                             }}
                         >
                             Logout

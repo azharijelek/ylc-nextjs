@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 import fetchJson from '@/lib/fetchJson'
 import useUser from '@/lib/useUser'
 
-export default function Login() {
+const Login = () => {
     
     const [values, setValues] = React.useState({
         username: '',
@@ -108,3 +108,5 @@ export default function Login() {
         </>
     )
 }
+
+export default Login
