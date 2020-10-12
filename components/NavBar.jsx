@@ -9,6 +9,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import $router from 'next/router'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import useUser from '@/lib/useUser'
+import Avatar from '@material-ui/core/Avatar';
 
 const drawerWidth = '90%'
 const red = '#ED1B33'
@@ -101,16 +103,26 @@ export default function NavBar(props) {
             </Link>
         )
     }
+
+    const { user } = useUser()
+
+    // if (!user || user.isLoggedIn === false) {
+    //     return <>loading...</>
+    // }
+    
     return (
         <>
             <AppBar className="mainheader" color="default" position="fixed">
                 <Toolbar>
+                    { user && user.isLoggedIn === true &&
+                        <Avatar alt={user.full_name} src={user.avatar} className="ylc-avatar" />
+                    }
+                    
                     <div onClick={() => $router.push('/')} className="title">
                         {router.pathname == '/'
                             ? <HomeLogo />
                             : <InnerPageLogo />
                         }
-
                     </div>
                     <IconButton onClick={() => $router.push('/about')} color="inherit" aria-label="search">
                         <SearchIcon />
@@ -136,7 +148,11 @@ export default function NavBar(props) {
             >
                 <div className="drawerHead">
                     {/* LOGIN BUTTON */}
-                    <Link href="/member/login/"><a href="/member/login/" onClick={handleDrawerClose} className="signUpButton">Sign In</a></Link>
+                    { !user || user.isLoggedIn === false &&
+                        <Link href="/member/login/">
+                            <a href="/member/login/" onClick={handleDrawerClose} className="signUpButton">Sign In</a>
+                        </Link>
+                    }
 
                     {/* Close Button */}
                     <div>
@@ -157,7 +173,13 @@ export default function NavBar(props) {
             <style jsx global>{`
                 .mainheader {
                     border-bottom: 1px solid #ED1B33;
+                    background: #fff;
                     box-shadow: none!important;
+                    .ylc-avatar {
+                        margin-right: 10px;
+                        width: 30px;
+                        height: 30px;
+                    }
                 }
                 .title {
                     flex-grow: 1;
@@ -173,22 +195,23 @@ export default function NavBar(props) {
                     width: ${drawerWidth};
                     background: ${red}!important;
                     color: #fff!important;
+                    overflow-x: hidden;
                 }
                 .drawerHead {
                     height: ${drawerHeadHeight};
                     display: flex;
                     align-items: center;
-                    justify-content: center;
+                    justify-content: ${ !user || user.isLoggedIn === false ? 'space-between' : 'flex-end' };
                     justify-items: center;
                     padding-left: 15px;
-                    paddin-right: 15px;
+                    padding-right: 15px;
                     position: sticky;
                     border-bottom: 1px solid rgba(0,0,0,.08);
                     background: #d8192f;
                     min-height: 57px;
                     top: 0;
                     left: 0;
-                    right: 0
+                    right: 0;
                 }
                 .signUpButton {
                     display: block;

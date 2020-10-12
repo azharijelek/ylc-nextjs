@@ -4,7 +4,10 @@ import Box from '@material-ui/core/Box'
 import Head from 'next/head'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
-import UserServices from '@/services/UserServices'
+import { useSelector, useDispatch } from 'react-redux'
+import { incrementCount, decrementCount, resetCount } from '@/store'
+import fetchJson from '@/lib/fetchJson'
+import useUser from '@/lib/useUser'
 
 export default function Login() {
     
@@ -17,6 +20,16 @@ export default function Login() {
         setValues({ ...values, [prop]: event.target.value });
     };
 
+    // Redux Persist
+    const counter = useSelector((state) => state.count)
+    const dispatch = useDispatch()
+
+    const { mutateUser } = useUser({
+        redirectTo: '/profile-sg',
+        redirectIfFound: true,
+    })
+    
+    const [errorMsg, setErrorMsg] = React.useState('')
     
     /**
      * Handle Login
@@ -27,17 +40,31 @@ export default function Login() {
             username: values.username,
             password: values.password
         }
-        try {
-            const res = await UserServices.login(payload);
 
-            if( res.status == 200 ) {
-                const data = await res.data
-                console.log(data);
-                localStorage.setItem('token', );
-            }
+        try {
+            await mutateUser(
+              fetchJson('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+              })
+            )
         } catch (error) {
-            console.log(error);
+            console.error('An unexpected error happened:', error)
+            setErrorMsg(error.data.message)
         }
+        
+        // try {
+        //     const res = await UserServices.login(payload);
+
+        //     if( res.status == 200 ) {
+        //         const data = await res.data
+        //         console.log(data);
+        //         localStorage.setItem('token', );
+        //     }
+        // } catch (error) {
+        //     console.log(error);
+        // }
     }
 
     return (
@@ -48,7 +75,15 @@ export default function Login() {
             <Container maxWidth="lg">
 
                 <main>
-                    <pre>{JSON.stringify(values, null, 2)}</pre>
+                    {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
+
+                    <h1>
+                        Count: <span>{counter}</span>
+                    </h1>
+                    <button onClick={() => dispatch(incrementCount())}>+1</button>
+                    <button onClick={() => dispatch(decrementCount())}>-1</button>
+                    <button onClick={() => dispatch(resetCount())}>Reset</button>
+                    
                     <h1 className="text-center">Login to YourLifeChoices Account</h1>
                     <Box my={3}>
                         <TextField
@@ -73,6 +108,8 @@ export default function Login() {
                         fullWidth
                         />
                     </Box>
+
+                    {errorMsg}
 
                     <Button
                     color="primary" 
