@@ -78,5 +78,5 @@ PostGrid.propTypes = {
   categories: PropTypes.object,
   permalink: PropTypes.string,
   title: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.number
 }

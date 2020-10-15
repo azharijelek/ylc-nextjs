@@ -47,7 +47,7 @@ export default function RecentNews(props) {
               id={post.id}
               title={post.title}
               thumbnail={post.featured_img}
-              permalink={process.env.APPHOST + post.slug}
+              permalink={post.permalink}
               categories={post.categories}
               key={'post-' + post.id}
             />

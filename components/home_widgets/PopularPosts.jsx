@@ -25,7 +25,7 @@ export default function PopularPosts(props) {
             id={post.id}
             title={post.title}
             thumbnail={post.featured_img}
-            permalink={process.env.APPHOST + post.slug}
+            permalink={post.permalink}
             key={'PopularPost-' + post.id}
           />
         ))}

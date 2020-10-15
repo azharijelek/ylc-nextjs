@@ -8,7 +8,7 @@ const PopularPosts = dynamic(import('@/components/home_widgets/PopularPosts'), {
 const RecentNews = dynamic(import('@/components/home_widgets/RecentNews'), { ssr: false })
 
 const Home = (data) => {
-  //const posts = data.data
+  const posts = data.data
 
   return (
     <>
@@ -18,8 +18,8 @@ const Home = (data) => {
 
       <main id="site-content">
         {/* Render Post Slider */}
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-        {/* {posts && (
+        {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+        {posts && (
           <Box my={3}>
             <HorizontalScroll>
               {posts.map((post) => (
@@ -27,18 +27,18 @@ const Home = (data) => {
                   <HeroCard
                     thumbnail={post.featured_img}
                     title={post.title}
-                    permalink={post.slug}
+                    permalink={process.env.APPHOST + post.slug}
                   />
                 </article>
               ))}
             </HorizontalScroll>
           </Box>
-        )} */}
+        )}
 
         {/* Popular Posts */}
         <Box my={4} px={2}>
           <h4 className="ylc-widgethead">MOST POPULAR</h4>
-          <PopularPosts per_page="4" />
+          <PopularPosts per_page={4} />
         </Box>
 
         {/* Recent News */}
@@ -48,7 +48,7 @@ const Home = (data) => {
           </Box>
 
           <HorizontalScroll>
-            <RecentNews offset="6" per_page="8" page="1" show_categories={1} />
+            <RecentNews offset="6" per_page="8" page={1} show_categories={1} />
           </HorizontalScroll>
         </Box>
 
