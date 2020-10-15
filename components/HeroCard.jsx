@@ -7,7 +7,7 @@ export default function HeroCard(props) {
       <section className="hs-card">
         <h2>
           <Link href={props.permalink}>
-            <a>{props.title}</a>
+            <a title={props.title}>{props.title}</a>
           </Link>
         </h2>
         <img src={props.thumbnail + '&h=200'} alt={props.title} loading="lazy" />
