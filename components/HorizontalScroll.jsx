@@ -25,5 +25,5 @@ export default function HorizontalScroll(props) {
 }
 
 HorizontalScroll.propTypes = {
-  children: PropTypes.array
+  children: PropTypes.any
 }

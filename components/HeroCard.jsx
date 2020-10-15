@@ -6,7 +6,7 @@ export default function HeroCard(props) {
     <>
       <section className="hs-card">
         <h2>
-          <Link href={process.env.APPHOST + props.slug}>
+          <Link href={props.permalink}>
             <a>{props.title}</a>
           </Link>
         </h2>
@@ -52,7 +52,7 @@ export default function HeroCard(props) {
 }
 
 HeroCard.propTypes = {
-  slug: PropTypes.string,
+  permalink: PropTypes.string,
   title: PropTypes.string,
   thumbnail: PropTypes.string
 }

@@ -18,17 +18,22 @@ const Home = (data) => {
 
       <main id="site-content">
         {/* Render Post Slider */}
-        {/* { JSON.stringify(posts, null, 2) } */}
-        <Box my={3}>
-          <HorizontalScroll>
-            {posts &&
-              posts.map((post) => (
+        <pre>{JSON.stringify(data, null, 2)}</pre>
+        {/* {posts && (
+          <Box my={3}>
+            <HorizontalScroll>
+              {posts.map((post) => (
                 <article className="slide-item" key={'slider-' + post.id}>
-                  <HeroCard thumbnail={post.featured_img} title={post.title} />
+                  <HeroCard
+                    thumbnail={post.featured_img}
+                    title={post.title}
+                    permalink={post.slug}
+                  />
                 </article>
               ))}
-          </HorizontalScroll>
-        </Box>
+            </HorizontalScroll>
+          </Box>
+        )} */}
 
         {/* Popular Posts */}
         <Box my={4} px={2}>
@@ -56,8 +61,6 @@ const Home = (data) => {
             }
           }
         `}</style>
-
-        {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
       </main>
     </>
   )
@@ -65,8 +68,8 @@ const Home = (data) => {
 
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await fetch(process.env.WP_API_URL + '/ylc/v1/posts?per_page=5')
-  const data = await res.json()
+  const response = await fetch(process.env.WP_API_URL + '/ylc/v1/posts?per_page=5')
+  const data = await response.json()
 
   // Pass data to the page via props
   return {
