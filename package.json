@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "lint": "eslint --fix --ignore-path .gitignore .",
+    "lintfix": "eslint --fix --ext .js,.jsx --ignore-path .gitignore .",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "dev": "NODE_ENV=development next dev --port 4200",
     "build": "next build",
     "start": "NODE_ENV=production next start --port 8000"
@@ -20,6 +23,7 @@
     "next-iron-session": "^4.1.9",
     "next-pwa": "^3.1.4",
     "next-redux-wrapper": "^2.0.0",
+    "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "^7.1.1",
@@ -30,7 +34,15 @@
     "swr": "^0.3.5"
   },
   "devDependencies": {
+    "eslint": "^7.11.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.4",
+    "eslint-plugin-react-hooks": "^4.1.2",
     "node-sass": "^4.14.1",
-    "styled-jsx-plugin-sass": "^1.0.0"
+    "prettier": "^2.1.2",
+    "styled-jsx-plugin-sass": "^1.0.0",
+    "undefined": "^0.1.0"
   }
 }

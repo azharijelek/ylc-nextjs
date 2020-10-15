@@ -11,7 +11,7 @@ const exampleInitialState = {
   light: false,
   count: 0,
   exampleData: [],
-  error: null,
+  error: null
 }
 
 export const actionTypes = {
@@ -20,7 +20,7 @@ export const actionTypes = {
   DECREMENT: 'DECREMENT',
   RESET: 'RESET',
   LOAD_EXAMPLE_DATA: 'LOAD_EXAMPLE_DATA',
-  LOADING_DATA_FAILURE: 'LOADING_DATA_FAILURE',
+  LOADING_DATA_FAILURE: 'LOADING_DATA_FAILURE'
 }
 
 // REDUCERS
@@ -30,27 +30,27 @@ export const reducer = (state = exampleInitialState, action) => {
       return {
         ...state,
         lastUpdate: action.ts,
-        light: !!action.light,
+        light: !!action.light
       }
     case actionTypes.INCREMENT:
       return {
         ...state,
-        count: state.count + 1,
+        count: state.count + 1
       }
     case actionTypes.DECREMENT:
       return {
         ...state,
-        count: state.count - 1,
+        count: state.count - 1
       }
     case actionTypes.RESET:
       return {
         ...state,
-        count: exampleInitialState.count,
+        count: exampleInitialState.count
       }
     case actionTypes.LOAD_EXAMPLE_DATA:
       return {
         ...state,
-        exampleData: action.data,
+        exampleData: action.data
       }
     case actionTypes.LOADING_DATA_FAILURE:
       return { ...state, error: true }
@@ -90,17 +90,13 @@ export const loadingExampleDataFailure = () => {
 const persistConfig = {
   key: 'primary',
   storage,
-  whitelist: ['exampleData'], // place to select which state you want to persist
+  whitelist: ['exampleData'] // place to select which state you want to persist
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)
 
 function makeStore(initialState = exampleInitialState) {
-  return createStore(
-    persistedReducer,
-    initialState,
-    composeWithDevTools(applyMiddleware())
-  )
+  return createStore(persistedReducer, initialState, composeWithDevTools(applyMiddleware()))
 }
 
 export const initializeStore = (preloadedState) => {
@@ -111,7 +107,7 @@ export const initializeStore = (preloadedState) => {
   if (preloadedState && store) {
     _store = makeStore({
       ...store.getState(),
-      ...preloadedState,
+      ...preloadedState
     })
     // Reset the current store
     store = undefined

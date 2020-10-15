@@ -1,112 +1,109 @@
-import React from "react";
+import React from 'react'
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 import Head from 'next/head'
-import TextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import fetchJson from '@/lib/fetchJson'
 import useUser from '@/lib/useUser'
 
 const Login = () => {
-    
-    const [values, setValues] = React.useState({
-        username: '',
-        password: ''
-    });
-    
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
+  const [values, setValues] = React.useState({
+    username: '',
+    password: ''
+  })
 
-    const { mutateUser } = useUser({
-        redirectTo: '/',
-        redirectIfFound: true,
-    })
-    
-    const [errorMsg, setErrorMsg] = React.useState('')
-    const [loading, setLoading] = React.useState('')
-    
-    /**
-     * Handle Login
-     */
-    const onSubmit = async () => {
-        setLoading(true);
-        
-        const payload = {
-            username: values.username,
-            password: values.password
-        }
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value })
+  }
 
-        try {
-            await mutateUser(
-              fetchJson('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-              })
-            ).then(() => {
-                setLoading(false);
-            })
-        } catch (error) {
-            //console.error('An unexpected error happened:', error)
-            setErrorMsg('Credentials failed, please check your login details again.')
-            setLoading(false)
-        }
+  const { mutateUser } = useUser({
+    redirectTo: '/',
+    redirectIfFound: true
+  })
+
+  const [errorMsg, setErrorMsg] = React.useState('')
+  const [loading, setLoading] = React.useState('')
+
+  /**
+   * Handle Login
+   */
+  const onSubmit = async () => {
+    setLoading(true)
+
+    const payload = {
+      username: values.username,
+      password: values.password
     }
 
-    return (
-        <>
-            <Head>
-                <title>Member Login - Your Life Choices</title>
-            </Head>
-            <Container maxWidth="lg">
+    try {
+      await mutateUser(
+        fetchJson('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+      ).then(() => {
+        setLoading(false)
+      })
+    } catch (error) {
+      //console.error('An unexpected error happened:', error)
+      setErrorMsg('Credentials failed, please check your login details again.')
+      setLoading(false)
+    }
+  }
 
-                <main>
-                   
-                    <h1 className="text-center">Login to YourLifeChoices Account</h1>
-                    
-                    <Box my={3}>
-                        <TextField
-                        type="text"
-                        label="Email/Username"
-                        variant="outlined"
-                        color="primary"
-                        onChange={handleChange('username')}
-                        value={values.username}
-                        fullWidth
-                        />
-                    </Box>
+  return (
+    <>
+      <Head>
+        <title>Member Login - Your Life Choices</title>
+      </Head>
+      <Container maxWidth="lg">
+        <main>
+          <h1 className="text-center">Login to YourLifeChoices Account</h1>
 
-                    <Box my={3}>
-                        <TextField
-                        type="password"
-                        label="Password"
-                        variant="outlined"
-                        color="primary"
-                        onChange={handleChange('password')}
-                        value={values.password}
-                        fullWidth
-                        />
-                    </Box>
+          <Box my={3}>
+            <TextField
+              type="text"
+              label="Email/Username"
+              variant="outlined"
+              color="primary"
+              onChange={handleChange('username')}
+              value={values.username}
+              fullWidth
+            />
+          </Box>
 
-                    {errorMsg && 
-                        <div style={{marginBottom: 20, color: 'red'}}>{errorMsg}</div>
-                    }
+          <Box my={3}>
+            <TextField
+              type="password"
+              label="Password"
+              variant="outlined"
+              color="primary"
+              onChange={handleChange('password')}
+              value={values.password}
+              fullWidth
+            />
+          </Box>
 
-                    <Button
-                    color="primary" 
-                    disableElevation={true}
-                    variant="contained"
-                    size="large"
-                    type="submit"
-                    onClick={() => { onSubmit() }}
-                    fullWidth>
-                        {loading == true ? 'Loading' : 'Sign In'}
-                    </Button>
-                </main>
-            </Container>
-        </>
-    )
+          {errorMsg && <div style={{ marginBottom: 20, color: 'red' }}>{errorMsg}</div>}
+
+          <Button
+            color="primary"
+            disableElevation={true}
+            variant="contained"
+            size="large"
+            type="submit"
+            onClick={() => {
+              onSubmit()
+            }}
+            fullWidth>
+            {loading == true ? 'Loading' : 'Sign In'}
+          </Button>
+        </main>
+      </Container>
+    </>
+  )
 }
 
 export default Login

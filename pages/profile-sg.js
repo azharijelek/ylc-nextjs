@@ -5,9 +5,9 @@ const SgProfile = () => {
 
   if (!user || user.isLoggedIn === false) {
     return (
-        <>
-        <div style={{padding: 15,textAlign:'center'}}>loading...</div>
-        </>
+      <>
+        <div style={{ padding: 15, textAlign: 'center' }}>loading...</div>
+      </>
     )
   }
 
