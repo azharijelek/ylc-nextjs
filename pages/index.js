@@ -8,7 +8,7 @@ const PopularPosts = dynamic(import('@/components/home_widgets/PopularPosts'), {
 const RecentNews = dynamic(import('@/components/home_widgets/RecentNews'), { ssr: false })
 
 const Home = (data) => {
-  const posts = data.data
+  //const posts = data.data
 
   return (
     <>
