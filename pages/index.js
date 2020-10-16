@@ -2,11 +2,12 @@ import Head from 'next/head'
 import Box from '@material-ui/core/Box'
 import HorizontalScroll from '@/components/HorizontalScroll'
 import HeroCard from '@/components/HeroCard'
+import PopularPosts from '@/components/home_widgets/PopularPosts'
 import dynamic from 'next/dynamic'
 import Button from '@material-ui/core/Button'
 import Link from 'next/link'
 
-const PopularPosts = dynamic(import('@/components/home_widgets/PopularPosts'), { ssr: false })
+//const PopularPosts = dynamic(import('@/components/home_widgets/PopularPosts'), { ssr: false })
 const RecentNews = dynamic(import('@/components/home_widgets/RecentNews'), { ssr: false })
 const TopGames = dynamic(import('@/components/TopGames'), { ssr: false })
 

@@ -21,11 +21,33 @@ export default function RecentNews(props) {
   if (!data)
     return (
       <>
-        <div className="px-4">Loading...</div>
+        {Array.apply(null, { length: 4 }).map((e, i) => (
+          <div className="post-grid--item" key={i}>
+            <div className="thumb"></div>
+            <div className="text" style={{ marginBottom: 10 }}></div>
+            <div className="text" style={{ width: '60%' }}></div>
+          </div>
+        ))}
+
         <style jsx>{`
-          .px-4 {
-            padding-left: 16px;
-            padding-right: 16px;
+          .post-grid--item {
+            width: 80%;
+            flex: 0 0 auto;
+            padding: 0 15px 0 0;
+            &:first-of-type {
+              padding-left: 15px;
+            }
+            .thumb {
+              height: 140px;
+              margin-bottom: 10px;
+              background-color: rgba(0, 0, 0, 0.11);
+              border-radius: 8px;
+            }
+            .text {
+              height: 10px;
+              background-color: rgba(0, 0, 0, 0.11);
+              width: 100%;
+            }
           }
         `}</style>
       </>

@@ -69,6 +69,7 @@ export default function PostGrid(props) {
           h4 {
             font-size: 16px;
             margin-top: 10px;
+            line-height: 20px;
           }
         }
       `}</style>

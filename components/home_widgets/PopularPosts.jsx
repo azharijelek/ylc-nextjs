@@ -1,5 +1,7 @@
 import useSWR from 'swr'
 import PostList from '../postswidget/PostList'
+import Skeleton from '@material-ui/lab/Skeleton'
+import Box from '@material-ui/core/Box'
 import PropTypes from 'prop-types'
 
 // function removeDomain(str) {
@@ -15,8 +17,25 @@ export default function PopularPosts(props) {
   const { data, error } = useSWR(url, fetcher)
 
   if (error) return <div>failed to load</div>
-  if (!data) return <div>Loading...</div>
-  // return <pre>{JSON.stringify(data, null, 2)}</pre>
+  if (!data)
+    return (
+      <>
+        {Array.apply(null, { length: 4 }).map((e, i) => (
+          <div style={{ width: '100%' }} key={i}>
+            <Box display="flex" mb="20px" flexWrap="nowrap">
+              <Box pr={2}>
+                <Skeleton animation="wave" variant="rect" width={86} height={60} />
+              </Box>
+              <Box width="100%">
+                <Skeleton animation="wave" height={15} style={{ marginBottom: 6 }} />
+                <Skeleton animation="wave" height={15} width="80%" style={{ marginBottom: 6 }} />
+                <Skeleton animation="wave" height={15} width="80%" />
+              </Box>
+            </Box>
+          </div>
+        ))}
+      </>
+    )
   return (
     <>
       {data.length > 0 &&
