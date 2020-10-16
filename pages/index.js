@@ -3,12 +3,25 @@ import Box from '@material-ui/core/Box'
 import HorizontalScroll from '@/components/HorizontalScroll'
 import HeroCard from '@/components/HeroCard'
 import dynamic from 'next/dynamic'
+import Button from '@material-ui/core/Button'
+import Link from 'next/link'
 
 const PopularPosts = dynamic(import('@/components/home_widgets/PopularPosts'), { ssr: false })
 const RecentNews = dynamic(import('@/components/home_widgets/RecentNews'), { ssr: false })
+const TopGames = dynamic(import('@/components/TopGames'), { ssr: false })
 
 const Home = (data) => {
   const posts = data.data
+
+  const home_categories = [
+    { name: 'TRAVEL', slug: 'travel' },
+    { name: 'RETIREMENT', slug: 'retirement' },
+    { name: 'RECIPES', slug: 'recipes' },
+    { name: 'MONEY', slug: 'finance' },
+    { name: 'HEALTH', slug: 'health' },
+    { name: 'AGE PENSION', slug: 'age-pension' },
+    { name: 'LIFE', slug: 'lifestyle' }
+  ]
 
   return (
     <>
@@ -52,12 +65,38 @@ const Home = (data) => {
           </HorizontalScroll>
         </Box>
 
+        {/* Top Games */}
+        <Box my={4} px={2}>
+          <h4 className="ylc-widgethead">TOP GAMES</h4>
+
+          <TopGames />
+
+          <Link href="/fun/games">
+            <Button component="a" fullWidth variant="outlined" color="primary">
+              View More Games
+            </Button>
+          </Link>
+        </Box>
+
+        {/* NEWS BY CATEGORY */}
+        {home_categories.map((cat) => (
+          <Box my={4} key={cat.slug}>
+            <Box px={2}>
+              <h4 className="ylc-widgethead">{cat.name}</h4>
+            </Box>
+
+            <HorizontalScroll>
+              <RecentNews per_page="4" page={1} show_categories={1} cat={cat.slug} />
+            </HorizontalScroll>
+          </Box>
+        ))}
+
         <style jsx>{`
           .slide-item {
             flex: 0 0 auto;
             padding: 0 15px 0 0;
-            &::first-of-type {
-              padding-left: 15px;
+            &:first-of-type {
+              padding-left: 15px !important;
             }
           }
         `}</style>

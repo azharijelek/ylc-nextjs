@@ -34,8 +34,8 @@ export default function PostList(props) {
           margin-bottom: 20px;
         }
         .postThumb {
-          min-width: 60px;
-          max-width: 60px;
+          min-width: 25%;
+          max-width: 25%;
           margin-right: 15px;
         }
         .postDetail {

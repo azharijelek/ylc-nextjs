@@ -15,7 +15,9 @@ export default function PostGrid(props) {
       <article className={'post-grid post-' + props.id}>
         <div className="post-grid--thumb">
           <Link href={catLink}>
-            <a className="cat-badge">{catName}</a>
+            <a className="cat-badge">
+              <span dangerouslySetInnerHTML={{ __html: catName }} />
+            </a>
           </Link>
           <Link href={props.permalink}>
             <a>
@@ -55,6 +57,7 @@ export default function PostGrid(props) {
               color: #fff;
               display: inline-block;
               padding: 0 5px;
+              font-size: 12px;
             }
 
             img {
