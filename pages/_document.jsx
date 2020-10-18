@@ -34,6 +34,16 @@ class MyDocument extends Document {
                 margin-top: 0 !important;
                 margin-bottom: 0 !important;
               }
+              .content {
+                p {
+                  font-size: 16px;
+                  line-height: 25px;
+
+                  & + br {
+                    display: none !important;
+                  }
+                }
+              }
             `}
           </style>
         </Head>

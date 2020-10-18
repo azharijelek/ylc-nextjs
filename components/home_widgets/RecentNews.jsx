@@ -25,7 +25,10 @@ export default function RecentNews(props) {
           <div className="post-grid--item" key={i}>
             <div className="thumb"></div>
             <div className="text" style={{ marginBottom: 10 }}></div>
-            <div className="text" style={{ width: '60%' }}></div>
+            <div className="text" style={{ marginBottom: 10, width: '60%' }}></div>
+            <div className="text" style={{ marginBottom: 5, width: '70%', height: 5 }}></div>
+            <div className="text" style={{ marginBottom: 5, width: '90%', height: 5 }}></div>
+            <div className="text" style={{ width: '40%', height: 5 }}></div>
           </div>
         ))}
 
