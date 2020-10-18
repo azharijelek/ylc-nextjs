@@ -2,7 +2,7 @@ import React from 'react'
 import { ThemeProvider } from '@material-ui/core/styles'
 import Head from 'next/head'
 import NavBar from '@/components/NavBar'
-//import CssBaseline from '@material-ui/core/CssBaseline';
+import Footer from '@/components/Footer'
 import theme from '@/theme'
 import { SWRConfig } from 'swr'
 import fetch from '@/lib/fetchJson'
@@ -47,6 +47,7 @@ function ylcApp({ Component, pageProps }) {
             }}>
             <NavBar />
             <Component {...pageProps} />
+            <Footer />
           </SWRConfig>
         </div>
       </ThemeProvider>

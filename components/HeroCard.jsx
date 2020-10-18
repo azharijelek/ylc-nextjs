@@ -30,6 +30,7 @@ export default function HeroCard(props) {
             background: rgba(0, 0, 0, 0.7);
             padding: 13px;
             font-size: 16px;
+            line-height: 25px;
             font-weight: bold;
             position: absolute;
             bottom: 0;

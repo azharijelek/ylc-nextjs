@@ -52,14 +52,7 @@ export default function RecentNews(props) {
         `}</style>
       </>
     )
-  // return (
-  //     <>
-  //         <pre>
-  //             {JSON.stringify(data, null, 2)}
-  //             {JSON.stringify(params, null, 2)}
-  //         </pre>
-  //     </>
-  // )
+
   return (
     <>
       {data.length > 0 &&
@@ -71,6 +64,7 @@ export default function RecentNews(props) {
               thumbnail={post.featured_img}
               permalink={post.permalink}
               categories={post.categories}
+              blurb={post.blurb}
               key={'post-' + post.id}
             />
           </div>

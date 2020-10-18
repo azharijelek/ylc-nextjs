@@ -31,6 +31,7 @@ export default function PostGrid(props) {
               <a>{props.title}</a>
             </Link>
           </h4>
+          <p>{props.blurb}</p>
         </div>
       </article>
 
@@ -67,9 +68,15 @@ export default function PostGrid(props) {
             }
           }
           h4 {
-            font-size: 16px;
+            font-size: 18px;
             margin-top: 10px;
-            line-height: 20px;
+            line-height: 24px;
+            margin-bottom: 10px;
+          }
+          p {
+            margin-top: 0;
+            font-size: 14px;
+            line-height: 22px;
           }
         }
       `}</style>
@@ -82,5 +89,6 @@ PostGrid.propTypes = {
   categories: PropTypes.object,
   permalink: PropTypes.string,
   title: PropTypes.string,
-  id: PropTypes.number
+  id: PropTypes.number,
+  blurb: PropTypes.string
 }
