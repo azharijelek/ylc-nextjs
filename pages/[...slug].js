@@ -2,7 +2,27 @@ import PropTypes from 'prop-types'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-export default function Post({ date, data }) {
+export async function getStaticPaths() {
+  return { paths: [], fallback: true }
+}
+
+export async function getStaticProps({ params }) {
+  const slug = params.slug // [ 'food-recipes', 'food', 'the-best-and-worst-foods-for-your-liver' ]
+  const path = slug.join('/')
+  try {
+    const response = await fetch(`${process.env.WP_API_URL}/ylc/v1/post?slug=${path}`)
+    const data = await response.json()
+    return {
+      props: data ? { data } : {},
+      revalidate: 100
+    }
+  } catch (error) {
+    // The Twitter API most likely died
+    return { props: {} }
+  }
+}
+
+export default function Post({ data }) {
   const { isFallback } = useRouter()
 
   if (!isFallback && !data) {
@@ -86,24 +106,4 @@ export default function Post({ date, data }) {
 
 Post.propTypes = {
   data: PropTypes.any
-}
-
-export async function getStaticPaths() {
-  return { paths: [], fallback: true }
-}
-
-export async function getStaticProps({ params }) {
-  const slug = params.slug // [ 'food-recipes', 'food', 'the-best-and-worst-foods-for-your-liver' ]
-  const path = slug.join('/')
-  try {
-    const response = await fetch(`http://localhost:8080/wp-json/ylc/v1/post?slug=${path}`)
-    const data = await response.json()
-    return {
-      props: data ? { data } : {},
-      revalidate: 100
-    }
-  } catch (error) {
-    // The Twitter API most likely died
-    return { props: {} }
-  }
 }
