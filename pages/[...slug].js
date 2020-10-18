@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-export default function Post({ data }) {
+export default function Post({ date, data }) {
   const { isFallback } = useRouter()
 
-  if (!isFallback) {
+  if (!isFallback && !data) {
     return <div>Error</div>
   }
 
@@ -99,7 +99,7 @@ export async function getStaticProps({ params }) {
     const response = await fetch(`http://localhost:8080/wp-json/ylc/v1/post?slug=${path}`)
     const data = await response.json()
     return {
-      props: { data },
+      props: data ? { data } : {},
       revalidate: 100
     }
   } catch (error) {
