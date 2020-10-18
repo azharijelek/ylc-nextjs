@@ -38,7 +38,7 @@ export default function Post({ data }) {
               {/* CONTENT */}
               <div className="content" dangerouslySetInnerHTML={createMarkup(data.content)}></div>
             </article>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
           </section>
 
           <style jsx>{`
