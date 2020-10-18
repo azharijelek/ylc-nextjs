@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 export default function Post({ data }) {
   const { isFallback } = useRouter()
 
-  if (!isFallback && !data) {
+  if (!isFallback) {
     return <div>Error</div>
   }
 
