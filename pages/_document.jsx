@@ -34,7 +34,16 @@ class MyDocument extends Document {
                 margin-top: 0 !important;
                 margin-bottom: 0 !important;
               }
+              img {
+                max-width: 100%;
+              }
               .content {
+                max-width: 100%;
+                overflow: hidden;
+                img {
+                  max-width: 100%;
+                  width: auto;
+                }
                 p {
                   font-size: 16px;
                   line-height: 25px;

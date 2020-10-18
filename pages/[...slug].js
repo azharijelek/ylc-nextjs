@@ -88,12 +88,6 @@ export default function Post({ data }) {
               }
             }
 
-            .content {
-              & >>> p {
-                font-size: 16px;
-              }
-            }
-
             p + br {
               display: none;
             }
