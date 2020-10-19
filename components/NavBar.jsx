@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
@@ -165,8 +166,8 @@ export default function NavBar() {
         {/* Drawer Menu */}
         <ul className="sideMenu">
           {Menu.map((item) => (
-            <li key={item.name}>
-              <Link href={item.slug} onClick={handleDrawerClose} onKeyUp={handleDrawerClose}>
+            <li key={item.name} onClick={handleDrawerClose} onKeyUp={handleDrawerClose}>
+              <Link href={item.slug}>
                 <a href={item.slug} className="sideMenuItem">
                   {item.name}
                 </a>
