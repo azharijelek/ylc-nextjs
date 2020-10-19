@@ -36,44 +36,36 @@ export default function NavBar() {
       slug: '/'
     },
     {
-      name: 'News',
-      slug: '/blog'
-    },
-    {
       name: 'Finance',
-      slug: '/'
+      slug: '/finance'
     },
     {
       name: 'Retirement',
-      slug: '/'
+      slug: '/retirement'
     },
     {
       name: 'Travel',
-      slug: '/'
-    },
-    {
-      name: 'Age Pension',
-      slug: '/'
-    },
-    {
-      name: 'Centrelink',
-      slug: '/'
+      slug: '/travel'
     },
     {
       name: 'Health',
-      slug: '/'
+      slug: '/health'
+    },
+    {
+      name: 'Centrelink',
+      slug: '/government/centrelink/'
+    },
+    {
+      name: 'Age Pension',
+      slug: '/age-pension'
     },
     {
       name: 'Life',
-      slug: '/'
+      slug: '/lifestyle'
     },
     {
       name: 'Fun & Games',
-      slug: '/'
-    },
-    {
-      name: 'Insight',
-      slug: '/'
+      slug: '/fun/games'
     },
     {
       name: 'Forum',
