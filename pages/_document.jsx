@@ -2,7 +2,7 @@ import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/styles'
 
-class MyDocument extends Document {
+class YourLifeChoices extends Document {
   render() {
     return (
       <Html>
@@ -65,7 +65,7 @@ class MyDocument extends Document {
   }
 }
 
-MyDocument.getInitialProps = async (ctx) => {
+YourLifeChoices.getInitialProps = async (ctx) => {
   // Render app and page and get the context of the page with collected side effects.
   const sheets = new ServerStyleSheets()
   const originalRenderPage = ctx.renderPage
@@ -89,4 +89,4 @@ MyDocument.getInitialProps = async (ctx) => {
   }
 }
 
-export default MyDocument
+export default YourLifeChoices

@@ -19,9 +19,16 @@ export default function ArticleDetail(props) {
           <p className="blurb">{props.data.blurb}</p>
 
           {/* Post Thumbnail */}
-          <div className="post-thumbnail">
-            <img src={props.data.featured_img} alt={props.data.title} height="170" loading="lazy" />
-          </div>
+          {props.data.featured_img && (
+            <div className="post-thumbnail">
+              <img
+                src={props.data.featured_img && props.data.featured_img + '&h=170'}
+                alt={props.data.title}
+                height="170"
+                loading="lazy"
+              />
+            </div>
+          )}
 
           {/* CONTENT */}
           <div className="content" dangerouslySetInnerHTML={createMarkup(props.data.content)}></div>
