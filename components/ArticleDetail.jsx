@@ -9,7 +9,21 @@ export default function ArticleDetail(props) {
     <>
       <Head>
         <title>{props.data.title} - Your Life Choices</title>
+        <meta name="description" content={props.data.blurb} />
+
+        {/* OG Tags */}
+        <meta property="og:site_name" content="Your Life Choices Pty Ltd" key="ogsitename" />
+        <meta property="og:title" content={props.data.title} key="ogtitle" />
+        <meta property="og:description" content={props.data.blurb} key="ogdesc" />
+        <meta property="og:image" content={props.data.featured_img} key="ogimage" />
+
+        {/* Twitter Cards tags */}
+        <meta name="twitter:title" content={props.data.title} />
+        <meta name="twitter:description" content={props.data.blurb} />
+        <meta name="twitter:image" content={props.data.featured_img} />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
+
       <section className="container" style={{ maxWidth: '100%', overflowX: 'scroll' }}>
         <article>
           {/* Post title */}
