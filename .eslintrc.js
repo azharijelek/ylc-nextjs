@@ -13,6 +13,7 @@ module.exports = {
     }
   },
   env: {
+    jest: true,
     browser: true, // Enables browser globals like window and document
     amd: true, // Enables require() and define() as global variables as per the amd spec.
     node: true // Enables Node.js global variables and Node.js scoping.

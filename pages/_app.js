@@ -3,7 +3,7 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import Head from 'next/head'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
-import theme from '@/theme'
+import theme from '../theme'
 import { SWRConfig } from 'swr'
 import fetch from '@/lib/fetchJson'
 
