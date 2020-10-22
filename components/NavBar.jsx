@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import CloseIcon from '@material-ui/icons/Close'
 import $router from 'next/router'
-import { useRouter } from 'next/router'
+//import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useUser from '@/lib/useUser'
 import Avatar from '@material-ui/core/Avatar'
@@ -19,7 +19,7 @@ const red = '#ED1B33'
 const drawerHeadHeight = 56
 
 export default function NavBar() {
-  const router = useRouter()
+  //const router = useRouter()
 
   const [open, setOpen] = React.useState(false)
 
@@ -86,15 +86,15 @@ export default function NavBar() {
     )
   }
 
-  const InnerPageLogo = () => {
-    return (
-      <Link href="/">
-        <a title="Your Life Choices">
-          <img src="/static/logo.svg" width="165" alt="Your Life Choices" />
-        </a>
-      </Link>
-    )
-  }
+  // const InnerPageLogo = () => {
+  //   return (
+  //     <Link href="/">
+  //       <a title="Your Life Choices">
+  //         <img src="/static/logo.svg" width="165" alt="Your Life Choices" />
+  //       </a>
+  //     </Link>
+  //   )
+  // }
 
   const { user, mutateUser } = useUser()
 
@@ -106,7 +106,10 @@ export default function NavBar() {
             <Avatar alt={user.full_name} src={user.avatar} className="ylc-avatar" />
           )}
 
-          <div className="title">{router.pathname == '/' ? <HomeLogo /> : <InnerPageLogo />}</div>
+          {/* <div className="title">{router.pathname == '/' ? <HomeLogo /> : <InnerPageLogo />}</div> */}
+          <div className="title">
+            <HomeLogo />
+          </div>
           <IconButton onClick={() => $router.push('/about')} color="inherit" aria-label="search">
             <SearchIcon />
           </IconButton>
