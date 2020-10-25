@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic'
 import Button from '@material-ui/core/Button'
 import Link from 'next/link'
 import axios from 'axios'
+import LazyLoad from 'react-lazyload'
 
 //const PopularPosts = dynamic(import('@/components/home_widgets/PopularPosts'), { ssr: false })
 const RecentNews = dynamic(import('@/components/home_widgets/RecentNews'), { ssr: false })
@@ -62,9 +63,11 @@ const Home = (data) => {
             <h4 className="ylc-widgethead">RECENT NEWS</h4>
           </Box>
 
-          <HorizontalScroll>
-            <RecentNews offset="6" per_page="8" page={1} show_categories={1} />
-          </HorizontalScroll>
+          <LazyLoad offset={-100} height={288}>
+            <HorizontalScroll>
+              <RecentNews offset="6" per_page="8" page={1} show_categories={1} />
+            </HorizontalScroll>
+          </LazyLoad>
         </Box>
 
         {/* Top Games */}
@@ -86,10 +89,11 @@ const Home = (data) => {
             <Box px={2}>
               <h4 className="ylc-widgethead">{cat.name}</h4>
             </Box>
-
-            <HorizontalScroll>
-              <RecentNews per_page="4" page={1} show_categories={1} cat={cat.slug} />
-            </HorizontalScroll>
+            <LazyLoad offset={-100} height={288}>
+              <HorizontalScroll>
+                <RecentNews per_page="4" page={1} show_categories={1} cat={cat.slug} />
+              </HorizontalScroll>
+            </LazyLoad>
           </Box>
         ))}
 
