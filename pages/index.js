@@ -6,6 +6,7 @@ import PopularPosts from '@/components/home_widgets/PopularPosts'
 import dynamic from 'next/dynamic'
 import Button from '@material-ui/core/Button'
 import Link from 'next/link'
+import axios from 'axios'
 
 //const PopularPosts = dynamic(import('@/components/home_widgets/PopularPosts'), { ssr: false })
 const RecentNews = dynamic(import('@/components/home_widgets/RecentNews'), { ssr: false })
@@ -108,8 +109,10 @@ const Home = (data) => {
 
 export async function getStaticProps() {
   // Fetch data from external API
-  const response = await fetch(process.env.WP_API_URL + '/ylc/v1/posts?per_page=5')
-  const data = await response.json()
+  // const response = await fetch(process.env.WP_API_URL + '/ylc/v1/posts?per_page=5')
+  // const data = await response.json()
+
+  const { data } = await axios.get(`${process.env.WP_API_URL}/ylc/v1/posts?per_page=5`)
 
   // Pass data to the page via props
   return {
