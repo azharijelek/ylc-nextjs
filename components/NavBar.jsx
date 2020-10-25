@@ -79,7 +79,7 @@ export default function NavBar() {
       <h1 className="logoH1">
         <Link href="/">
           <a title="Your Life Choices">
-            <img src="/static/logo.svg" width="165" alt="Your Life Choices" />
+            <img src="/static/logo.svg" width="165" height="22" alt="Your Life Choices" />
           </a>
         </Link>
       </h1>

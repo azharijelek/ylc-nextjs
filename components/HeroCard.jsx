@@ -10,7 +10,13 @@ export default function HeroCard(props) {
             <a title={props.title}>{props.title}</a>
           </Link>
         </h2>
-        <img src={props.thumbnail + '&h=200'} alt={props.title} loading="lazy" />
+        <img
+          src={props.thumbnail + '&h=200'}
+          width="300"
+          height="200"
+          alt={props.title}
+          loading="lazy"
+        />
       </section>
 
       <style jsx>{`
