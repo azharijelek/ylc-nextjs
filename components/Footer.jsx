@@ -25,6 +25,9 @@ export default function Footer() {
           <img
             src="https://cdn.statically.io/img/new.ylcdev.com.au/wp-content/themes/bimber-child-theme/assets/img/ylc-logo-simple-white.svg"
             alt="Your Life Choices"
+            loading="lazy"
+            width="225"
+            height="53"
           />
           <p className="mt-4">
             YourLifeChoices is Australia’s most established and trusted digital publication for the
