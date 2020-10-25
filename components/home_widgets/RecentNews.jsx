@@ -24,11 +24,10 @@ export default function RecentNews(props) {
         {Array.apply(null, { length: 4 }).map((e, i) => (
           <div className="post-grid--item" key={i}>
             <div className="thumb"></div>
-            <div className="text" style={{ marginBottom: 10 }}></div>
-            <div className="text" style={{ marginBottom: 10, width: '60%' }}></div>
-            <div className="text" style={{ marginBottom: 5, width: '70%', height: 5 }}></div>
-            <div className="text" style={{ marginBottom: 5, width: '90%', height: 5 }}></div>
-            <div className="text" style={{ width: '40%', height: 5 }}></div>
+            <div className="text" style={{ marginBottom: 10, width: '100%', height: 15 }}></div>
+            <div className="text" style={{ marginBottom: 15, width: '90%', height: 15 }}></div>
+            <div className="text" style={{ marginBottom: 10, width: '70%', height: 10 }}></div>
+            <div className="text" style={{ marginBottom: 0, width: '90%', height: 10 }}></div>
           </div>
         ))}
 
@@ -50,6 +49,8 @@ export default function RecentNews(props) {
               height: 10px;
               background-color: rgba(0, 0, 0, 0.11);
               width: 100%;
+              line-height: 1;
+              border-radius: 4px;
             }
           }
         `}</style>

@@ -63,7 +63,7 @@ const Home = (data) => {
             <h4 className="ylc-widgethead">RECENT NEWS</h4>
           </Box>
 
-          <LazyLoad offset={-100} height={288}>
+          <LazyLoad offset={[-100, 100]} height={290}>
             <HorizontalScroll>
               <RecentNews offset="6" per_page="8" page={1} show_categories={1} />
             </HorizontalScroll>
@@ -89,7 +89,7 @@ const Home = (data) => {
             <Box px={2}>
               <h4 className="ylc-widgethead">{cat.name}</h4>
             </Box>
-            <LazyLoad offset={-100} height={288}>
+            <LazyLoad offset={[-100, 100]} height={288}>
               <HorizontalScroll>
                 <RecentNews per_page="4" page={1} show_categories={1} cat={cat.slug} />
               </HorizontalScroll>
