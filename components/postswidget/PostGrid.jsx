@@ -21,7 +21,7 @@ export default function PostGrid(props) {
           </Link>
           <Link href={props.permalink}>
             <a>
-              <img src={thumbnail} alt={props.title} width="60" height="60" loading="lazy" />
+              <img src={thumbnail} alt={props.title} width="270" height="140" loading="lazy" />
             </a>
           </Link>
         </div>
