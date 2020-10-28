@@ -110,10 +110,19 @@ export default function NavBar() {
           <div className="title">
             <HomeLogo />
           </div>
-          <IconButton onClick={() => $router.push('/about')} color="inherit" aria-label="search">
+          <IconButton
+            className="btn-search"
+            onClick={() => $router.push('/about')}
+            color="inherit"
+            aria-label="search">
             <SearchIcon />
           </IconButton>
-          <IconButton onClick={handleDrawerOpen} edge="end" color="inherit" aria-label="menu">
+          <IconButton
+            className="btn-menu"
+            onClick={handleDrawerOpen}
+            edge="end"
+            color="inherit"
+            aria-label="menu">
             <MenuIcon />
           </IconButton>
         </Toolbar>
@@ -122,7 +131,7 @@ export default function NavBar() {
       {/* <div><pre>{JSON.stringify($router, null, 2)}</pre></div> */}
 
       <Drawer
-        className="drawer"
+        className="ylc-drawer"
         anchor="right"
         open={open}
         variant="temporary"
@@ -160,6 +169,7 @@ export default function NavBar() {
               onKeyUp={handleDrawerClose}
               edge="end"
               color="inherit"
+              className="btn-closedrawer"
               aria-label="menu">
               <CloseIcon />
             </IconButton>
@@ -197,7 +207,7 @@ export default function NavBar() {
         .logoH1 {
           margin: 0;
         }
-        .drawer {
+        .ylc-drawer {
           width: ${drawerWidth};
           flex-shrink: 0;
         }
