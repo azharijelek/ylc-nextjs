@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Button from '@material-ui/core/Button'
 
 export default function TopGames() {
   const games = [
@@ -39,6 +40,18 @@ export default function TopGames() {
           </Link>
         </div>
       ))}
+
+      <Link href="/fun/games">
+        <Button
+          component="a"
+          href="/fun/games"
+          fullWidth
+          variant="outlined"
+          color="primary"
+          className="viewmoregames">
+          View More Games
+        </Button>
+      </Link>
 
       <style jsx>{`
         .game-item {

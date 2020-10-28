@@ -1,7 +1,9 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
-import { configure, mount } from 'enzyme'
+import { configure, mount, shallow } from 'enzyme'
 import preloadAll from 'jest-next-dynamic'
+import { render } from '../test-utils'
+import '@testing-library/jest-dom/extend-expect'
 
 configure({ adapter: new Adapter() })
 
@@ -15,15 +17,27 @@ beforeAll(async () => {
 const wrapper = mount(<TopGames />)
 
 describe('TopGames', () => {
-  it('renders correctly', () => {
+  it('should renders correctly', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('renders 4 Images', () => {
+  it('should renders 4 Images', () => {
     expect(wrapper.find('img')).toHaveLength(4)
   })
 
-  it('renders 4 div containers', () => {
+  it('should renders 4 div containers', () => {
     expect(wrapper.find('div')).toHaveLength(4)
+  })
+
+  it('should renders View More Games button', () => {
+    const { getByText } = render(<TopGames />)
+    const ViewMoreGames = getByText('View More Games')
+    expect(ViewMoreGames).toBeInTheDocument()
+  })
+
+  it('should redirect to /fun/games', () => {
+    const wrapper = shallow(<TopGames />)
+    const ViewMoreGames = wrapper.find('.viewmoregames')
+    expect(ViewMoreGames.prop('href')).toEqual('/fun/games')
   })
 })

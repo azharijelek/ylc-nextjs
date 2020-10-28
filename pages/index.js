@@ -4,8 +4,6 @@ import HorizontalScroll from '@/components/HorizontalScroll'
 import HeroCard from '@/components/HeroCard'
 import PopularPosts from '@/components/home_widgets/PopularPosts'
 import dynamic from 'next/dynamic'
-import Button from '@material-ui/core/Button'
-import Link from 'next/link'
 import axios from 'axios'
 import LazyLoad from 'react-lazyload'
 
@@ -75,12 +73,6 @@ const Home = (data) => {
           <h4 className="ylc-widgethead">TOP GAMES</h4>
 
           <TopGames />
-
-          <Link href="/fun/games">
-            <Button component="a" fullWidth variant="outlined" color="primary">
-              View More Games
-            </Button>
-          </Link>
         </Box>
 
         {/* NEWS BY CATEGORY */}
