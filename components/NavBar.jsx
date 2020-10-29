@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -21,7 +21,11 @@ const drawerHeadHeight = 56
 export default function NavBar() {
   //const router = useRouter()
 
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    console.log(open)
+  }, [open])
 
   const handleDrawerOpen = () => {
     setOpen(true)

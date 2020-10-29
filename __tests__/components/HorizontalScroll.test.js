@@ -1,9 +1,7 @@
 import React from 'react'
-import Adapter from 'enzyme-adapter-react-16'
-import { shallow, configure } from 'enzyme'
-import HorizontalScroll from '@/components/HorizontalScroll'
+import { shallow } from 'enzyme'
 
-configure({ adapter: new Adapter() })
+import HorizontalScroll from '@/components/HorizontalScroll'
 
 describe('<HorizontalScroll/>', () => {
   it('renders correctly', () => {

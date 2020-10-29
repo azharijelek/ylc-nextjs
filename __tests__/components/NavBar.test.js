@@ -1,12 +1,13 @@
+import '@testing-library/jest-dom'
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
-import Adapter from 'enzyme-adapter-react-16'
-import { shallow, configure, mount } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import NavBar from '@/components/NavBar'
 
-configure({ adapter: new Adapter() })
-
 describe('NavBar', () => {
+  // let wrapper
+  // beforeEach(() => {
+  //   wrapper = shallow(<NavBar />)
+  // })
   it('renders correctly', () => {
     const wrapper = shallow(<NavBar />)
     expect(wrapper).toMatchSnapshot()
@@ -33,8 +34,8 @@ describe('NavBar', () => {
   })
 
   it('renders menu drawer', () => {
-    const wrapper = shallow(<NavBar />)
-    expect(wrapper.find('.ylc-drawer')).toHaveLength(1)
+    const comp = shallow(<NavBar />)
+    expect(comp.find('.ylc-drawer')).toHaveLength(1)
   })
 
   it("renders menu drawer's Head", () => {
@@ -62,25 +63,15 @@ describe('NavBar', () => {
     expect(wrapper.find('.sideMenu').find('li')).toHaveLength(10)
   })
 
-  it('should call handleDrawerOpen when .btn-menu clicked', () => {
-    const handleDrawerOpen = jest.fn()
-    const wrapper = shallow(<NavBar onClick={handleDrawerOpen} />)
-
-    wrapper.find('.btn-menu').prop('onClick')()
-
-    setTimeout(() => {
-      expect(handleDrawerOpen).toHaveBeenCalled()
-    })
+  it('should show menu drawer on .btn-menu click', () => {
+    const container = shallow(<NavBar />)
+    container.find('.btn-menu').simulate('click')
+    expect(container.find('.ylc-drawer').prop('open')).toBeTruthy()
   })
 
-  it('should call handleDrawerClose when .btn-closedrawer clicked', () => {
-    const handleDrawerClose = jest.fn()
-    const wrapper = shallow(<NavBar onClick={handleDrawerClose} />)
-
-    wrapper.find('.btn-closedrawer').prop('onClick')()
-
-    setTimeout(() => {
-      expect(handleDrawerClose).toHaveBeenCalled()
-    })
+  it('should hide menu drawer on .btn-closedrawer click', () => {
+    const container = shallow(<NavBar />)
+    container.find('.btn-closedrawer').simulate('click')
+    expect(container.find('.ylc-drawer').prop('open')).toBeFalsy()
   })
 })
