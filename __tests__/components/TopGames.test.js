@@ -1,17 +1,12 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, mount, shallow } from 'enzyme'
-import preloadAll from 'jest-next-dynamic'
-import { render } from '../test-utils'
+import { render } from '../../test-utils'
 import '@testing-library/jest-dom/extend-expect'
 
 configure({ adapter: new Adapter() })
 
 import TopGames from '@/components/TopGames'
-
-beforeAll(async () => {
-  await preloadAll()
-})
 
 //const logopath = '/static/logo.svg'
 const wrapper = mount(<TopGames />)

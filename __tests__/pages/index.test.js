@@ -1,4 +1,4 @@
-import { render, waitFor } from '../test-utils'
+import { render, waitFor } from '../../test-utils'
 import '@testing-library/jest-dom/extend-expect'
 import preloadAll from 'jest-next-dynamic'
 
