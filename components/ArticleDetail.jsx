@@ -3,6 +3,12 @@ import PropTypes from 'prop-types'
 import Head from 'next/head'
 
 export default class ArticleDetail extends React.Component {
+  // State
+  constructor(props) {
+    super(props)
+    this.state = { data: props }
+  }
+
   /**
    * render html markup
    * @param {*} $html
@@ -12,39 +18,40 @@ export default class ArticleDetail extends React.Component {
   }
 
   render() {
+    const item = this.state.data.data
     return (
       <>
         <Head>
-          <title>{this.props.data.title} - Your Life Choices</title>
-          <meta name="description" content={this.props.data.blurb} />
+          <title>{item.title} - Your Life Choices</title>
+          <meta name="description" content={item.blurb} />
 
           {/* OG Tags */}
           <meta property="og:site_name" content="Your Life Choices Pty Ltd" key="ogsitename" />
-          <meta property="og:title" content={this.props.data.title} key="ogtitle" />
-          <meta property="og:description" content={this.props.data.blurb} key="ogdesc" />
-          <meta property="og:image" content={this.props.data.featured_img} key="ogimage" />
+          <meta property="og:title" content={item.title} key="ogtitle" />
+          <meta property="og:description" content={item.blurb} key="ogdesc" />
+          <meta property="og:image" content={item.featured_img} key="ogimage" />
 
           {/* Twitter Cards tags */}
-          <meta name="twitter:title" content={this.props.data.title} />
-          <meta name="twitter:description" content={this.props.data.blurb} />
-          <meta name="twitter:image" content={this.props.data.featured_img} />
+          <meta name="twitter:title" content={item.title} />
+          <meta name="twitter:description" content={item.blurb} />
+          <meta name="twitter:image" content={item.featured_img} />
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
 
         <section className="container" style={{ maxWidth: '100%', overflowX: 'scroll' }}>
           <article>
             {/* Post title */}
-            <h1>{this.props.data.title}</h1>
+            <h1>{item.title}</h1>
 
             {/* Blurb */}
-            <p className="blurb">{this.props.data.blurb}</p>
+            <p className="blurb">{item.blurb}</p>
 
             {/* Post Thumbnail */}
-            {this.props.data.featured_img && (
+            {item.featured_img && (
               <div className="post-thumbnail">
                 <img
-                  src={this.props.data.featured_img && this.props.data.featured_img + '&h=170'}
-                  alt={this.props.data.title}
+                  src={item.featured_img && item.featured_img + '&h=170'}
+                  alt={item.title}
                   height="170"
                   loading="lazy"
                 />
@@ -54,7 +61,7 @@ export default class ArticleDetail extends React.Component {
             {/* CONTENT */}
             <div
               className="content"
-              dangerouslySetInnerHTML={this.createMarkup(this.props.data.content)}></div>
+              dangerouslySetInnerHTML={this.createMarkup(item.content)}></div>
           </article>
         </section>
 
