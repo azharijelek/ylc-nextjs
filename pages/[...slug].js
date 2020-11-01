@@ -45,7 +45,7 @@ export default function Post({ data }) {
           {data.type == 'post' && <ArticleDetail data={data.detail} />}
           {data.type == 'category' && <Category data={data} />}
 
-          <pre>{JSON.stringify(data, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
         </>
       )}
     </>
