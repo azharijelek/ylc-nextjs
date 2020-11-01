@@ -3,11 +3,12 @@ import useUser from '@/lib/useUser'
 
 export default function Footer() {
   const { user } = useUser()
+  const userdetail = user
   return (
     <>
       <footer className="ylc-footer">
-        {!user ||
-          (user.isLoggedIn !== true && (
+        {!userdetail ||
+          (userdetail.isLoggedIn !== true && (
             <div className="footer-up">
               <div className="join-text">
                 Join Australia’s largest and longest-running digital resource for over 50s
@@ -23,7 +24,7 @@ export default function Footer() {
         {/* for Public */}
         <div className="footer-bottom">
           <img
-            src="https://cdn.statically.io/img/new.ylcdev.com.au/wp-content/themes/bimber-child-theme/assets/img/ylc-logo-simple-white.svg"
+            src="https://cdn.statically.io/img/production.yourlifechoices.com.au/wp-content/themes/bimber-child-theme/assets/img/ylc-logo-simple-white.svg"
             alt="Your Life Choices"
             loading="lazy"
             width="225"

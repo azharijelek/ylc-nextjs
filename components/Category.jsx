@@ -5,7 +5,7 @@ import HorizontalScroll from '@/components/HorizontalScroll'
 import HeroCard from '@/components/HeroCard'
 import PostGrid from '@/components/postswidget/PostGrid'
 
-export default function ArticleDetail(props) {
+export default function Category(props) {
   const term = props.data.detail
   const posts = props.data.posts
   const recentposts = props.data.posts
@@ -89,6 +89,6 @@ export default function ArticleDetail(props) {
   )
 }
 
-ArticleDetail.propTypes = {
+Category.propTypes = {
   data: PropTypes.any
 }
