@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types'
-
 export default function HorizontalScroll(props) {
   return (
     <>
@@ -22,8 +20,4 @@ export default function HorizontalScroll(props) {
       `}</style>
     </>
   )
-}
-
-HorizontalScroll.propTypes = {
-  children: PropTypes.any
 }

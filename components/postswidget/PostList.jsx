@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import PropTypes from 'prop-types'
 
 /**
  * PostList
@@ -65,11 +64,4 @@ export default function PostList(props) {
       `}</style>
     </>
   )
-}
-
-PostList.propTypes = {
-  id: PropTypes.any,
-  permalink: PropTypes.string,
-  title: PropTypes.string,
-  thumbnail: PropTypes.string
 }

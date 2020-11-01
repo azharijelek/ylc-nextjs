@@ -27,12 +27,19 @@ module.exports = {
   rules: {
     semi: [2, 'never'],
     'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 0,
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
         components: ['Link'],
         specialLink: ['hrefLeft', 'hrefRight'],
         aspects: ['invalidHref', 'preferButton']
+      }
+    ],
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: ['@material-ui/*/*/*', '!@material-ui/core/test-utils/*']
       }
     ]
   }

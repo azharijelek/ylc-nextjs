@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 const ArticleDetail = dynamic(import('@/components/ArticleDetail'), { ssr: true })
@@ -50,8 +49,4 @@ export default function Post({ data }) {
       )}
     </>
   )
-}
-
-Post.propTypes = {
-  data: PropTypes.any
 }

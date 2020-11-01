@@ -2,11 +2,6 @@ import useSWR from 'swr'
 import PostList from '../postswidget/PostList'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Box from '@material-ui/core/Box'
-import PropTypes from 'prop-types'
-
-// function removeDomain(str) {
-//     return str.replace(/^.*\/\/[^\/]+/, '');
-// }
 
 export default function PopularPosts(props) {
   let per_page = props.per_page ? props.per_page : '4'
@@ -50,9 +45,4 @@ export default function PopularPosts(props) {
         ))}
     </>
   )
-}
-
-PopularPosts.propTypes = {
-  per_page: PropTypes.number,
-  paged: PropTypes.number
 }

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import Head from 'next/head'
 import Box from '@material-ui/core/Box'
 import HorizontalScroll from '@/components/HorizontalScroll'
@@ -87,8 +86,4 @@ export default function Category(props) {
       `}</style>
     </>
   )
-}
-
-Category.propTypes = {
-  data: PropTypes.any
 }

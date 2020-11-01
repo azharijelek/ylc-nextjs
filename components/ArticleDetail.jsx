@@ -1,12 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { Component } from 'react'
 import Head from 'next/head'
 
-export default class ArticleDetail extends React.Component {
+export default class ArticleDetail extends Component {
   // State
   constructor(props) {
     super(props)
-    this.state = { data: props }
+    this.state = { article: props }
   }
 
   /**
@@ -18,7 +17,7 @@ export default class ArticleDetail extends React.Component {
   }
 
   render() {
-    const item = this.state.data.data
+    const item = this.state.article.data
     return (
       <>
         <Head>
@@ -45,6 +44,8 @@ export default class ArticleDetail extends React.Component {
 
             {/* Blurb */}
             <p className="blurb">{item.blurb}</p>
+
+            {/* Author */}
 
             {/* Post Thumbnail */}
             {item.featured_img && (
@@ -100,8 +101,4 @@ export default class ArticleDetail extends React.Component {
       </>
     )
   }
-}
-
-ArticleDetail.propTypes = {
-  data: PropTypes.any
 }

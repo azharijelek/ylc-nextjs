@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import PropTypes from 'prop-types'
 
 export default function HeroCard(props) {
   return (
@@ -56,10 +55,4 @@ export default function HeroCard(props) {
       `}</style>
     </>
   )
-}
-
-HeroCard.propTypes = {
-  permalink: PropTypes.string,
-  title: PropTypes.string,
-  thumbnail: PropTypes.string
 }

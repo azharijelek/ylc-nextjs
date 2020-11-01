@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import PropTypes from 'prop-types'
 
 /**
  * PostGrid
@@ -82,13 +81,4 @@ export default function PostGrid(props) {
       `}</style>
     </>
   )
-}
-
-PostGrid.propTypes = {
-  thumbnail: PropTypes.string,
-  categories: PropTypes.object,
-  permalink: PropTypes.string,
-  title: PropTypes.string,
-  id: PropTypes.number,
-  blurb: PropTypes.string
 }
