@@ -1,23 +1,16 @@
 import { Component } from 'react'
 import Head from 'next/head'
 
+/**
+ * render html markup
+ * @param {*} $html
+ */
+function createMarkup($html) {
+  return { __html: $html }
+}
 export default class ArticleDetail extends Component {
-  // State
-  constructor(props) {
-    super(props)
-    this.state = { article: props }
-  }
-
-  /**
-   * render html markup
-   * @param {*} $html
-   */
-  createMarkup($html) {
-    return { __html: $html }
-  }
-
   render() {
-    const item = this.state.article.data
+    const item = this.props.data
     return (
       <>
         <Head>
@@ -60,9 +53,7 @@ export default class ArticleDetail extends Component {
             )}
 
             {/* CONTENT */}
-            <div
-              className="content"
-              dangerouslySetInnerHTML={this.createMarkup(item.content)}></div>
+            <div className="content" dangerouslySetInnerHTML={createMarkup(item.content)}></div>
           </article>
         </section>
 

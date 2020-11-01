@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const slug = params.slug // [ 'food-recipes', 'food', 'the-best-and-worst-foods-for-your-liver' ]
   const path = slug.join('/')
-  console.log('slug', `${process.env.WP_API_URL}/ylc/v1/post?slug=${path}`)
+  //console.log('slug', `${process.env.WP_API_URL}/ylc/v1/post?slug=${path}`)
   try {
     const response = await fetch(`${process.env.WP_API_URL}/ylc/v1/post?slug=${path}`)
     const data = await response.json()
