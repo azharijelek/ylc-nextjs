@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
  * @param {*} props id, title, thumbnail, permalink
  */
 export default function PostList(props) {
-  let thumbnail = `${props.thumbnail}&h=60`
   return (
     <>
       <article id={'post-' + props.id} className={'post post-' + props.id}>
@@ -14,7 +13,13 @@ export default function PostList(props) {
           <div className="media">
             <Link href={props.permalink}>
               <a>
-                <img src={thumbnail} alt={props.title} width="60" height="60" loading="lazy" />
+                <img
+                  src={props.thumbnail}
+                  alt={props.title}
+                  width="60"
+                  height="60"
+                  loading="lazy"
+                />
               </a>
             </Link>
           </div>
@@ -22,7 +27,7 @@ export default function PostList(props) {
         <div className="postDetail">
           <h4>
             <Link href={props.permalink}>
-              <a>{props.title}</a>
+              <a title={props.title}>{props.title}</a>
             </Link>
           </h4>
         </div>

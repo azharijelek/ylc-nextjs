@@ -65,7 +65,7 @@ export default function RecentNews(props) {
             <PostGrid
               id={post.id}
               title={post.title}
-              thumbnail={post.featured_img}
+              thumbnail={post.featured_img + '&h=60'}
               permalink={post.permalink}
               categories={post.categories}
               blurb={post.blurb}
