@@ -13,6 +13,8 @@ export default function RecentNews(props) {
     .join('&')
   const { data, error } = useSWR(`/api/posts?${queryString}`)
 
+  console.log(data)
+
   if (error) return <div className="px-4">failed to load</div>
   if (!data)
     return (
