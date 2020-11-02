@@ -1,6 +1,8 @@
 const withPWA = require('next-pwa')
+const nextBuildId = require('next-build-id')
 
 module.exports = withPWA({
+  generateBuildId: () => nextBuildId({ dir: __dirname }),
   pwa: {
     disable: process.env.NODE_ENV === 'development',
     dest: 'public',
@@ -13,6 +15,8 @@ module.exports = withPWA({
     SECRET_COOKIE_PASSWORD: process.env.SECRET_COOKIE_PASSWORD,
     APPHOST: process.env.APPHOST
   },
-  generateEtags: false
+  generateEtags: false,
+  poweredByHeader: false,
+  compress: true
   //trailingSlash: true,
 })

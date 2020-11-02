@@ -8,14 +8,10 @@ import PostGrid from '@/components/postswidget/PostGrid'
 export default function RecentNews(props) {
   const params = props
 
-  //const url = process.env.WP_API_URL+`/posts?offset=${offset}&per_page=${per_page}&page=${paged}&show_categories=${show_categories}`
   const queryString = Object.keys(params)
     .map((key) => key + '=' + params[key])
     .join('&')
-
-  const url = process.env.WP_API_URL + `/ylc/v1/posts?${queryString}`
-  const fetcher = (...args) => fetch(...args).then((res) => res.json())
-  const { data, error } = useSWR(url, fetcher)
+  const { data, error } = useSWR(`/api/posts?${queryString}`)
 
   if (error) return <div className="px-4">failed to load</div>
   if (!data)

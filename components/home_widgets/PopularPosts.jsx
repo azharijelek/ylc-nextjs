@@ -7,9 +7,9 @@ export default function PopularPosts(props) {
   let per_page = props.per_page ? props.per_page : '4'
   let paged = props.paged ? props.paged : '1'
 
-  const url = process.env.WP_API_URL + `/ylc/v1/popularposts?per_page=${per_page}&page=${paged}`
-  const fetcher = (...args) => fetch(...args).then((res) => res.json())
-  const { data, error } = useSWR(url, fetcher)
+  const { data, error } = useSWR(`/api/popularposts?per_page=${per_page}&page=${paged}`, {
+    refreshInterval: 0
+  })
 
   if (error) return <div>failed to load</div>
   if (!data)

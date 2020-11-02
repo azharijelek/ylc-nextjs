@@ -108,7 +108,7 @@ export async function getStaticProps() {
   // const response = await fetch(process.env.WP_API_URL + '/ylc/v1/posts?per_page=5')
   // const data = await response.json()
 
-  const { data } = await axios.get(`${process.env.WP_API_URL}/ylc/v1/posts?per_page=5`)
+  const { data } = await axios.get(`/api/posts?per_page=5`)
 
   // Pass data to the page via props
   return {

@@ -1,9 +1,8 @@
 import withSession from '@/lib/session'
-import UserServices from '@/services/UserServices'
+import UserServices from '@/lib/UserServices'
 
 export default withSession(async (req, res) => {
   const { username, password } = await req.body
-  //const url = `https://api.github.com/users/${username}`
 
   const payload = {
     username: username,

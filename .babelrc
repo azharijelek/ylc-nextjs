@@ -1,17 +1,17 @@
 {
-    "presets": [
-      [
-        "next/babel",
-        {
-          "styled-jsx": {
-            "plugins": ["styled-jsx-plugin-sass"]
-          }
+  "presets": [
+    [
+      "next/babel",
+      {
+        "styled-jsx": {
+          "plugins": ["styled-jsx-plugin-sass"]
         }
-      ]
-    ],
-    "env": {
-      "test": {
-        "plugins": ["transform-dynamic-import", "babel-plugin-dynamic-import-node", "styled-jsx/babel-test"]
       }
+    ]
+  ],
+  "env": {
+    "test": {
+      "plugins": ["transform-dynamic-import", "babel-plugin-dynamic-import-node", "styled-jsx/babel-test"]
     }
   }
+}

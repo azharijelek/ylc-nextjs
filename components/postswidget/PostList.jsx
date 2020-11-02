@@ -7,7 +7,7 @@ import Link from 'next/link'
 export default function PostList(props) {
   return (
     <>
-      <article id={'post-' + props.id} className={'post post-' + props.id}>
+      <article id={'post-' + props.id} className={'PostList post-' + props.id}>
         <div className="postThumb">
           <div className="media">
             <Link href={props.permalink}>
@@ -33,7 +33,7 @@ export default function PostList(props) {
       </article>
 
       <style jsx>{`
-        .post {
+        .PostList {
           display: flex;
           margin-bottom: 20px;
         }
