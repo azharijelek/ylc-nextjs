@@ -4,7 +4,6 @@ import HorizontalScroll from '@/components/HorizontalScroll'
 import HeroCard from '@/components/HeroCard'
 import PopularPosts from '@/components/home_widgets/PopularPosts'
 import dynamic from 'next/dynamic'
-import axios from 'axios'
 import LazyLoad from 'react-lazyload'
 
 //const PopularPosts = dynamic(import('@/components/home_widgets/PopularPosts'), { ssr: false })
