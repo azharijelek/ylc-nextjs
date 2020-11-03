@@ -15,7 +15,7 @@ module.exports = withPWA({
     SECRET_COOKIE_PASSWORD: process.env.SECRET_COOKIE_PASSWORD,
     APPHOST: process.env.APPHOST
   },
-  generateEtags: false,
+  generateEtags: true,
   poweredByHeader: false,
   compress: true
   //trailingSlash: true,
