@@ -5,62 +5,65 @@ import { ServerStyleSheets } from '@material-ui/styles'
 class YourLifeChoices extends Document {
   render() {
     return (
-      <Html>
-        <Head>
-          <meta name="theme-color" content="#ED1B33" />
-          <style jsx global>
-            {`
-              html,
-              body {
-                height: 100%;
-                width: 100%;
-                margin: 0;
-                padding: 0;
-              }
-              *,
-              *:after,
-              *:before {
-                box-sizing: border-box;
-              }
-              body {
-                font-size: 1rem;
-                margin: 0;
-              }
-              a {
-                color: inherit;
-                text-decoration: none !important;
-              }
-              .my-0 {
-                margin-top: 0 !important;
-                margin-bottom: 0 !important;
-              }
+      <>
+        <Html>
+          <Head>
+            <meta name="theme-color" content="#ED1B33" />
+          </Head>
+          <body>
+            <Main />
+            <NextScript />
+          </body>
+        </Html>
+        <style jsx global>
+          {`
+            html,
+            body {
+              height: 100%;
+              width: 100%;
+              margin: 0;
+              padding: 0;
+            }
+            *,
+            *:after,
+            *:before {
+              box-sizing: border-box;
+            }
+            body {
+              font-size: 1rem;
+              margin: 0;
+            }
+            a {
+              color: inherit;
+              text-decoration: none !important;
+            }
+            .my-0 {
+              margin-top: 0 !important;
+              margin-bottom: 0 !important;
+            }
+            img {
+              max-width: 100%;
+            }
+            .content {
+              max-width: 100%;
+              overflow: hidden;
               img {
                 max-width: 100%;
+                width: auto;
+                height: auto;
               }
-              .content {
-                max-width: 100%;
-                overflow: hidden;
-                img {
-                  max-width: 100%;
-                  width: auto;
-                }
-                p {
-                  font-size: 16px;
-                  line-height: 25px;
+              p {
+                font-size: 16px;
+                line-height: 25px;
 
-                  & + br {
-                    display: none !important;
-                  }
+                & + br {
+                  display: none !important;
                 }
               }
-            `}
-          </style>
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
+            }
+          `}
+        </style>
+      </>
     )
   }
 }

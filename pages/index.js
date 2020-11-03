@@ -11,7 +11,7 @@ const RecentNews = dynamic(import('@/components/home_widgets/RecentNews'), { ssr
 const TopGames = dynamic(import('@/components/TopGames'), { ssr: false })
 
 const Home = (data) => {
-  const posts = data.data
+  const posts = data ? data.data : null
 
   const home_categories = [
     { name: 'TRAVEL', slug: 'travel' },
@@ -32,7 +32,7 @@ const Home = (data) => {
       <main id="site-content">
         {/* Render Post Slider */}
         {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
-        {posts && (
+        {posts != null && (
           <Box my={3}>
             <HorizontalScroll>
               {posts.map((post) => (
