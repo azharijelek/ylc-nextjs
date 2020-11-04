@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 const ArticleDetail = dynamic(import('@/components/ArticleDetail'), { ssr: true })
 const Category = dynamic(import('@/components/Category'), { ssr: true })
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 export async function getStaticPaths() {
   return { paths: [], fallback: true }
@@ -31,22 +32,44 @@ export default function Post({ data }) {
     return <div>Error</div>
   }
 
-  // const createMarkup = function ($html) {
-  //   return { __html: $html }
-  // }
+  const Loader = () => {
+    return (
+      <>
+        <div className="loading">
+          <CircularProgress />
+        </div>
+        <style jsx>{`
+          .loading {
+            width: 100%;
+            text-align: center;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        `}</style>
+      </>
+    )
+  }
 
   return (
     <>
-      {isFallback ? (
-        'Loading'
-      ) : (
-        <>
-          {data.type == 'post' && <ArticleDetail data={data.detail} />}
-          {data.type == 'category' && <Category data={data} />}
-
-          {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
-        </>
-      )}
+      <main className="ylc-outtest-wrapper">
+        {isFallback ? (
+          <Loader />
+        ) : (
+          <>
+            {data.type == 'post' && <ArticleDetail data={data.detail} />}
+            {data.type == 'category' && <Category data={data} />}
+            {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+          </>
+        )}
+      </main>
+      <style jsx>{`
+        .ylc-outtest-wrapper {
+          min-height: 70vh;
+        }
+      `}</style>
     </>
   )
 }

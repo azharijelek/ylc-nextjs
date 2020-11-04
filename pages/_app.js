@@ -56,6 +56,7 @@ function ylcApp({ Component, pageProps }) {
         .root {
           flex-grow: 1;
           padding-top: 60px;
+          min-height: 70vh;
         }
         body,
         html {

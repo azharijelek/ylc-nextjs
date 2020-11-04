@@ -9,60 +9,56 @@ class YourLifeChoices extends Document {
         <Html>
           <Head>
             <meta name="theme-color" content="#ED1B33" />
+            <style jsx global>
+              {`
+                html,
+                body {
+                  height: 100%;
+                  width: 100%;
+                  margin: 0;
+                  padding: 0;
+                }
+                body {
+                  overflow-x: hidden;
+                  overflow-y: auto;
+                  max-width: 100%;
+                  width: 100%;
+                }
+                *,
+                *:after,
+                *:before {
+                  box-sizing: border-box;
+                }
+                body {
+                  font-size: 1rem;
+                  margin: 0;
+                }
+                a {
+                  color: inherit;
+                  text-decoration: none !important;
+                }
+                .container {
+                  padding: 25px 15px;
+                  overflow-x: hidden;
+                  overflow-y: auto;
+                  max-width: 100%;
+                  width: 100%;
+                }
+                .my-0 {
+                  margin-top: 0 !important;
+                  margin-bottom: 0 !important;
+                }
+                img {
+                  max-width: 100%;
+                }
+              `}
+            </style>
           </Head>
           <body>
             <Main />
             <NextScript />
           </body>
         </Html>
-        <style jsx global>
-          {`
-            html,
-            body {
-              height: 100%;
-              width: 100%;
-              margin: 0;
-              padding: 0;
-            }
-            *,
-            *:after,
-            *:before {
-              box-sizing: border-box;
-            }
-            body {
-              font-size: 1rem;
-              margin: 0;
-            }
-            a {
-              color: inherit;
-              text-decoration: none !important;
-            }
-            .my-0 {
-              margin-top: 0 !important;
-              margin-bottom: 0 !important;
-            }
-            img {
-              max-width: 100%;
-            }
-            .content {
-              max-width: 100%;
-              overflow: hidden;
-              img {
-                max-width: 100%;
-                width: auto;
-                height: auto;
-              }
-              p {
-                font-size: 16px;
-                line-height: 25px;
-
-                & + br {
-                  display: none !important;
-                }
-              }
-            }
-          `}
-        </style>
       </>
     )
   }

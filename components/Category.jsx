@@ -57,10 +57,6 @@ export default function Category(props) {
       </Box>
 
       <style jsx>{`
-        .container {
-          padding: 25px 15px 0;
-        }
-
         h1 {
           font-size: 26px;
           line-height: 35px;

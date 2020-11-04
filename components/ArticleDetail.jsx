@@ -1,7 +1,10 @@
 import { Component } from 'react'
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 import DateRangeIcon from '@material-ui/icons/DateRange'
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
+import LazyLoad from 'react-lazyload'
+const Comments = dynamic(import('@/components/article/Comments'), { ssr: false })
 
 /**
  * render html markup
@@ -83,19 +86,54 @@ export default class ArticleDetail extends Component {
 
             {/* CONTENT */}
             <div className="content" dangerouslySetInnerHTML={createMarkup(item.content)}></div>
+
+            {/* COMMENTS */}
+            <h4 className="ylc-widgethead">{item.comments} COMMENTS</h4>
+            <LazyLoad offset={[-100, 100]} height={290}>
+              <Comments postId={item.id} />
+            </LazyLoad>
           </article>
         </section>
 
+        <style jsx global>{`
+          p {
+            font-size: 18px;
+            line-height: 32px;
+            margin: 20px 0;
+
+            & + br {
+              display: none !important;
+            }
+          }
+        `}</style>
+
         <style jsx>{`
-          .container {
-            padding: 25px 15px;
+          article {
+            max-width: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+          }
+          .post-date {
+            color: #696969;
+            margin-bottom: 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            .date-icon {
+              width: 16px;
+              margin-right: 10px;
+              position: relative;
+              top: 2px;
+              color: #006cab;
+            }
           }
 
           h1 {
             font-size: 26px;
             line-height: 35px;
             margin-top: 0;
-            margin-bottom: 20px;
+            margin-bottom: 0;
           }
 
           p.blurb {
@@ -136,21 +174,6 @@ export default class ArticleDetail extends Component {
             align-items: center;
             line-height: 1;
             .comment-icon {
-              width: 16px;
-              margin-right: 10px;
-              position: relative;
-              top: 2px;
-              color: #006cab;
-            }
-          }
-
-          .post-date {
-            color: #696969;
-            margin-bottom: 5px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            .date-icon {
               width: 16px;
               margin-right: 10px;
               position: relative;
