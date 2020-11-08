@@ -35,7 +35,7 @@ export default class ArticleDetail extends Component {
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
 
-        <section className="container" style={{ maxWidth: '100%', overflowX: 'scroll' }}>
+        <section className="container">
           <article>
             {/* <pre>{JSON.stringify(this.props.data, null, 2)}</pre> */}
 
@@ -196,6 +196,10 @@ export default class ArticleDetail extends Component {
 
           p + br {
             display: none;
+          }
+          .ylc-widgethead {
+            margin-top: 30px !important;
+            margin-bottom: 30px !important;
           }
         `}</style>
       </>

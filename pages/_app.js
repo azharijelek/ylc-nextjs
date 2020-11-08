@@ -66,6 +66,10 @@ function ylcApp({ Component, pageProps }) {
             Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
         }
 
+        .container {
+          padding: 15px;
+        }
+
         a {
           color: inherit;
           text-decoration: none !important;
