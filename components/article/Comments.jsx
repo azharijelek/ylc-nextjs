@@ -21,7 +21,7 @@ export default function Comments(props) {
     const page_to_load = parseInt(paged + 1)
     try {
       const response = await fetch(
-        `http://localhost:8080/wp-json/ylc/v1/comments?post_id=${post_id}&paged=${page_to_load}`
+        `${process.env.WP_API_URL}/ylc/v1/comments?post_id=${post_id}&paged=${page_to_load}`
       )
       const data = await response.json()
 
@@ -45,7 +45,7 @@ export default function Comments(props) {
   }
 
   const { data, error } = useSWR(
-    `http://localhost:8080/wp-json/ylc/v1/comments?post_id=${post_id}&paged=1`
+    `${process.env.WP_API_URL}/ylc/v1/comments?post_id=${post_id}&paged=1`
   )
 
   if (error) return <div className="px-4">failed to load</div>
