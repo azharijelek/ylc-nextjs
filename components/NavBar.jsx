@@ -11,8 +11,8 @@ import $router from 'next/router'
 //import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useUser from '@/lib/useUser'
-import Avatar from '@material-ui/core/Avatar'
 import fetchJson from '@/lib/fetchJson'
+import UserMenu from '@/components/UserMenu'
 
 const drawerWidth = '90%'
 const red = '#ED1B33'
@@ -76,13 +76,22 @@ export default function NavBar() {
 
   const HomeLogo = () => {
     return (
-      <h1 className="logoH1">
-        <Link href="/">
-          <a title="Your Life Choices">
-            <img src="/static/logo.svg" width="165" height="22" alt="Your Life Choices" />
-          </a>
-        </Link>
-      </h1>
+      <>
+        <h1 className="logoH1">
+          <Link href="/">
+            <a title="Your Life Choices">
+              <img src="/static/logo.svg" width="165" height="22" alt="Your Life Choices" />
+            </a>
+          </Link>
+        </h1>
+
+        <style jsx>{`
+          .logoH1 a {
+            display: block;
+            line-height: 1;
+          }
+        `}</style>
+      </>
     )
   }
 
@@ -102,9 +111,7 @@ export default function NavBar() {
     <>
       <AppBar className="mainheader" color="default" position="fixed">
         <Toolbar>
-          {user && user.isLoggedIn === true && (
-            <Avatar alt={user.full_name} src={user.avatar} className="ylc-avatar" />
-          )}
+          {user && user.isLoggedIn === true && <UserMenu user={user} />}
 
           {/* <div className="title">{router.pathname == '/' ? <HomeLogo /> : <InnerPageLogo />}</div> */}
           <div className="title">
