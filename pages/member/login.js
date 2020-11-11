@@ -1,14 +1,21 @@
-import React from 'react'
-import Container from '@material-ui/core/Container'
-import Box from '@material-ui/core/Box'
-import Head from 'next/head'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
+import React, { useState } from 'react'
 import fetchJson from '@/lib/fetchJson'
 import useUser from '@/lib/useUser'
+import dynamic from 'next/dynamic'
+
+//import Container from '@material-ui/core/Container'
+//import Box from '@material-ui/core/Box'
+//import Head from 'next/head'
+//import TextField from '@material-ui/core/TextField'
+//import Button from '@material-ui/core/Button'
+const Container = dynamic(import('@material-ui/core/Container'), { ssr: false })
+const Box = dynamic(import('@material-ui/core/Box'), { ssr: false })
+const Head = dynamic(import('next/head'), { ssr: false })
+const TextField = dynamic(import('@material-ui/core/TextField'), { ssr: false })
+const Button = dynamic(import('@material-ui/core/Button'), { ssr: false })
 
 const Login = () => {
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     username: '',
     password: ''
   })
@@ -22,8 +29,8 @@ const Login = () => {
     redirectIfFound: true
   })
 
-  const [errorMsg, setErrorMsg] = React.useState('')
-  const [loading, setLoading] = React.useState('')
+  const [errorMsg, setErrorMsg] = useState('')
+  const [loading, setLoading] = useState('')
 
   /**
    * Handle Login

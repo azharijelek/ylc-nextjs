@@ -117,11 +117,7 @@ export default function NavBar() {
           <div className="title">
             <HomeLogo />
           </div>
-          <IconButton
-            className="btn-search"
-            onClick={() => $router.push('/about')}
-            color="inherit"
-            aria-label="search">
+          <IconButton className="btn-search" color="inherit" aria-label="search">
             <SearchIcon />
           </IconButton>
           <IconButton
