@@ -18,14 +18,14 @@ const red = '#ED1B33'
 
 const useStyles = makeStyles(() => ({
   paper: {
-    height: 'calc(100% - 57px)',
+    height: 'calc(100% - 67px)',
     maxHeight: 'none',
     overflow: 'visible'
   },
   wrapper: {
     position: 'relative',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
+    borderTopLeftRadius: 18,
+    borderTopRightRadius: 18,
     visibility: 'visible !important',
     background: red + '!important',
     color: '#fff',
@@ -90,9 +90,12 @@ export default function PostList(props) {
 
   return (
     <>
+      {/* AVATAR with TRIGGER */}
       <ButtonBase aria-haspopup="true" onClick={toggleDrawer('bottom', true)}>
         <Avatar alt={props.user.full_name} src={props.user.avatar} className="ylc-avatar" />
       </ButtonBase>
+
+      {/* MENU DRAWER */}
       <SwipeableDrawer
         anchor="bottom"
         open={state.bottom}

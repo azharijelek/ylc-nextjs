@@ -23,7 +23,7 @@ export default function HeroCard(props) {
           width: 300px;
           height: 200px;
           background: #ddd;
-          border-radius: 8px;
+          border-radius: 18px;
           position: relative;
           overflow: hidden;
           background: #f5f5f5;
