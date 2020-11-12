@@ -201,7 +201,6 @@ export default function NavBar(props) {
                 {sub_menu != null && typeof sub_menu != 'undefined' && (
                   <Collapse
                     in={is_open}
-                    unmountOnExit
                     timeout="auto"
                     key={'collapse-menu-' + i}
                     className={classes.collapse}>
