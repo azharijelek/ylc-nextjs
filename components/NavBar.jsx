@@ -247,6 +247,9 @@ export default function NavBar(props) {
           width: 100% !important;
           flex-shrink: 0;
           height: 100%;
+          .MuiDrawer-paperAnchorBottom {
+            height: calc(100% - 56px) !important;
+          }
         }
         .drawerPaper {
           width: 100%;
