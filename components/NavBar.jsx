@@ -33,13 +33,12 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const red = '#ED1B33'
-const newMenu = JSON.parse(Menu())
 
 export default function NavBar(props) {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
-  const [menu] = useState(newMenu)
   const [openMenu, setOpenMenu] = useState(null)
+  const menu = JSON.parse(Menu())
 
   /**
    * Open Drawer
@@ -116,9 +115,7 @@ export default function NavBar(props) {
           {user && user.isLoggedIn === true && <UserMenu user={user} />}
 
           <div className="title">{props.path == '/' ? <HomeLogo /> : <InnerPageLogo />}</div>
-          {/* <div className="title">
-            <HomeLogo />
-          </div> */}
+
           <IconButton className="btn-search" color="inherit" aria-label="search">
             <SearchIcon />
           </IconButton>

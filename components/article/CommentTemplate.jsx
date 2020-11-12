@@ -6,7 +6,13 @@ export default function CommentTemplate(props) {
   /**
    * Thumbs Up Icon
    */
-  const iconStyles = { fill: 'none', fontSize: 16, verticalAlign: 'middle', marginRight: 2 }
+  const iconStyles = {
+    fill: 'none',
+    fontSize: 16,
+    verticalAlign: 'middle',
+    marginRight: 2,
+    display: 'inline-block'
+  }
   const ThumbsUpIcon = () => {
     return (
       <SvgIcon style={iconStyles}>
@@ -62,18 +68,14 @@ export default function CommentTemplate(props) {
             <div className="like-dislike-date">
               {/* Like */}
               <div>
-                <a href="#like">
-                  <ThumbsUpIcon />
-                  {comment.likes}
-                </a>
+                <ThumbsUpIcon />
+                {comment.likes}
               </div>
 
               {/* Dislike */}
               <div>
-                <a href="#like">
-                  <ThumbsDownIcon />
-                  {comment.dislikes}
-                </a>
+                <ThumbsDownIcon />
+                {comment.dislikes}
               </div>
 
               {/* Date */}
