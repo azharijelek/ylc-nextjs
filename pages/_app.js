@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import theme from '../theme'
 import { SWRConfig } from 'swr'
 import fetch from '@/lib/fetchJson'
+import { useRouter } from 'next/router'
 
 // export function reportWebVitals(metric) {
 // 	console.log(metric)
@@ -23,6 +24,8 @@ function ylcApp({ Component, pageProps }) {
       jssStyles.parentElement.removeChild(jssStyles)
     }
   }, [])
+
+  const router = useRouter()
 
   return (
     <>
@@ -45,7 +48,7 @@ function ylcApp({ Component, pageProps }) {
                 console.error(err)
               }
             }}>
-            <NavBar />
+            <NavBar path={router.pathname} />
             <Component {...pageProps} />
             <Footer />
           </SWRConfig>

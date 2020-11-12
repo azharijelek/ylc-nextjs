@@ -7,75 +7,63 @@ import MenuIcon from '@material-ui/icons/Menu'
 import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import CloseIcon from '@material-ui/icons/Close'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Collapse from '@material-ui/core/Collapse'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
+import Divider from '@material-ui/core/Divider'
+
 //import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useUser from '@/lib/useUser'
 import UserMenu from '@/components/UserMenu'
+import Menu from '@/lib/Menu'
+
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  nested: {
+    paddingLeft: theme.spacing(4)
+  },
+  collapse: {
+    background: '#a91425'
+  }
+}))
 
 const red = '#ED1B33'
+const newMenu = JSON.parse(Menu())
 
-export default function NavBar() {
-  //const router = useRouter()
-
+export default function NavBar(props) {
+  const classes = useStyles()
   const [open, setOpen] = useState(false)
+  const [menu] = useState(newMenu)
+  const [openMenu, setOpenMenu] = useState(null)
 
+  /**
+   * Open Drawer
+   */
   const handleDrawerOpen = () => {
     setOpen(true)
   }
 
+  /**
+   * Close Drawer
+   */
   const handleDrawerClose = () => {
     setOpen(false)
   }
 
-  const Menu = [
-    {
-      name: 'Home',
-      slug: '/'
-    },
-    {
-      name: 'Finance',
-      slug: '/finance'
-    },
-    {
-      name: 'Retirement',
-      slug: '/retirement'
-    },
-    {
-      name: 'Travel',
-      slug: '/travel'
-    },
-    {
-      name: 'Health',
-      slug: '/health'
-    },
-    {
-      name: 'Centrelink',
-      slug: '/government/centrelink/'
-    },
-    {
-      name: 'Age Pension',
-      slug: '/age-pension'
-    },
-    {
-      name: 'Life',
-      slug: '/lifestyle'
-    },
-    {
-      name: 'Fun & Games',
-      slug: '/fun/games'
-    },
-    {
-      name: 'Forum',
-      slug: '/'
-    }
-  ]
-
+  /**
+   * Home Logo
+   */
   const HomeLogo = () => {
     return (
       <>
         <h1 className="logoH1">
           <Link href="/">
-            <a title="Your Life Choices">
+            <a title="Your Life Choices" className="logo-link">
               <img src="/static/logo.svg" width="165" height="22" alt="Your Life Choices" />
             </a>
           </Link>
@@ -84,22 +72,40 @@ export default function NavBar() {
         <style jsx>{`
           .logoH1 a {
             display: block;
-            line-height: 1;
+            line-height: 0;
           }
         `}</style>
       </>
     )
   }
 
-  // const InnerPageLogo = () => {
-  //   return (
-  //     <Link href="/">
-  //       <a title="Your Life Choices">
-  //         <img src="/static/logo.svg" width="165" alt="Your Life Choices" />
-  //       </a>
-  //     </Link>
-  //   )
-  // }
+  /**
+   * Inner Page Logo
+   */
+  const InnerPageLogo = () => {
+    return (
+      <>
+        <Link href="/">
+          <a title="Your Life Choices" className="logo-link">
+            <img src="/static/logo.svg" width="165" alt="Your Life Choices" />
+          </a>
+        </Link>
+        <style jsx>{`
+          a {
+            display: block;
+            line-height: 0;
+          }
+        `}</style>
+      </>
+    )
+  }
+
+  /**
+   * Toggle nested menu
+   */
+  const handleMenuClick = (slug) => {
+    setOpenMenu(slug)
+  }
 
   const { user } = useUser()
 
@@ -109,10 +115,10 @@ export default function NavBar() {
         <Toolbar>
           {user && user.isLoggedIn === true && <UserMenu user={user} />}
 
-          {/* <div className="title">{router.pathname == '/' ? <HomeLogo /> : <InnerPageLogo />}</div> */}
-          <div className="title">
+          <div className="title">{props.path == '/' ? <HomeLogo /> : <InnerPageLogo />}</div>
+          {/* <div className="title">
             <HomeLogo />
-          </div>
+          </div> */}
           <IconButton className="btn-search" color="inherit" aria-label="search">
             <SearchIcon />
           </IconButton>
@@ -165,17 +171,62 @@ export default function NavBar() {
         </div>
 
         {/* Drawer Menu */}
-        <ul className="sideMenu">
-          {Menu.map((item) => (
-            <li key={item.name} onClick={handleDrawerClose} onKeyUp={handleDrawerClose}>
-              <Link href={item.slug}>
-                <a href={item.slug} className="sideMenuItem">
-                  {item.name}
-                </a>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <List component="nav">
+          {menu.map(({ slug, label, sub_menu }, i) => {
+            const is_open = openMenu == slug ? true : false
+            return (
+              <div key={'parent-menu-' + i}>
+                <ListItem button>
+                  <Link href={slug} passHref>
+                    <ListItemText primary={label} onClick={handleDrawerClose} />
+                  </Link>
+                  {sub_menu != null && (
+                    <>
+                      {is_open ? (
+                        <ExpandLess
+                          onClick={() => {
+                            handleMenuClick(null)
+                          }}
+                        />
+                      ) : (
+                        <ExpandMore
+                          onClick={() => {
+                            handleMenuClick(slug)
+                          }}
+                        />
+                      )}
+                    </>
+                  )}
+                </ListItem>
+
+                <Divider key={'menu-devider-' + i} />
+
+                {sub_menu != null && typeof sub_menu != 'undefined' && (
+                  <Collapse
+                    in={is_open}
+                    unmountOnExit
+                    timeout="auto"
+                    key={'collapse-menu-' + i}
+                    className={classes.collapse}>
+                    <List component="nav" disablePadding>
+                      {sub_menu.map((item, z) => (
+                        <ListItem
+                          className={classes.nested}
+                          href={item.slug}
+                          button
+                          key={'child-menu-item-' + z}>
+                          <Link href={item.slug} passHref>
+                            <ListItemText primary={item.label} onClick={handleDrawerClose} />
+                          </Link>
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Collapse>
+                )}
+              </div>
+            )
+          })}
+        </List>
       </Drawer>
 
       <style jsx global>{`
@@ -185,8 +236,8 @@ export default function NavBar() {
           box-shadow: none !important;
           .ylc-avatar {
             margin-right: 10px;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
           }
         }
         .title {
@@ -223,6 +274,7 @@ export default function NavBar() {
           top: 0;
           left: 0;
           right: 0;
+          z-index: 999;
         }
         .signUpButton {
           display: block;
