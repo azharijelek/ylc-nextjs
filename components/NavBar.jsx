@@ -116,7 +116,7 @@ export default function NavBar(props) {
 
           <div className="title">{props.path == '/' ? <HomeLogo /> : <InnerPageLogo />}</div>
 
-          <IconButton className="btn-search" color="inherit" aria-label="search">
+          <IconButton className="btn-search" color="inherit" aria-label="search" disableFocusRipple>
             <SearchIcon />
           </IconButton>
           <IconButton
@@ -124,6 +124,7 @@ export default function NavBar(props) {
             onClick={handleDrawerOpen}
             edge="end"
             color="inherit"
+            disableFocusRipple
             aria-label="menu">
             <MenuIcon />
           </IconButton>

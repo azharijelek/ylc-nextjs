@@ -86,13 +86,15 @@ export default class ArticleDetail extends Component {
 
             {/* CONTENT */}
             <div className="content" dangerouslySetInnerHTML={createMarkup(item.content)}></div>
-
-            {/* COMMENTS */}
-            <h4 className="ylc-widgethead">{item.comments} COMMENTS</h4>
-            <LazyLoad offset={[-100, 100]} height={290}>
-              <Comments postId={item.id} />
-            </LazyLoad>
           </article>
+        </section>
+
+        {/* COMMENTS */}
+        <section style={{ padding: '15px 15px 25px', background: '#fbfbfb' }}>
+          <h4 className="ylc-widgethead">{item.comments} COMMENTS</h4>
+          <LazyLoad offset={[-100, 100]} height={290}>
+            <Comments postId={item.id} />
+          </LazyLoad>
         </section>
 
         <style jsx global>{`

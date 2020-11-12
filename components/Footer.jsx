@@ -43,7 +43,7 @@ export default function Footer() {
         .ylc-footer {
           color: #fff;
           text-align: center;
-          margin-top: 30px;
+          margin-top: 0;
 
           .footer-up {
             background: #4f4f4f;
