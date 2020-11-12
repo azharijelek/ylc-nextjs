@@ -5,6 +5,8 @@ import HeroCard from '@/components/HeroCard'
 import PopularPosts from '@/components/home_widgets/PopularPosts'
 import dynamic from 'next/dynamic'
 import LazyLoad from 'react-lazyload'
+import Link from 'next/link'
+import Button from '@material-ui/core/Button'
 
 //const PopularPosts = dynamic(import('@/components/home_widgets/PopularPosts'), { ssr: false })
 const RecentNews = dynamic(import('@/components/home_widgets/RecentNews'), { ssr: false })
@@ -75,8 +77,8 @@ const Home = (data) => {
         </Box>
 
         {/* NEWS BY CATEGORY */}
-        {home_categories.map((cat) => (
-          <Box my={4} key={cat.slug}>
+        {home_categories.map((cat, i) => (
+          <Box py={4} key={cat.slug} bgcolor={i % 2 === 0 ? '#f5f5f5' : '#fff'}>
             <Box px={2}>
               <h4 className="ylc-widgethead">{cat.name}</h4>
             </Box>
@@ -84,6 +86,14 @@ const Home = (data) => {
               <HorizontalScroll>
                 <RecentNews per_page="4" page={1} show_categories={1} cat={cat.slug} />
               </HorizontalScroll>
+
+              <Box mt={2} px={5} className="text-cente">
+                <Link href={'/' + cat.slug} passHref>
+                  <Button component="a" variant="outlined" color="primary" fullWidth>
+                    View More Articles
+                  </Button>
+                </Link>
+              </Box>
             </LazyLoad>
           </Box>
         ))}
@@ -95,6 +105,9 @@ const Home = (data) => {
             &:first-of-type {
               padding-left: 15px !important;
             }
+          }
+          .text-center {
+            text-align: center;
           }
         `}</style>
       </main>

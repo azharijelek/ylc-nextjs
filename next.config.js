@@ -17,6 +17,6 @@ module.exports = withPWA({
   },
   generateEtags: true,
   poweredByHeader: false,
-  compress: true
-  //trailingSlash: true,
+  compress: true,
+  trailingSlash: true
 })

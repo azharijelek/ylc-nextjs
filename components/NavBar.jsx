@@ -7,16 +7,12 @@ import MenuIcon from '@material-ui/icons/Menu'
 import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import CloseIcon from '@material-ui/icons/Close'
-import $router from 'next/router'
 //import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useUser from '@/lib/useUser'
-import fetchJson from '@/lib/fetchJson'
 import UserMenu from '@/components/UserMenu'
 
-const drawerWidth = '90%'
 const red = '#ED1B33'
-const drawerHeadHeight = 56
 
 export default function NavBar() {
   //const router = useRouter()
@@ -105,7 +101,7 @@ export default function NavBar() {
   //   )
   // }
 
-  const { user, mutateUser } = useUser()
+  const { user } = useUser()
 
   return (
     <>
@@ -135,7 +131,7 @@ export default function NavBar() {
 
       <Drawer
         className="ylc-drawer"
-        anchor="right"
+        anchor="bottom"
         open={open}
         variant="temporary"
         onEscapeKeyDown={handleDrawerClose}
@@ -145,25 +141,14 @@ export default function NavBar() {
         }}>
         <div className="drawerHead">
           {/* LOGIN BUTTON */}
-          {!user || user.isLoggedIn === false ? (
-            <Link href="/member/login/">
-              <a href="/member/login/" onClick={handleDrawerClose} className="signUpButton">
-                Sign In
-              </a>
-            </Link>
-          ) : (
-            <a
-              href="/api/logout"
-              className="signUpButton"
-              onClick={async (e) => {
-                e.preventDefault()
-                handleDrawerClose()
-                await mutateUser(fetchJson('/api/logout'))
-                $router.push('/member/login')
-              }}>
-              Logout
-            </a>
-          )}
+          {!user ||
+            (user.isLoggedIn === false && (
+              <Link href="/member/login/">
+                <a href="/member/login/" onClick={handleDrawerClose} className="signUpButton">
+                  Sign In
+                </a>
+              </Link>
+            ))}
 
           {/* Close Button */}
           <div>
@@ -211,17 +196,20 @@ export default function NavBar() {
           margin: 0;
         }
         .ylc-drawer {
-          width: ${drawerWidth};
+          width: 100% !important;
           flex-shrink: 0;
+          height: 100%;
         }
         .drawerPaper {
-          width: ${drawerWidth};
+          width: 100%;
           background: ${red}!important;
           color: #fff !important;
+          height: 100%;
+          height: calc(100% - 56px);
           overflow-x: hidden;
         }
         .drawerHead {
-          height: ${drawerHeadHeight};
+          height: 56;
           display: flex;
           align-items: center;
           justify-content: ${!user || user.isLoggedIn === false ? 'space-between' : 'flex-end'};

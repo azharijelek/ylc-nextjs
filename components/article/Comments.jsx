@@ -1,6 +1,16 @@
 import { useState, useEffect } from 'react'
 import CommentTemplate from '@/components/article/CommentTemplate'
+import Box from '@material-ui/core/Box'
+import Skeleton from '@material-ui/lab/Skeleton'
 
+/**
+ * List of functions:
+ * ====================
+ * Handle More Comments
+ * Set Replies Data
+ * Set page info
+ * Scroll to ID
+ */
 export default function Comments(props) {
   const post_id = props.postId
   const [loading, setLoading] = useState(true)
@@ -14,18 +24,27 @@ export default function Comments(props) {
   // Lifecycle
   useEffect(() => {
     setLoading(true)
-    fetchMoreComments(paged, false)
+    fetchMoreComments(
+      {
+        paged: paged,
+        per_page: 10
+      },
+      false
+    )
   }, [])
 
   /**
    * Handle More Comments
    */
-  const fetchMoreComments = async (paged, ismore = false, parent) => {
-    const next_page = ismore == true ? parseInt(paged + 1) : paged
-    const comment_parent = typeof parent != 'undefined' ? `&parent=${parent}` : ''
+  const fetchMoreComments = async (args, ismore) => {
+    const queryString = Object.keys(args)
+      .map((key) => key + '=' + args[key])
+      .join('&')
+
     try {
       const data = await fetch(
-        `/api/comments?post_id=${post_id}&paged=${next_page}${comment_parent}`
+        //`/api/comments?post_id=${post_id}&paged=${next_page}${comment_parent}`
+        `/api/comments?post_id=${post_id}&${queryString}`
       ).then(function (response) {
         return response.json()
       })
@@ -34,13 +53,13 @@ export default function Comments(props) {
       const comments_loaded = await data.items
       const pagination = data.pagination
 
-      if (typeof parent == 'undefined') {
+      if (typeof args.parent == 'undefined' || args.parent == 0) {
         const items = { ...comments }
         const newItems = { ...items, ...comments_loaded }
         setComments(newItems)
         setPageInfo(pagination)
       } else {
-        setReplies(parent, comments_loaded)
+        setReplies(args.parent, comments_loaded)
       }
 
       if (ismore) {
@@ -101,7 +120,32 @@ export default function Comments(props) {
   if (loading && error != true)
     return (
       <>
-        <div>Loading</div>
+        {Array.apply(null, { length: 4 }).map((e, i) => (
+          <Box mb={2} display="flex" flexWrap="nowrap" key={i}>
+            <Box pr={1}>
+              <Skeleton
+                style={{ background: '#f0f2f5' }}
+                animation="wave"
+                variant="circle"
+                width={30}
+                height={30}
+              />
+            </Box>
+            <Box width="100%">
+              <Skeleton
+                animation="wave"
+                variant="rect"
+                height={90}
+                style={{
+                  marginBottom: 0,
+                  background: '#f0f2f5',
+                  padding: '12px 15px',
+                  borderRadius: 18
+                }}
+              />
+            </Box>
+          </Box>
+        ))}
       </>
     )
 
@@ -124,7 +168,13 @@ export default function Comments(props) {
                     typeof comments[id]['children'] == 'undefined' && (
                       <button
                         onClick={() => {
-                          fetchMoreComments(1, false, id)
+                          fetchMoreComments(
+                            {
+                              per_page: comments[id]['replies'],
+                              parent: id
+                            },
+                            false
+                          )
                         }}
                         className="view-replies">
                         {' '}
@@ -159,7 +209,12 @@ export default function Comments(props) {
             className="comment-more"
             onClick={() => {
               setMoreLoading(true)
-              fetchMoreComments(paged, true)
+              fetchMoreComments(
+                {
+                  paged: parseInt(paged + 1)
+                },
+                true
+              )
             }}>
             {moreLoading == true ? 'Loading...' : 'Load More Comments'}
           </button>

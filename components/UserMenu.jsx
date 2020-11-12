@@ -13,14 +13,18 @@ import RssFeedOutlinedIcon from '@material-ui/icons/RssFeedOutlined'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined'
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined'
+import useUser from '@/lib/useUser'
+import fetchJson from '@/lib/fetchJson'
+import $router from 'next/router'
 
 const red = '#ED1B33'
 
 const useStyles = makeStyles(() => ({
   paper: {
-    height: 'calc(100% - 67px)',
+    height: 'calc(100% - 57px)',
     maxHeight: 'none',
-    overflow: 'visible'
+    overflow: 'visible',
+    backgroundColor: 'transparent!important'
   },
   wrapper: {
     position: 'relative',
@@ -45,10 +49,7 @@ const useStyles = makeStyles(() => ({
 export default function PostList(props) {
   const classes = useStyles(props)
   const [state, setState] = useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false
+    bottom: false
   })
 
   const toggleDrawer = (side, open) => (event) => {
@@ -80,13 +81,16 @@ export default function PostList(props) {
       name: 'My Profile',
       slug: '/members/' + props.user_display_name + '/profile/',
       icon: <PersonOutlineOutlinedIcon />
-    },
-    {
-      name: 'Sign Out',
-      slug: '/members/' + props.user_display_name + '/profile/',
-      icon: <ExitToAppOutlinedIcon />
     }
+    // {
+    //   name: 'Sign Out',
+    //   slug: '/members/' + props.user_display_name + '/profile/',
+    //   icon: <ExitToAppOutlinedIcon />
+    // }
   ]
+
+  // User
+  const { mutateUser } = useUser()
 
   return (
     <>
@@ -106,23 +110,23 @@ export default function PostList(props) {
         }}
         swipeAreaWidth={56}
         BackdropProps={{
-          invisible: true
+          invisible: false
         }}
         classes={{
           paper: classes.paper
         }}>
+        <div className="swiper"></div>
         <div className={classes.wrapper}>
           <div className={classes.container}>
-            {/* User info */}
-            <ListItem button>
-              <ListItemAvatar>
-                <Avatar alt={props.user.full_name} src={props.user.avatar} />
-              </ListItemAvatar>
-              <ListItemText primary={'Hi, ' + props.user.full_name} />
-            </ListItem>
-
-            {/* Menu */}
             <List disablePadding component="nav" aria-label="User Menu">
+              {/* User info */}
+              <ListItem button>
+                <ListItemAvatar>
+                  <Avatar alt={props.user.full_name} src={props.user.avatar} />
+                </ListItemAvatar>
+                <ListItemText primary={'Hi, ' + props.user.full_name} />
+              </ListItem>
+
               {/* Item */}
               {UserMenuList.map((menu) => (
                 <ListItem button key={menu.name}>
@@ -130,6 +134,21 @@ export default function PostList(props) {
                   <ListItemText primary={menu.name} />
                 </ListItem>
               ))}
+
+              <ListItem
+                button
+                onClick={async (e) => {
+                  e.preventDefault()
+                  toggleDrawer('bottom', true)
+                  await mutateUser(fetchJson('/api/logout')).then(() => {
+                    $router.push('/member/login/')
+                  })
+                }}>
+                <ListItemIcon style={{ color: '#fff' }}>
+                  <ExitToAppOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Sign Out" />
+              </ListItem>
             </List>
           </div>
         </div>
@@ -141,6 +160,18 @@ export default function PostList(props) {
           background: ${red}!important;
           color: #fff !important;
           overflow-x: hidden;
+        }
+        .swiper {
+          width: 80px;
+          height: 5px;
+          border-radius: 90px;
+          background: rgba(255, 255, 255, 0.3);
+          position: absolute;
+          top: 10px;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+          z-index: 999;
         }
       `}</style>
     </>
