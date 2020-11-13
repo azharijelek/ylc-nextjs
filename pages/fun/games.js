@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Head from 'next/head'
 
 function Games() {
   const games = [
@@ -42,6 +43,9 @@ function Games() {
 
   return (
     <>
+      <Head>
+        <title>Games - Your Life Choices</title>
+      </Head>
       <section className="container">
         <article>
           <h1>Game Room</h1>

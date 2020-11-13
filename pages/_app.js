@@ -1,12 +1,13 @@
 import React from 'react'
 import { ThemeProvider } from '@material-ui/core/styles'
-import Head from 'next/head'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import theme from '../theme'
-import { SWRConfig } from 'swr'
 import fetch from '@/lib/fetchJson'
+import useUser from '@/lib/useUser'
+import { SWRConfig } from 'swr'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 // export function reportWebVitals(metric) {
 // 	console.log(metric)
@@ -26,17 +27,12 @@ function ylcApp({ Component, pageProps }) {
   }, [])
 
   const router = useRouter()
+  const { user } = useUser()
 
   return (
     <>
       <Head>
         <title>Your Life Choices</title>
-        <link rel="manifest" href="/manifest.json"></link>
-        <link rel="icon" href="/favicon.ico"></link>
-        <link
-          rel="apple-touch-icon"
-          href="/icons/apple-icon-180x180-dunplab-manifest-18305.png"></link>
-        <meta name="theme-color" content="#317EFB" />
       </Head>
       <ThemeProvider theme={theme}>
         <div className="root">
@@ -48,9 +44,9 @@ function ylcApp({ Component, pageProps }) {
                 console.error(err)
               }
             }}>
-            <NavBar path={router.pathname} />
+            <NavBar path={router.pathname} user={user} />
             <Component {...pageProps} />
-            <Footer />
+            <Footer user={user} />
           </SWRConfig>
         </div>
       </ThemeProvider>

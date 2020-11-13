@@ -8,7 +8,13 @@ class YourLifeChoices extends Document {
       <>
         <Html>
           <Head>
-            <meta name="theme-color" content="#ED1B33" />
+            <link rel="manifest" href="/manifest.json" />
+            <link rel="icon" href="/favicon.ico" />
+            <link
+              rel="apple-touch-icon"
+              href="/icons/apple-icon-180x180-dunplab-manifest-18305.png"
+            />
+            <meta name="theme-color" content="#317EFB" />
           </Head>
           <body>
             <Main />
@@ -34,7 +40,6 @@ YourLifeChoices.getInitialProps = async (ctx) => {
 
   return {
     ...initialProps,
-    // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       <Fragment key="styles">
         {initialProps.styles}

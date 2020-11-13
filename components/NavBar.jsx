@@ -17,7 +17,6 @@ import Divider from '@material-ui/core/Divider'
 
 //import { useRouter } from 'next/router'
 import Link from 'next/link'
-import useUser from '@/lib/useUser'
 import UserMenu from '@/components/UserMenu'
 import Menu from '@/lib/Menu'
 
@@ -39,19 +38,21 @@ export default function NavBar(props) {
   const [open, setOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState(null)
   const menu = JSON.parse(Menu())
-
-  /**
-   * Open Drawer
-   */
-  const handleDrawerOpen = () => {
-    setOpen(true)
-  }
+  const user = props.user
 
   /**
    * Close Drawer
    */
   const handleDrawerClose = () => {
     setOpen(false)
+  }
+
+  /**
+   * Toggle Drawer
+   */
+  const toggleDrawer = () => {
+    const previous = open
+    setOpen(!previous)
   }
 
   /**
@@ -106,8 +107,6 @@ export default function NavBar(props) {
     setOpenMenu(slug)
   }
 
-  const { user } = useUser()
-
   return (
     <>
       <AppBar className="mainheader" color="default" position="fixed">
@@ -121,12 +120,12 @@ export default function NavBar(props) {
           </IconButton>
           <IconButton
             className="btn-menu"
-            onClick={handleDrawerOpen}
+            onClick={toggleDrawer}
             edge="end"
             color="inherit"
             disableFocusRipple
             aria-label="menu">
-            <MenuIcon />
+            {open == true ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -135,42 +134,34 @@ export default function NavBar(props) {
 
       <Drawer
         className="ylc-drawer"
-        anchor="bottom"
+        anchor="top"
         open={open}
         variant="temporary"
         onEscapeKeyDown={handleDrawerClose}
         onBackdropClick={handleDrawerClose}
         transitionDuration={150}
+        hideBackdrop={true}
         ModalProps={{
           keepMounted: true
+        }}
+        style={{
+          top: 56,
+          zIndex: 1
         }}
         classes={{
           paper: 'drawerPaper'
         }}>
-        <div className="drawerHead">
-          {/* LOGIN BUTTON */}
-          {!user ||
-            (user.isLoggedIn === false && (
-              <Link href="/member/login/">
-                <a href="/member/login/" onClick={handleDrawerClose} className="signUpButton">
-                  Sign In
-                </a>
-              </Link>
-            ))}
-
-          {/* Close Button */}
-          <div>
-            <IconButton
-              onClick={handleDrawerClose}
-              onKeyUp={handleDrawerClose}
-              edge="end"
-              color="inherit"
-              className="btn-closedrawer"
-              aria-label="menu">
-              <CloseIcon />
-            </IconButton>
+        {/* LOGIN BUTTON */}
+        {typeof user != 'undefined' && user.isLoggedIn === false && (
+          <div className="drawerHead">
+            {/* LOGIN BUTTON */}
+            <Link href="/member/login/">
+              <a href="/member/login/" onClick={handleDrawerClose} className="signUpButton">
+                Sign In
+              </a>
+            </Link>
           </div>
-        </div>
+        )}
 
         {/* Drawer Menu */}
         <List component="nav">
@@ -206,7 +197,7 @@ export default function NavBar(props) {
                 {sub_menu != null && typeof sub_menu != 'undefined' && (
                   <Collapse
                     in={is_open}
-                    timeout="auto"
+                    timeout={100}
                     key={'collapse-menu-' + i}
                     className={classes.collapse}>
                     <List component="nav" disablePadding>
@@ -235,6 +226,7 @@ export default function NavBar(props) {
           border-bottom: 1px solid #ed1b33;
           background-color: #fff !important;
           box-shadow: none !important;
+          z-index: 99;
           .ylc-avatar {
             margin-right: 10px;
             width: 40px;
@@ -251,8 +243,11 @@ export default function NavBar(props) {
           width: 100% !important;
           flex-shrink: 0;
           height: 100%;
-          .MuiDrawer-paperAnchorBottom {
+          z-index: 1;
+          .MuiDrawer-paperAnchorTop {
             height: calc(100% - 56px) !important;
+            top: 56px;
+            z-index: 1;
           }
         }
         .drawerPaper {

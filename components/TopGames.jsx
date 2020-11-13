@@ -31,15 +31,17 @@ export default function TopGames() {
 
   return (
     <>
-      {games.map((game) => (
-        <div className="game-item" key={game.name}>
-          <Link href={game.permalink}>
-            <a>
-              <img src={game.img} alt={game.name} loading="lazy" />
-            </a>
-          </Link>
-        </div>
-      ))}
+      <div className="games-wrapper">
+        {games.map((game) => (
+          <div className="game-item" key={game.name}>
+            <Link href={game.permalink}>
+              <a>
+                <img src={game.img} alt={game.name} loading="lazy" />
+              </a>
+            </Link>
+          </div>
+        ))}
+      </div>
 
       <Link href="/fun/games">
         <Button
@@ -48,22 +50,37 @@ export default function TopGames() {
           fullWidth
           variant="outlined"
           color="primary"
-          className="viewmoregames">
+          className="viewmoregames"
+          size="large"
+          style={{ marginTop: 30 }}>
           View More Games
         </Button>
       </Link>
 
       <style jsx>{`
+        .games-wrapper {
+          display: grid;
+          grid-template-columns: auto auto;
+          gap: 15px;
+        }
         .game-item {
-          border-radius: 4px;
+          border-radius: 18px;
           background: #4f4f4f;
-          height: 140px;
+          height: 60vw;
           text-align: center;
           padding: 0 35px;
-          border-radius: 10px;
+          border-radius: 18px;
           position: relative;
           z-index: 0;
-          margin-bottom: 10px;
+          cursor: pointer;
+          background: linear-gradient(225deg, #555555, #474747);
+          box-shadow: -5px 4px 10px rgba(0, 0, 0, 0.3);
+          border: 3px solid transparent;
+          transition: all 0.2s ease;
+
+          &:hover {
+            border: 3px solid red;
+          }
 
           img {
             position: absolute;
@@ -72,6 +89,7 @@ export default function TopGames() {
             left: 0;
             right: 0;
             margin: 0 auto;
+            max-width: 80%;
           }
         }
       `}</style>

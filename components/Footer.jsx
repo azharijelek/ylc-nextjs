@@ -1,14 +1,11 @@
 //import Link from 'next/link'
-import useUser from '@/lib/useUser'
-
-export default function Footer() {
-  const { user } = useUser()
-  const userdetail = user
+export default function Footer(props) {
+  const user = props.user
   return (
     <>
       <footer className="ylc-footer">
-        {!userdetail ||
-          (userdetail.isLoggedIn !== true && (
+        {!user ||
+          (user.isLoggedIn !== true && (
             <div className="footer-up">
               <div className="join-text">
                 Join Australia’s largest and longest-running digital resource for over 50s

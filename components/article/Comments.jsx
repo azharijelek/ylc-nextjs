@@ -60,12 +60,9 @@ export default function Comments(props) {
     const queryString = Object.keys(args)
       .map((key) => key + '=' + args[key])
       .join('&')
-
+    const url = `/api/comments?post_id=${post_id}&${queryString}`
     try {
-      const data = await fetch(
-        //`/api/comments?post_id=${post_id}&paged=${next_page}${comment_parent}`
-        `/api/comments?post_id=${post_id}&${queryString}`
-      ).then(function (response) {
+      const data = await fetch(url).then(function (response) {
         return response.json()
       })
 
