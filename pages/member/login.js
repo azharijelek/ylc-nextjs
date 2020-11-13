@@ -61,7 +61,7 @@ const Login = () => {
       <Head>
         <title>Member Login - Your Life Choices</title>
       </Head>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" style={{ paddingBottom: 30 }}>
         <main>
           <h2 className="text-center">Login to YourLifeChoices Account</h2>
 

@@ -13,7 +13,6 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
-import Divider from '@material-ui/core/Divider'
 
 //import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -45,6 +44,7 @@ export default function NavBar(props) {
    */
   const handleDrawerClose = () => {
     setOpen(false)
+    setOpenMenu(null)
   }
 
   /**
@@ -164,14 +164,16 @@ export default function NavBar(props) {
         )}
 
         {/* Drawer Menu */}
-        <List component="nav">
+        <List component="ul">
           {menu.map(({ slug, label, sub_menu }, i) => {
             const is_open = openMenu == slug ? true : false
             return (
-              <div key={'parent-menu-' + i}>
-                <ListItem button>
-                  <Link href={slug} passHref>
-                    <ListItemText primary={label} onClick={handleDrawerClose} />
+              <React.Fragment key={'parent-menu-' + i}>
+                <ListItem divider>
+                  <Link href={process.env.APPHOST + '/' + slug} passHref>
+                    <a className="d-block">
+                      <ListItemText primary={label} onClick={handleDrawerClose} />
+                    </a>
                   </Link>
                   {sub_menu != null && (
                     <>
@@ -192,30 +194,26 @@ export default function NavBar(props) {
                   )}
                 </ListItem>
 
-                <Divider key={'menu-devider-' + i} />
-
                 {sub_menu != null && typeof sub_menu != 'undefined' && (
                   <Collapse
                     in={is_open}
-                    timeout={100}
+                    timeout="auto"
                     key={'collapse-menu-' + i}
                     className={classes.collapse}>
                     <List component="nav" disablePadding>
                       {sub_menu.map((item, z) => (
-                        <ListItem
-                          className={classes.nested}
-                          href={item.slug}
-                          button
-                          key={'child-menu-item-' + z}>
-                          <Link href={item.slug} passHref>
-                            <ListItemText primary={item.label} onClick={handleDrawerClose} />
+                        <ListItem className={classes.nested} button key={'child-menu-item-' + z}>
+                          <Link href={process.env.APPHOST + '/' + slug + '/' + item.slug} passHref>
+                            <a className="d-block">
+                              <ListItemText primary={item.label} onClick={handleDrawerClose} />
+                            </a>
                           </Link>
                         </ListItem>
                       ))}
                     </List>
                   </Collapse>
                 )}
-              </div>
+              </React.Fragment>
             )
           })}
         </List>
@@ -297,6 +295,10 @@ export default function NavBar(props) {
           display: block;
           padding: 15px;
           font-weight: bold;
+        }
+        .d-block {
+          display: block;
+          flex: 1 1 auto;
         }
       `}</style>
     </>
