@@ -105,10 +105,11 @@ export default function PostList(props) {
         open={state.bottom}
         onClose={toggleDrawer('bottom', false)}
         onOpen={toggleDrawer('bottom', true)}
+        swipeAreaWidth={56}
+        disableDiscovery={false}
         ModalProps={{
           keepMounted: true
         }}
-        swipeAreaWidth={56}
         BackdropProps={{
           invisible: false
         }}

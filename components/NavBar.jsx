@@ -140,6 +140,10 @@ export default function NavBar(props) {
         variant="temporary"
         onEscapeKeyDown={handleDrawerClose}
         onBackdropClick={handleDrawerClose}
+        transitionDuration={150}
+        ModalProps={{
+          keepMounted: true
+        }}
         classes={{
           paper: 'drawerPaper'
         }}>
