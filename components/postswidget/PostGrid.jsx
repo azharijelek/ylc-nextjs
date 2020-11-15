@@ -6,7 +6,7 @@ import Link from 'next/link'
  */
 
 export default function PostGrid(props) {
-  let thumbnail = `${props.thumbnail}&h=140`
+  let thumbnail = props.thumbnail != null && `${props.thumbnail}&h=140`
   let catLink = props.categories.slug
   let catName = props.categories.name
   return (
@@ -18,11 +18,13 @@ export default function PostGrid(props) {
               <span dangerouslySetInnerHTML={{ __html: catName }} />
             </a>
           </Link>
-          <Link href={props.permalink}>
-            <a>
-              <img src={thumbnail} alt={props.title} width="270" height="140" loading="lazy" />
-            </a>
-          </Link>
+          {props.thumbnail != null && (
+            <Link href={props.permalink}>
+              <a>
+                <img src={thumbnail} alt={props.title} width="270" height="140" loading="lazy" />
+              </a>
+            </Link>
+          )}
         </div>
         <div className="postDetail">
           <h4>

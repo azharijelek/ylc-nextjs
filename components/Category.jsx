@@ -3,22 +3,28 @@ import Box from '@material-ui/core/Box'
 import HorizontalScroll from '@/components/HorizontalScroll'
 import HeroCard from '@/components/HeroCard'
 import PostGrid from '@/components/postswidget/PostGrid'
+import LazyLoad from 'react-lazyload'
+import Link from 'next/link'
+import Button from '@material-ui/core/Button'
+import RecentNews from '@/components/home_widgets/RecentNews'
 
 export default function Category(props) {
   const term = props.data.detail
   const posts = props.data.posts
   const recentposts = props.data.posts
+  const subcategories = props.data.subcats
+
   return (
     <>
       <Head>
         <title>{term.name} - Your Life Choices</title>
       </Head>
       <section className="container" style={{ maxWidth: '100%', overflowX: 'scroll' }}>
-        <h1>{term.name}</h1>
+        <h1 dangerouslySetInnerHTML={{ __html: term.name }}></h1>
       </section>
 
       {posts && (
-        <Box mb={3}>
+        <Box pb={4}>
           <HorizontalScroll>
             {posts.slice(0, 4).map((post) => (
               <article className="slide-item" key={'slider-' + post.id}>
@@ -33,8 +39,9 @@ export default function Category(props) {
         </Box>
       )}
 
-      <Box my={4}>
-        <Box px={2}>
+      {/* RECENT STORIES */}
+      <Box py={4} bgcolor="#f5f5f5">
+        <Box px={2} mb={3}>
           <h4 className="ylc-widgethead">RECENT STORIES</h4>
         </Box>
 
@@ -55,6 +62,28 @@ export default function Category(props) {
           ))}
         </HorizontalScroll>
       </Box>
+
+      {/* SUB CATEGORIES */}
+      {subcategories.map((cat, i) => (
+        <Box py={4} key={cat.slug + '-sub-cat-' + i}>
+          <Box px={2} mb={3}>
+            <h4 className="ylc-widgethead" dangerouslySetInnerHTML={{ __html: cat.name }}></h4>
+          </Box>
+          <LazyLoad offset={[-100, 100]} height={288}>
+            <HorizontalScroll>
+              <RecentNews per_page="4" page={1} show_categories={1} cat={cat.slug} />
+            </HorizontalScroll>
+
+            <Box mt={2} px={5} className="text-center">
+              <Link href={'/' + cat.description} passHref>
+                <Button component="a" variant="outlined" color="primary" fullWidth>
+                  View More Articles
+                </Button>
+              </Link>
+            </Box>
+          </LazyLoad>
+        </Box>
+      ))}
 
       <style jsx>{`
         h1 {
