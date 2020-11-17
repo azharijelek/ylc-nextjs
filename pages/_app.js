@@ -39,6 +39,8 @@ function ylcApp({ Component, pageProps }) {
           {/* <CssBaseline /> */}
           <SWRConfig
             value={{
+              revalidateOnFocus: false,
+              refreshInterval: 0,
               fetcher: fetch,
               onError: (err) => {
                 console.error(err)
