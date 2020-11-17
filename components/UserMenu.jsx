@@ -125,7 +125,12 @@ export default function PostList(props) {
                 <ListItemAvatar>
                   <Avatar alt={props.user.full_name} src={props.user.avatar} />
                 </ListItemAvatar>
-                <ListItemText primary={'Hi, ' + props.user.full_name} />
+                <ListItemText
+                  primary={
+                    'Hi, ' +
+                    (props.user.full_name != '' ? props.user.full_name : props.user.display_name)
+                  }
+                />
               </ListItem>
 
               {/* Item */}
@@ -163,7 +168,7 @@ export default function PostList(props) {
           overflow-x: hidden;
         }
         .swiper {
-          width: 80px;
+          width: 50px;
           height: 5px;
           border-radius: 90px;
           background: rgba(255, 255, 255, 0.3);

@@ -26,7 +26,19 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(4)
   },
   collapse: {
-    background: '#a91425'
+    background: '#a91425',
+    margin: '0!important',
+    minWidth: '100%',
+    width: '100%',
+    maxWidth: '100%'
+  },
+  parentList: {
+    flexWrap: 'wrap',
+    padding: 0
+  },
+  listlink: {
+    minWidth: '90%',
+    padding: 10
   }
 }))
 
@@ -115,7 +127,7 @@ export default function NavBar(props) {
 
           <div className="title">{props.path == '/' ? <HomeLogo /> : <InnerPageLogo />}</div>
 
-          <IconButton className="btn-search" color="inherit" aria-label="search" disableFocusRipple>
+          <IconButton className="btn-search" color="inherit" aria-label="search">
             <SearchIcon />
           </IconButton>
           <IconButton
@@ -123,7 +135,6 @@ export default function NavBar(props) {
             onClick={toggleDrawer}
             edge="end"
             color="inherit"
-            disableFocusRipple
             aria-label="menu">
             {open == true ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
@@ -169,9 +180,12 @@ export default function NavBar(props) {
             const is_open = openMenu == slug ? true : false
             return (
               <React.Fragment key={'parent-menu-' + i}>
-                <ListItem divider>
+                <ListItem
+                  className={classes.parentList}
+                  divider
+                  style={{ paddingLeft: 0, paddingRight: 0 }}>
                   <Link href={process.env.APPHOST + '/' + slug} passHref>
-                    <a className="d-block">
+                    <a className={classes.listlink}>
                       <ListItemText primary={label} onClick={handleDrawerClose} />
                     </a>
                   </Link>
@@ -192,27 +206,33 @@ export default function NavBar(props) {
                       )}
                     </>
                   )}
-                </ListItem>
 
-                {sub_menu != null && typeof sub_menu != 'undefined' && (
-                  <Collapse
-                    in={is_open}
-                    timeout="auto"
-                    key={'collapse-menu-' + i}
-                    className={classes.collapse}>
-                    <List component="nav" disablePadding>
-                      {sub_menu.map((item, z) => (
-                        <ListItem className={classes.nested} button key={'child-menu-item-' + z}>
-                          <Link href={process.env.APPHOST + '/' + slug + '/' + item.slug} passHref>
-                            <a className="d-block">
-                              <ListItemText primary={item.label} onClick={handleDrawerClose} />
-                            </a>
-                          </Link>
-                        </ListItem>
-                      ))}
-                    </List>
-                  </Collapse>
-                )}
+                  {sub_menu != null && typeof sub_menu != 'undefined' && (
+                    <Collapse
+                      in={is_open}
+                      timeout={700}
+                      key={'collapse-menu-' + i}
+                      className={classes.collapse}>
+                      <List component="ul" disablePadding>
+                        {sub_menu.map((item, z) => (
+                          <ListItem
+                            component="li"
+                            className={classes.nested}
+                            button
+                            key={'child-menu-item-' + z}>
+                            {/* <Link
+                              href={process.env.APPHOST + '/' + slug + '/' + item.slug}
+                              passHref>
+                              <a className="d-block"> */}
+                            <ListItemText primary={item.label} onClick={handleDrawerClose} />
+                            {/* </a>
+                            </Link> */}
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Collapse>
+                  )}
+                </ListItem>
               </React.Fragment>
             )
           })}
@@ -299,6 +319,7 @@ export default function NavBar(props) {
         .d-block {
           display: block;
           flex: 1 1 auto;
+          padding: 0 15px;
         }
       `}</style>
     </>
