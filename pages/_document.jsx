@@ -14,7 +14,7 @@ class YourLifeChoices extends Document {
               rel="apple-touch-icon"
               href="/icons/apple-icon-180x180-dunplab-manifest-18305.png"
             />
-            <meta name="theme-color" content="#317EFB" />
+            <meta name="theme-color" content="#ED1B33" />
           </Head>
           <body>
             <Main />
