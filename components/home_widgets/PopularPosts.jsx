@@ -36,7 +36,7 @@ export default function PopularPosts(props) {
           <PostList
             id={post.id}
             title={post.title}
-            thumbnail={post.featured_img + '&h=60'}
+            thumbnail={post.featured_img + '&h=60&q=50'}
             permalink={post.permalink}
             key={'PopularPost-' + post.id}
           />
