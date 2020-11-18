@@ -1,4 +1,4 @@
-import React from 'react'
+//import React from 'react'
 import { ThemeProvider } from '@material-ui/core/styles'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
@@ -17,13 +17,13 @@ import Head from 'next/head'
  * @param {Component, pageProps} param0
  */
 function ylcApp({ Component, pageProps }) {
-  React.useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side')
-    if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles)
-    }
-  }, [])
+  // React.useEffect(() => {
+  //   // Remove the server-side injected CSS.
+  //   const jssStyles = document.querySelector('#jss-server-side')
+  //   if (jssStyles) {
+  //     jssStyles.parentElement.removeChild(jssStyles)
+  //   }
+  // }, [])
 
   const router = useRouter()
 
@@ -31,18 +31,12 @@ function ylcApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Your Life Choices</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
-        />
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/icons/apple-icon-180x180-dunplab-manifest-18305.png" />
-        <meta name="theme-color" content="#ED1B33" />
       </Head>
       <ThemeProvider theme={theme}>
         <div className="root">
-          {/* <CssBaseline /> */}
           <SWRConfig
             value={{
               revalidateOnFocus: false,
@@ -69,8 +63,7 @@ function ylcApp({ Component, pageProps }) {
         html {
           padding: 0;
           margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-            Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+          font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
         .container {

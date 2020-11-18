@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import Document, { Html, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/styles'
 
 class YourLifeChoices extends Document {
@@ -7,6 +7,9 @@ class YourLifeChoices extends Document {
     return (
       <>
         <Html>
+          <Head>
+            <meta name="theme-color" content="#ED1B33" />
+          </Head>
           <body>
             <Main />
             <NextScript />
