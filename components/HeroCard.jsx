@@ -10,7 +10,7 @@ export default function HeroCard(props) {
           </Link>
         </h2>
         <img
-          src={props.thumbnail + '&h=200'}
+          src={props.thumbnail + '&h=200&q=40'}
           width="300"
           height="200"
           alt={props.title}

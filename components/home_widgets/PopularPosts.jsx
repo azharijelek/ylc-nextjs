@@ -7,9 +7,7 @@ export default function PopularPosts(props) {
   let per_page = props.per_page ? props.per_page : '4'
   let paged = props.paged ? props.paged : '1'
 
-  const { data, error } = useSWR(`/api/popularposts?per_page=${per_page}&page=${paged}`, {
-    refreshInterval: 0
-  })
+  const { data, error } = useSWR(`/api/popularposts?per_page=${per_page}&page=${paged}`)
 
   if (error) return <div>failed to load</div>
   if (!data)
