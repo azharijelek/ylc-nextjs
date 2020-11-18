@@ -53,7 +53,9 @@ const Home = (data) => {
         {/* Popular Posts */}
         <Box my={4} px={2}>
           <h4 className="ylc-widgethead">MOST POPULAR</h4>
-          <PopularPosts per_page={4} />
+          <LazyLoad offset={[-100, 100]} height={338}>
+            <PopularPosts per_page={4} />
+          </LazyLoad>
         </Box>
 
         {/* Recent News */}

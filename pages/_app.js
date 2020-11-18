@@ -1,8 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from '@material-ui/core/styles'
-import dynamic from 'next/dynamic'
-const NavBar = dynamic(import('@/components/NavBar'), { ssr: false })
-const Footer = dynamic(import('@/components/Footer'), { ssr: false })
+import NavBar from '@/components/NavBar'
+import Footer from '@/components/Footer'
 import theme from '../theme'
 import fetch from '@/lib/fetchJson'
 import useUser from '@/lib/useUser'
