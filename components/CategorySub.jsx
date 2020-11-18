@@ -86,46 +86,51 @@ export default function SubCategory(props) {
       </section>
 
       {posts.length > 0 ? (
-        <Box pb={4} px={2}>
-          {page == 1 ? (
-            <>
-              {posts.length > 0 &&
-                posts.map((post) => (
-                  <PostList
-                    id={post.id}
-                    title={post.title}
-                    thumbnail={post.featured_img + '&h=60'}
-                    permalink={post.permalink}
-                    postdate={post.date}
-                    key={'category-' + post.id}
-                  />
-                ))}
-            </>
-          ) : (
-            <>
-              {pagingPosts.length > 0 &&
-                pagingPosts.map((post) => (
-                  <PostList
-                    id={post.id}
-                    title={post.title}
-                    thumbnail={post.featured_img + '&h=60'}
-                    permalink={post.permalink}
-                    postdate={post.date}
-                    key={'category-' + post.id}
-                  />
-                ))}
-            </>
-          )}
-
-          <Pagination
-            count={pagination.total_pages}
-            page={page}
-            onChange={handleChange}
-            color="primary"
-            shape="rounded"
-            style={{ marginTop: 30 }}
-          />
-        </Box>
+        <>
+          <Box pt={4} px={2}>
+            {page == 1 ? (
+              <>
+                {posts.length > 0 &&
+                  posts.map((post) => (
+                    <PostList
+                      id={post.id}
+                      title={post.title}
+                      thumbnail={post.featured_img + '&h=60'}
+                      permalink={post.permalink}
+                      postdate={post.date}
+                      key={'category-' + post.id}
+                    />
+                  ))}
+              </>
+            ) : (
+              <>
+                {pagingPosts.length > 0 &&
+                  pagingPosts.map((post) => (
+                    <PostList
+                      id={post.id}
+                      title={post.title}
+                      thumbnail={post.featured_img + '&h=60'}
+                      permalink={post.permalink}
+                      postdate={post.date}
+                      key={'category-' + post.id}
+                    />
+                  ))}
+              </>
+            )}
+          </Box>
+          <Box pb={4} px={1} display="flex" flexWrap="wrap" justifyContent="center">
+            <Pagination
+              count={pagination.total_pages}
+              page={page}
+              onChange={handleChange}
+              color="primary"
+              shape="rounded"
+              siblingCount={1}
+              boundaryCount={1}
+              style={{ marginTop: 30 }}
+            />
+          </Box>
+        </>
       ) : (
         <Box py={3} px={2} alignContent="center">
           <div className="text-center">
