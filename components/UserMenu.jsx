@@ -106,7 +106,7 @@ export default function PostList(props) {
         onClose={toggleDrawer('bottom', false)}
         onOpen={toggleDrawer('bottom', true)}
         swipeAreaWidth={56}
-        disableDiscovery={false}
+        disableDiscovery
         ModalProps={{
           keepMounted: true
         }}
