@@ -1,6 +1,7 @@
-//import Link from 'next/link'
-export default function Footer(props) {
-  const user = props.user
+import useUser from '@/lib/useUser'
+
+export default function Footer() {
+  const { user } = useUser()
   return (
     <>
       <footer className="ylc-footer">

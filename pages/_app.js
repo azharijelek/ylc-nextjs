@@ -4,7 +4,6 @@ import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import theme from '../theme'
 import fetch from '@/lib/fetchJson'
-import useUser from '@/lib/useUser'
 import { SWRConfig } from 'swr'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -27,7 +26,6 @@ function ylcApp({ Component, pageProps }) {
   }, [])
 
   const router = useRouter()
-  const { user } = useUser()
 
   return (
     <>
@@ -37,6 +35,10 @@ function ylcApp({ Component, pageProps }) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/icons/apple-icon-180x180-dunplab-manifest-18305.png" />
+        <meta name="theme-color" content="#ED1B33" />
       </Head>
       <ThemeProvider theme={theme}>
         <div className="root">
@@ -50,9 +52,9 @@ function ylcApp({ Component, pageProps }) {
                 console.error(err)
               }
             }}>
-            <NavBar path={router.pathname} user={user} />
+            <NavBar path={router.pathname} />
             <Component {...pageProps} />
-            <Footer user={user} />
+            <Footer />
           </SWRConfig>
         </div>
       </ThemeProvider>

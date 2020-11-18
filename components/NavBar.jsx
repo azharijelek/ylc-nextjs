@@ -13,6 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
+import useUser from '@/lib/useUser'
 
 //import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -76,7 +77,7 @@ export default function NavBar(props) {
   const [open, setOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState(null)
   const menu = JSON.parse(Menu())
-  const user = props.user
+  const { user } = useUser()
 
   /**
    * Close Drawer

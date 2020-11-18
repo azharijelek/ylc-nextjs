@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/styles'
 
 class YourLifeChoices extends Document {
@@ -7,15 +7,6 @@ class YourLifeChoices extends Document {
     return (
       <>
         <Html>
-          <Head>
-            <link rel="manifest" href="/manifest.json" />
-            <link rel="icon" href="/favicon.ico" />
-            <link
-              rel="apple-touch-icon"
-              href="/icons/apple-icon-180x180-dunplab-manifest-18305.png"
-            />
-            <meta name="theme-color" content="#ED1B33" />
-          </Head>
           <body>
             <Main />
             <NextScript />
