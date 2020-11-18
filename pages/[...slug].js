@@ -67,7 +67,7 @@ export default function Post({ data }) {
                 {data.detail.parent == 0 ? <Category data={data} /> : <CategorySub data={data} />}
               </>
             )}
-            {data.type == 'unknown' && <DefaultErrorPage statusCode={404} />}
+            {/* {data.type == 'unknown' && <DefaultErrorPage statusCode={404} />} */}
             {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
           </>
         )}
