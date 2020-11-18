@@ -122,6 +122,7 @@ export default function SubCategory(props) {
             page={page}
             onChange={handleChange}
             color="primary"
+            shape="rounded"
             style={{ marginTop: 30 }}
           />
         </Box>
