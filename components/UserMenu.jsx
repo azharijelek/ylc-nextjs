@@ -107,6 +107,7 @@ export default function PostList(props) {
         onOpen={toggleDrawer('bottom', true)}
         disableDiscovery
         disableSwipeToOpen
+        disableBackdropTransition
         BackdropProps={{
           invisible: false
         }}
