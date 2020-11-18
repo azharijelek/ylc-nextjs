@@ -81,13 +81,13 @@ export default function SubCategory(props) {
       <Head>
         <title>{parseHtmlEntities(term.name)} - Your Life Choices</title>
       </Head>
-      <section className="container" style={{ maxWidth: '100%', overflowX: 'scroll' }}>
-        <h1 dangerouslySetInnerHTML={{ __html: term.name }}></h1>
+      <section className="container" style={{ maxWidth: '100%' }}>
+        <h1 dangerouslySetInnerHTML={{ __html: term.name }} style={{ marginBottom: 0 }}></h1>
       </section>
 
       {posts.length > 0 ? (
         <>
-          <Box pt={4} px={2}>
+          <Box pt={2} px={2}>
             {page == 1 ? (
               <>
                 {posts.length > 0 &&
