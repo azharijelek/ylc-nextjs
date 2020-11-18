@@ -4,7 +4,6 @@ const ArticleDetail = dynamic(import('@/components/ArticleDetail'), { ssr: true 
 const Category = dynamic(import('@/components/Category'), { ssr: true })
 const CategorySub = dynamic(import('@/components/CategorySub'), { ssr: true })
 import CircularProgress from '@material-ui/core/CircularProgress'
-import DefaultErrorPage from 'next/error'
 import Articles from '@/lib/Articles'
 export async function getStaticPaths() {
   return { paths: [], fallback: true }
@@ -61,13 +60,11 @@ export default function Post({ data }) {
         ) : (
           <>
             {data.type == 'post' && <ArticleDetail data={data.detail} />}
-            {/* {data.type == 'category' && <Category data={data} />} */}
             {data.type == 'category' && (
               <>
                 {data.detail.parent == 0 ? <Category data={data} /> : <CategorySub data={data} />}
               </>
             )}
-            {/* {data.type == 'unknown' && <DefaultErrorPage statusCode={404} />} */}
             {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
           </>
         )}

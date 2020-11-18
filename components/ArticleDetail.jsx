@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 import DateRangeIcon from '@material-ui/icons/DateRange'
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
 import LazyLoad from 'react-lazyload'
-import { parseHtmlEntities } from '@/lib/helpers'
 const Comments = dynamic(import('@/components/article/Comments'), { ssr: false })
 export default class ArticleDetail extends Component {
   render() {
@@ -12,7 +11,7 @@ export default class ArticleDetail extends Component {
     return (
       <>
         <Head>
-          <title>{parseHtmlEntities(item.title)} - Your Life Choices</title>
+          <title>{item.title} - Your Life Choices</title>
           <meta name="description" content={item.blurb} />
 
           {/* OG Tags */}
