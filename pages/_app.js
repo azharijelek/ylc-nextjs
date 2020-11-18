@@ -33,6 +33,10 @@ function ylcApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Your Life Choices</title>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+        />
       </Head>
       <ThemeProvider theme={theme}>
         <div className="root">
