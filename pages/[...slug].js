@@ -2,8 +2,10 @@ import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 const ArticleDetail = dynamic(import('@/components/ArticleDetail'), { ssr: true })
 const Category = dynamic(import('@/components/Category'), { ssr: true })
+const CategorySub = dynamic(import('@/components/CategorySub'), { ssr: true })
 import CircularProgress from '@material-ui/core/CircularProgress'
-
+import DefaultErrorPage from 'next/error'
+import Articles from '@/lib/Articles'
 export async function getStaticPaths() {
   return { paths: [], fallback: true }
 }
@@ -11,10 +13,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const slug = params.slug // [ 'food-recipes', 'food', 'the-best-and-worst-foods-for-your-liver' ]
   const path = slug.join('/')
-  //console.log('slug', `${process.env.WP_API_URL}/ylc/v1/post?slug=${path}`)
   try {
-    const response = await fetch(`${process.env.WP_API_URL}/ylc/v1/post?slug=${path}`)
-    const data = await response.json()
+    const response = await Articles.postDetail(path)
+    const data = await response.data
     return {
       props: data ? { data } : {},
       revalidate: 100
@@ -52,6 +53,10 @@ export default function Post({ data }) {
     )
   }
 
+  if (typeof data != 'undefined' && data.type == 'unknown') {
+    return <DefaultErrorPage statusCode={404} />
+  }
+
   return (
     <>
       <main className="ylc-outtest-wrapper">
@@ -60,16 +65,16 @@ export default function Post({ data }) {
         ) : (
           <>
             {data.type == 'post' && <ArticleDetail data={data.detail} />}
-            {data.type == 'category' && <Category data={data} />}
+            {/* {data.type == 'category' && <Category data={data} />} */}
+            {data.type == 'category' && (
+              <>
+                {data.detail.parent == 0 ? <Category data={data} /> : <CategorySub data={data} />}
+              </>
+            )}
             {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
           </>
         )}
       </main>
-      <style jsx>{`
-        .ylc-outtest-wrapper {
-          min-height: 70vh;
-        }
-      `}</style>
     </>
   )
 }

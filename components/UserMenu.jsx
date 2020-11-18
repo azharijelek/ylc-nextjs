@@ -95,7 +95,7 @@ export default function PostList(props) {
   return (
     <>
       {/* AVATAR with TRIGGER */}
-      <ButtonBase aria-haspopup="true" onClick={toggleDrawer('bottom', true)}>
+      <ButtonBase {...props} aria-haspopup="true" onClick={toggleDrawer('bottom', true)}>
         <Avatar alt={props.user.full_name} src={props.user.avatar} className="ylc-avatar" />
       </ButtonBase>
 

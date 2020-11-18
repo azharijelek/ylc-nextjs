@@ -29,6 +29,7 @@ export default function PostList(props) {
               <a title={props.title}>{props.title}</a>
             </Link>
           </h4>
+          {props.postdate != null && <div className="date">{props.postdate}</div>}
         </div>
       </article>
 
@@ -60,6 +61,11 @@ export default function PostList(props) {
             height: 100%;
             width: 100%;
           }
+        }
+        .date {
+          font-size: 12px;
+          color: #6d6d6d;
+          margin-top: 5px;
         }
       `}</style>
     </>

@@ -103,6 +103,10 @@ function ylcApp({ Component, pageProps }) {
         .text-center {
           text-align: center;
         }
+
+        .ylc-outtest-wrapper {
+          min-height: 70vh;
+        }
       `}</style>
     </>
   )

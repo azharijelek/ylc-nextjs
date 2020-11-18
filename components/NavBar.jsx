@@ -22,8 +22,39 @@ import Menu from '@/lib/Menu'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
-  nested: {
-    paddingLeft: theme.spacing(4)
+  mainheader: {
+    borderBottom: '1px solid #ed1b33',
+    backgroundColor: '#fff !important',
+    boxShadow: 'none !important',
+    zIndex: 99,
+    maxHeight: 56
+  },
+  avatar: {
+    marginRight: 10,
+    width: 40,
+    height: 40
+  },
+  ylcdrawer: {
+    width: '100% !important',
+    flexShrink: 0,
+    height: '100%',
+    zIndex: 1
+  },
+  drawerPaper: {
+    height: 'calc(100% - 56px) !important',
+    top: 56,
+    zIndex: 1,
+    background: theme.palette.primary.main,
+    color: '#fff'
+  },
+  parentList: {
+    flexWrap: 'wrap',
+    padding: 0,
+    color: '#fff'
+  },
+  listlink: {
+    minWidth: '90%',
+    padding: 10
   },
   collapse: {
     background: '#a91425',
@@ -32,17 +63,13 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     maxWidth: '100%'
   },
-  parentList: {
-    flexWrap: 'wrap',
-    padding: 0
-  },
-  listlink: {
-    minWidth: '90%',
-    padding: 10
+  childLink: {
+    fontSize: '14px!important',
+    color: '#fff',
+    paddingTop: 5,
+    paddingBottom: 5
   }
 }))
-
-const red = '#ED1B33'
 
 export default function NavBar(props) {
   const classes = useStyles()
@@ -121,9 +148,9 @@ export default function NavBar(props) {
 
   return (
     <>
-      <AppBar className="mainheader" color="default" position="fixed">
+      <AppBar className={classes.mainheader} color="default" position="fixed">
         <Toolbar>
-          {user && user.isLoggedIn === true && <UserMenu user={user} />}
+          {user && user.isLoggedIn === true && <UserMenu className={classes.avatar} user={user} />}
 
           <div className="title">{props.path == '/' ? <HomeLogo /> : <InnerPageLogo />}</div>
 
@@ -144,7 +171,7 @@ export default function NavBar(props) {
       {/* <div><pre>{JSON.stringify($router, null, 2)}</pre></div> */}
 
       <Drawer
-        className="ylc-drawer"
+        className={classes.ylcdrawer}
         anchor="top"
         open={open}
         variant="temporary"
@@ -160,13 +187,13 @@ export default function NavBar(props) {
           zIndex: 1
         }}
         classes={{
-          paper: 'drawerPaper'
+          paper: classes.drawerPaper
         }}>
         {/* LOGIN BUTTON */}
         {typeof user != 'undefined' && user.isLoggedIn === false && (
           <div className="drawerHead">
             {/* LOGIN BUTTON */}
-            <Link href="/member/login/">
+            <Link href="/member/login/" prefetch>
               <a href="/member/login/" onClick={handleDrawerClose} className="signUpButton">
                 Sign In
               </a>
@@ -181,10 +208,10 @@ export default function NavBar(props) {
             return (
               <React.Fragment key={'parent-menu-' + i}>
                 <ListItem
-                  className={classes.parentList}
                   divider
+                  className={classes.parentList}
                   style={{ paddingLeft: 0, paddingRight: 0 }}>
-                  <Link href={process.env.APPHOST + '/' + slug} passHref>
+                  <Link href={process.env.APPHOST + slug} passHref>
                     <a className={classes.listlink}>
                       <ListItemText primary={label} onClick={handleDrawerClose} />
                     </a>
@@ -207,26 +234,26 @@ export default function NavBar(props) {
                     </>
                   )}
 
+                  {/* SUB MENU */}
                   {sub_menu != null && typeof sub_menu != 'undefined' && (
                     <Collapse
                       in={is_open}
-                      timeout={700}
+                      timeout="auto"
                       key={'collapse-menu-' + i}
                       className={classes.collapse}>
                       <List component="ul" disablePadding>
                         {sub_menu.map((item, z) => (
                           <ListItem
-                            component="li"
-                            className={classes.nested}
+                            divider
                             button
+                            component="li"
+                            onClick={handleDrawerClose}
                             key={'child-menu-item-' + z}>
-                            {/* <Link
-                              href={process.env.APPHOST + '/' + slug + '/' + item.slug}
-                              passHref>
-                              <a className="d-block"> */}
-                            <ListItemText primary={item.label} onClick={handleDrawerClose} />
-                            {/* </a>
-                            </Link> */}
+                            <Link href={process.env.APPHOST + item.slug} passHref>
+                              <a
+                                className={classes.childLink}
+                                dangerouslySetInnerHTML={{ __html: item.label }}></a>
+                            </Link>
                           </ListItem>
                         ))}
                       </List>
@@ -239,42 +266,12 @@ export default function NavBar(props) {
         </List>
       </Drawer>
 
-      <style jsx global>{`
-        .mainheader {
-          border-bottom: 1px solid #ed1b33;
-          background-color: #fff !important;
-          box-shadow: none !important;
-          z-index: 99;
-          .ylc-avatar {
-            margin-right: 10px;
-            width: 40px;
-            height: 40px;
-          }
-        }
+      <style jsx>{`
         .title {
           flex-grow: 1;
         }
         .logoH1 {
           margin: 0;
-        }
-        .ylc-drawer {
-          width: 100% !important;
-          flex-shrink: 0;
-          height: 100%;
-          z-index: 1;
-          .MuiDrawer-paperAnchorTop {
-            height: calc(100% - 56px) !important;
-            top: 56px;
-            z-index: 1;
-          }
-        }
-        .drawerPaper {
-          width: 100%;
-          background: ${red}!important;
-          color: #fff !important;
-          height: 100%;
-          height: calc(100% - 56px);
-          overflow-x: hidden;
         }
         .drawerHead {
           height: 56;
@@ -315,11 +312,6 @@ export default function NavBar(props) {
           display: block;
           padding: 15px;
           font-weight: bold;
-        }
-        .d-block {
-          display: block;
-          flex: 1 1 auto;
-          padding: 0 15px;
         }
       `}</style>
     </>
