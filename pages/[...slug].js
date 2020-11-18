@@ -53,10 +53,6 @@ export default function Post({ data }) {
     )
   }
 
-  if (typeof data != 'undefined' && data.type == 'unknown') {
-    return <DefaultErrorPage statusCode={404} />
-  }
-
   return (
     <>
       <main className="ylc-outtest-wrapper">
@@ -71,6 +67,7 @@ export default function Post({ data }) {
                 {data.detail.parent == 0 ? <Category data={data} /> : <CategorySub data={data} />}
               </>
             )}
+            {data.type == 'unknown' && <DefaultErrorPage statusCode={404} />}
             {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
           </>
         )}
