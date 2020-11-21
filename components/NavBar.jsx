@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
@@ -7,21 +6,18 @@ import MenuIcon from '@material-ui/icons/Menu'
 import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import CloseIcon from '@material-ui/icons/Close'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import useUser from '@/lib/useUser'
 
-//import { useRouter } from 'next/router'
+// Navigation
 import Link from 'next/link'
 import UserMenu from '@/components/UserMenu'
 import Menu from '@/lib/Menu'
+import { useRouter } from 'next/router'
 
+// Styling
 import { makeStyles } from '@material-ui/core/styles'
-
 const useStyles = makeStyles((theme) => ({
   mainheader: {
     borderBottom: '1px solid #ed1b33',
@@ -47,37 +43,20 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
     background: theme.palette.primary.main,
     color: '#fff'
-  },
-  parentList: {
-    flexWrap: 'wrap',
-    padding: 0,
-    color: '#fff'
-  },
-  listlink: {
-    minWidth: '90%',
-    padding: 10
-  },
-  collapse: {
-    background: '#a91425',
-    margin: '0!important',
-    minWidth: '100%',
-    width: '100%',
-    maxWidth: '100%'
-  },
-  childLink: {
-    fontSize: '14px!important',
-    color: '#fff',
-    paddingTop: 5,
-    paddingBottom: 5
   }
 }))
 
-export default function NavBar(props) {
+/**
+ * Main Component: NavBar
+ * @param {Object} props
+ */
+function NavBar(props) {
   const classes = useStyles()
-  const [open, setOpen] = useState(false)
-  const [openMenu, setOpenMenu] = useState(null)
+  const router = useRouter()
   const menu = JSON.parse(Menu())
   const { user } = useUser()
+  const [open, setOpen] = useState(false)
+  const [openMenu, setOpenMenu] = useState(null)
 
   /**
    * Close Drawer
@@ -93,6 +72,13 @@ export default function NavBar(props) {
   const toggleDrawer = () => {
     const previous = open
     setOpen(!previous)
+  }
+
+  /**
+   * Toggle nested menu
+   */
+  const handleMenuClick = (slug) => {
+    setOpenMenu(slug)
   }
 
   /**
@@ -141,10 +127,31 @@ export default function NavBar(props) {
   }
 
   /**
-   * Toggle nested menu
+   * NavLink Component
+   * @param {Object} props
    */
-  const handleMenuClick = (slug) => {
-    setOpenMenu(slug)
+  const NavLink = (props) => {
+    return (
+      <>
+        <Link href={props.href} passHref>
+          <a {...props}>{props.children}</a>
+        </Link>
+        <style jsx>{`
+          .listlink {
+            min-width: 90%;
+            padding: 15px;
+            display: block;
+            line-height: 1;
+          }
+          .childLink {
+            font-size: 14px !important;
+            color: #fff;
+            padding: 0 0 0 20px;
+            display: block;
+          }
+        `}</style>
+      </>
+    )
   }
 
   return (
@@ -153,7 +160,14 @@ export default function NavBar(props) {
         <Toolbar>
           {user && user.isLoggedIn === true && <UserMenu className={classes.avatar} user={user} />}
 
-          <div className="title">{props.path == '/' ? <HomeLogo /> : <InnerPageLogo />}</div>
+          <div
+            className="title"
+            onKeyDown={handleDrawerClose}
+            onClick={handleDrawerClose}
+            role="button"
+            tabIndex={0}>
+            {props.path == '/' ? <HomeLogo /> : <InnerPageLogo />}
+          </div>
 
           <IconButton className="btn-search" color="inherit" aria-label="search">
             <SearchIcon />
@@ -203,22 +217,30 @@ export default function NavBar(props) {
         )}
 
         {/* Drawer Menu */}
-        <List component="ul">
+        <ul className="menu-list-wrapper">
           {menu.map(({ slug, label, sub_menu }, i) => {
+            let parentLink = slug
+            let currentRoute = router.asPath
             const is_open = openMenu == slug ? true : false
             return (
               <React.Fragment key={'parent-menu-' + i}>
-                <ListItem
-                  divider
-                  className={classes.parentList}
-                  style={{ paddingLeft: 0, paddingRight: 0 }}>
-                  <Link href={process.env.APPHOST + slug} passHref>
-                    <a className={classes.listlink}>
-                      <ListItemText primary={label} onClick={handleDrawerClose} />
-                    </a>
-                  </Link>
+                <li
+                  current-link={currentRoute}
+                  parent-link={slug}
+                  className={
+                    'parentList' +
+                    (currentRoute === parentLink || currentRoute.indexOf(parentLink) == 0
+                      ? ' current'
+                      : '')
+                  }>
+                  <NavLink
+                    href={parentLink}
+                    onClick={handleDrawerClose}
+                    className="listlink"
+                    dangerouslySetInnerHTML={{ __html: label }}></NavLink>
+                  {/* SUB MENU TOGGLER */}
                   {sub_menu != null && (
-                    <>
+                    <div className="toggleChild">
                       {is_open ? (
                         <ExpandLess
                           onClick={() => {
@@ -232,39 +254,39 @@ export default function NavBar(props) {
                           }}
                         />
                       )}
-                    </>
+                    </div>
                   )}
 
-                  {/* SUB MENU */}
+                  {/* SUB MENU LIST */}
                   {sub_menu != null && typeof sub_menu != 'undefined' && (
-                    <Collapse
-                      in={is_open}
-                      timeout="auto"
+                    <ul
                       key={'collapse-menu-' + i}
-                      className={classes.collapse}>
-                      <List component="ul" disablePadding>
-                        {sub_menu.map((item, z) => (
-                          <ListItem
-                            divider
-                            button
-                            component="li"
-                            onClick={handleDrawerClose}
-                            key={'child-menu-item-' + z}>
-                            <Link href={process.env.APPHOST + item.slug} passHref>
-                              <a
-                                className={classes.childLink}
-                                dangerouslySetInnerHTML={{ __html: item.label }}></a>
-                            </Link>
-                          </ListItem>
-                        ))}
-                      </List>
-                    </Collapse>
+                      className={'collapse ' + (is_open ? 'show' : 'hidden')}>
+                      {sub_menu.map((item, z) => {
+                        let childLink = item.slug
+                        return (
+                          <li
+                            key={'child-menu-item-' + z}
+                            className={
+                              currentRoute === childLink || currentRoute === item.slug
+                                ? 'current'
+                                : ''
+                            }>
+                            <NavLink
+                              href={childLink}
+                              onClick={handleDrawerClose}
+                              className="childLink"
+                              dangerouslySetInnerHTML={{ __html: item.label }}></NavLink>
+                          </li>
+                        )
+                      })}
+                    </ul>
                   )}
-                </ListItem>
+                </li>
               </React.Fragment>
             )
           })}
-        </List>
+        </ul>
       </Drawer>
 
       <style jsx>{`
@@ -314,7 +336,61 @@ export default function NavBar(props) {
           padding: 15px;
           font-weight: bold;
         }
+        .menu-list-wrapper {
+          padding: 0;
+          margin: 0;
+        }
+        .parentList {
+          flex-wrap: wrap;
+          padding: 0;
+          color: '#fff';
+          display: flex;
+          border-bottom: 1px solid #da192f;
+          align-items: center;
+          letter-spacing: 0.5px;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.07);
+          }
+          &.current {
+            background-color: #ed8f1b;
+            border-color: #a91425;
+          }
+        }
+        .collapse {
+          background: #a91425;
+          margin: 0 !important;
+          min-width: 100%;
+          width: 100%;
+          max-width: '100%';
+          list-style: none;
+          padding: 0;
+          &.show {
+            li {
+              height: 40px;
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+          li {
+            height: 0;
+            line-height: 40px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+
+            &.current {
+              background: #8e101f;
+            }
+          }
+        }
+        .toggleChild {
+          cursor: pointer;
+        }
       `}</style>
     </>
   )
 }
+
+export default NavBar

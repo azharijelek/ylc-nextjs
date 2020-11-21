@@ -1,13 +1,6 @@
 import { useState } from 'react'
 import { makeStyles } from '@material-ui/core'
-import Avatar from '@material-ui/core/Avatar'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
-import ButtonBase from '@material-ui/core/ButtonBase'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined'
 import RssFeedOutlinedIcon from '@material-ui/icons/RssFeedOutlined'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
@@ -43,10 +36,10 @@ const useStyles = makeStyles(() => ({
 }))
 
 /**
- * PostList
+ * UserMenu
  * @param {*} props id, title, thumbnail, permalink
  */
-export default function PostList(props) {
+export default function UserMenu(props) {
   const classes = useStyles(props)
   const [state, setState] = useState({
     bottom: false
@@ -64,7 +57,7 @@ export default function PostList(props) {
   const UserMenuList = [
     {
       name: 'Notification',
-      slug: '/members/' + props.user_display_name + '/notifications/',
+      slug: '/members/' + props.user.user_nicename + '/notifications/',
       icon: <NotificationsNoneOutlinedIcon />
     },
     {
@@ -79,14 +72,9 @@ export default function PostList(props) {
     },
     {
       name: 'My Profile',
-      slug: '/members/' + props.user_display_name + '/profile/',
+      slug: '/members/' + props.user.user_nicename + '/profile/',
       icon: <PersonOutlineOutlinedIcon />
     }
-    // {
-    //   name: 'Sign Out',
-    //   slug: '/members/' + props.user_display_name + '/profile/',
-    //   icon: <ExitToAppOutlinedIcon />
-    // }
   ]
 
   // User
@@ -95,9 +83,15 @@ export default function PostList(props) {
   return (
     <>
       {/* AVATAR with TRIGGER */}
-      <ButtonBase {...props} aria-haspopup="true" onClick={toggleDrawer('bottom', true)}>
-        <Avatar alt={props.user.full_name} src={props.user.avatar} className="ylc-avatar" />
-      </ButtonBase>
+      <button
+        {...props}
+        aria-haspopup="true"
+        className="avatarButton"
+        onClick={toggleDrawer('bottom', true)}>
+        <div className="avatarBall ylc-avatar">
+          <img src={props.user.avatar} alt={'user-id-' + props.user.id} />
+        </div>
+      </button>
 
       {/* MENU DRAWER */}
       <SwipeableDrawer
@@ -117,65 +111,117 @@ export default function PostList(props) {
         <div className="swiper"></div>
         <div className={classes.wrapper}>
           <div className={classes.container}>
-            <List disablePadding component="nav" aria-label="User Menu">
+            <ul className="user-menu-wrapper" aria-label="User Menu">
               {/* User info */}
-              <ListItem button>
-                <ListItemAvatar>
-                  <Avatar alt={props.user.full_name} src={props.user.avatar} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={
-                    'Hi, ' +
-                    (props.user.full_name != '' ? props.user.full_name : props.user.display_name)
-                  }
-                />
-              </ListItem>
+              <li style={{ padding: 15 }}>
+                <div className="userMenuAvatar">
+                  <div className="avatarBall">
+                    <img src={props.user.avatar} alt={'user-id-' + props.user.id} />
+                  </div>
+                </div>
+                Hi, {props.user.full_name != '' ? props.user.full_name : props.user.user_nicename}
+              </li>
 
               {/* Item */}
               {UserMenuList.map((menu) => (
-                <ListItem button key={menu.name}>
-                  <ListItemIcon style={{ color: '#fff' }}>{menu.icon}</ListItemIcon>
-                  <ListItemText primary={menu.name} />
-                </ListItem>
+                <li key={menu.name}>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setState({ ...state, ['bottom']: false })
+                      $router.push(menu.slug)
+                    }}>
+                    <div className="menu-icon">{menu.icon}</div>
+                    {menu.name}
+                  </button>
+                </li>
               ))}
 
-              <ListItem
-                button
-                onClick={async (e) => {
-                  e.preventDefault()
-                  toggleDrawer('bottom', true)
-                  await mutateUser(fetchJson('/api/logout')).then(() => {
-                    $router.push('/member/login/')
-                  })
-                }}>
-                <ListItemIcon style={{ color: '#fff' }}>
-                  <ExitToAppOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Sign Out" />
-              </ListItem>
-            </List>
+              <li>
+                <button
+                  onClick={async (e) => {
+                    e.preventDefault()
+                    toggleDrawer('bottom', false)
+                    await mutateUser(fetchJson('/api/logout')).then(() => {
+                      $router.push('/member/login/')
+                    })
+                  }}>
+                  <div className="menu-icon">
+                    <ExitToAppOutlinedIcon />
+                  </div>
+                  Sign Out
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
       </SwipeableDrawer>
 
-      <style jsx global>{`
+      <style jsx>{`
         .userMenuPaper {
           width: 100%;
           background: ${red}!important;
           color: #fff !important;
           overflow-x: hidden;
         }
+        .avatarButton {
+          background: transparent;
+          border: 0;
+          padding: 0;
+          color: #fff;
+          text-align: left;
+          font-size: inherit;
+          margin-right: 15px;
+          outline: none;
+        }
+        .ylc-avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 90px;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover !important;
+          }
+        }
         .swiper {
           width: 50px;
           height: 5px;
           border-radius: 90px;
-          background: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.5);
           position: absolute;
           top: 10px;
           left: 0;
           right: 0;
           margin: 0 auto;
           z-index: 999;
+        }
+        .user-menu-wrapper {
+          padding: 0;
+          margin: 0;
+          li,
+          button {
+            display: flex;
+            width: 100%;
+            align-items: center;
+
+            .menu-icon,
+            .userMenuAvatar {
+              width: 56px;
+              min-width: 56px;
+              max-width: 56px;
+            }
+
+            .avatarBall {
+              @extend .ylc-avatar;
+            }
+          }
+          button {
+            padding: 15px;
+            @extend .avatarButton;
+          }
         }
       `}</style>
     </>
