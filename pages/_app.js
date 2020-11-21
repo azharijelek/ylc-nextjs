@@ -76,6 +76,7 @@ function ylcApp({ Component, pageProps }) {
 
         table {
           max-width: 100%;
+          display: flex;
           td {
             padding: 10px;
           }
