@@ -7,6 +7,8 @@ import Pagination from '@material-ui/lab/Pagination'
 import { parseHtmlEntities } from '@/lib/helpers'
 import { useRouter } from 'next/router'
 
+const S3_URL = process.env.S3_URL
+
 export default function SubCategory(props) {
   const router = useRouter()
   const router_page = router.query.page ? parseInt(router.query.page) : 1
@@ -76,6 +78,25 @@ export default function SubCategory(props) {
     window.history.pushState({ path: refresh }, '', refresh)
   }
 
+  /**
+   * Simplify Post List
+   */
+  const SimplifyPostList = ({ post }) => {
+    const img =
+      post.featured_img != ''
+        ? post.featured_img
+        : 'https://cdn.statically.io/img/' + S3_URL + post.ylc_news_data.featured_image
+    return (
+      <PostList
+        id={post.id}
+        title={post.title}
+        thumbnail={img + '?h=60&q=70&f=webp'}
+        permalink={post.permalink}
+        postdate={post.date}
+      />
+    )
+  }
+
   return (
     <>
       <Head>
@@ -87,33 +108,19 @@ export default function SubCategory(props) {
 
       {posts.length > 0 ? (
         <>
-          <Box pt={2} px={2}>
-            {page == 1 ? (
+          <Box pt={2} px={3}>
+            {page == 1 && (
               <>
                 {posts.length > 0 &&
-                  posts.map((post) => (
-                    <PostList
-                      id={post.id}
-                      title={post.title}
-                      thumbnail={post.featured_img + '&h=60'}
-                      permalink={post.permalink}
-                      postdate={post.date}
-                      key={'category-' + post.id}
-                    />
-                  ))}
+                  posts.map((post) => <SimplifyPostList post={post} key={'category-' + post.id} />)}
               </>
-            ) : (
+            )}
+
+            {page > 1 && (
               <>
                 {pagingPosts.length > 0 &&
                   pagingPosts.map((post) => (
-                    <PostList
-                      id={post.id}
-                      title={post.title}
-                      thumbnail={post.featured_img + '&h=60'}
-                      permalink={post.permalink}
-                      postdate={post.date}
-                      key={'category-' + post.id}
-                    />
+                    <SimplifyPostList post={post} key={'category-' + post.id} />
                   ))}
               </>
             )}
@@ -132,7 +139,7 @@ export default function SubCategory(props) {
           </Box>
         </>
       ) : (
-        <Box py={3} px={2} alignContent="center">
+        <Box py={3} px={3} alignContent="center">
           <div className="text-center">
             <img
               src="/static/img/article.svg"

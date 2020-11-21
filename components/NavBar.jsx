@@ -16,13 +16,6 @@ import { useRouter } from 'next/router'
 // Styling
 import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme) => ({
-  mainheader: {
-    borderBottom: '1px solid #ed1b33',
-    backgroundColor: '#fff !important',
-    boxShadow: 'none !important',
-    zIndex: 99,
-    maxHeight: 56
-  },
   avatar: {
     marginRight: 10,
     width: 40,
@@ -605,7 +598,8 @@ function NavBar() {
 
         <style jsx>{`
           .listlink {
-            min-width: 90%;
+            width: 85%;
+            width: calc(100% - 46px);
             padding: 15px;
             display: block;
             line-height: 1;
@@ -613,8 +607,27 @@ function NavBar() {
           .childLink {
             font-size: 14px !important;
             color: #fff;
-            padding: 0 0 0 20px;
+            padding: 15px;
+            margin-left: 15px;
+            line-height: 1;
             display: block;
+            border-left: 1px dashed rgba(255, 255, 255, 0.3);
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            &:before {
+              content: '';
+              display: block;
+              width: 5px;
+              height: 5px;
+              border-radius: 90px;
+              background: #fff;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              margin: auto 0;
+              transform: translateX(-50%) translateY(-1px);
+            }
           }
         `}</style>
       </>
@@ -676,7 +689,7 @@ function NavBar() {
           <div className="drawerHead">
             {/* LOGIN BUTTON */}
             <Link href="/member/login/" prefetch>
-              <a href="/member/login/" onClick={handleDrawerClose} className="signUpButton">
+              <a href="/member/login/" onClick={handleDrawerClose} className="signInButton">
                 Sign In
               </a>
             </Link>
@@ -756,6 +769,7 @@ function NavBar() {
 
       {/* STYLES */}
       <style jsx>{`
+        /* Main Header */
         .mainheader {
           position: fixed;
           top: 0;
@@ -774,12 +788,16 @@ function NavBar() {
             padding-right: 15px;
           }
         }
+
+        /* Logo */
         .title {
           flex-grow: 1;
         }
         .logoH1 {
           margin: 0;
         }
+
+        /* Login Button */
         .drawerHead {
           height: 56;
           display: flex;
@@ -797,7 +815,7 @@ function NavBar() {
           right: 0;
           z-index: 999;
         }
-        .signUpButton {
+        .signInButton {
           display: block;
           height: 35px;
           line-height: 35px;
@@ -810,6 +828,8 @@ function NavBar() {
           border-radius: 4px;
           font-weight: bold;
         }
+
+        /* Drawer List Menu */
         .sideMenu {
           list-style: none;
           padding: 0;
@@ -824,55 +844,60 @@ function NavBar() {
           padding: 0;
           margin: 0;
         }
+
+        /* Parent Menu */
         .parentList {
           flex-wrap: wrap;
           padding: 0;
-          color: '#fff';
+          color: #fff;
           display: flex;
           border-bottom: 1px solid #da192f;
           align-items: center;
           letter-spacing: 0.5px;
 
-          &:hover {
+          &:hover,
+          &:active {
             background-color: rgba(0, 0, 0, 0.07);
           }
           &.current {
             background-color: #ed8f1b;
-            border-color: #a91425;
+            border-color: #a91426;
+          }
+
+          .toggleChild {
+            cursor: pointer;
+            height: 46px;
+            width: 46px;
+            line-height: 45px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
         }
+
+        /* Child Menu */
         .collapse {
           background: #a91425;
           margin: 0 !important;
           min-width: 100%;
           width: 100%;
-          max-width: '100%';
+          max-width: 100%;
           list-style: none;
           padding: 0;
           display: none;
           &.show {
             display: block;
-            /* li {
-              height: 40px;
-              opacity: 1;
-              visibility: visible;
-            } */
           }
           li {
-            height: 40px;
-            line-height: 40px;
-            /*transition: all 0.3s ease;
-            overflow: hidden;
-            opacity: 0;
-            visibility: hidden;*/
-
-            &.current {
+            transition: background 0.2s ease;
+            &.current,
+            &:hover,
+            &:focus,
+            &:active {
               background: #8e101f;
             }
           }
-        }
-        .toggleChild {
-          cursor: pointer;
         }
       `}</style>
     </>

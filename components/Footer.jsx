@@ -43,6 +43,10 @@ export default function Footer() {
           text-align: center;
           margin-top: 0;
 
+          p {
+            color: #fff;
+          }
+
           .footer-up {
             background: #4f4f4f;
             padding: 30px 15px;

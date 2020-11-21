@@ -39,7 +39,7 @@ export default function Category(props) {
           </HorizontalScroll>
         </Box>
       ) : (
-        <Box py={3} px={2} alignContent="center">
+        <Box py={3} px={3} alignContent="center">
           <div className="text-center">
             <img
               src="/static/img/article.svg"
@@ -81,7 +81,7 @@ export default function Category(props) {
       {/* RECENT STORIES */}
       {recentposts.length > 0 && (
         <Box py={4} bgcolor="#f5f5f5">
-          <Box px={2} mb={3}>
+          <Box px={3} mb={3}>
             <h4 className="ylc-widgethead">RECENT STORIES</h4>
           </Box>
 
@@ -108,7 +108,7 @@ export default function Category(props) {
       {subcategories.length > 0 &&
         subcategories.map((cat, i) => (
           <Box py={4} key={cat.slug + '-sub-cat-' + i}>
-            <Box px={2} mb={3}>
+            <Box px={3} mb={3}>
               <h4 className="ylc-widgethead" dangerouslySetInnerHTML={{ __html: cat.name }}></h4>
             </Box>
             <LazyLoad offset={[-100, 100]} height={288}>

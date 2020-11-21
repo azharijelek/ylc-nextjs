@@ -5,9 +5,16 @@ import DateRangeIcon from '@material-ui/icons/DateRange'
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
 import LazyLoad from 'react-lazyload'
 const Comments = dynamic(import('@/components/article/Comments'), { ssr: false })
+
+const S3_URL = process.env.S3_URL
 export default class ArticleDetail extends Component {
   render() {
     const item = this.props.data
+    const img =
+      item.featured_img != ''
+        ? item.featured_img
+        : 'https://cdn.statically.io/img/' + S3_URL + item.ylc_news_data.featured_image
+
     return (
       <>
         <Head>
@@ -27,86 +34,74 @@ export default class ArticleDetail extends Component {
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
 
-        <section className="container">
-          <article>
-            {/* <pre>{JSON.stringify(this.props.data, null, 2)}</pre> */}
+        <article
+          key={'post-' + item.id}
+          id={'post-' + item.id}
+          className={'container post-' + item.id}>
+          {/* <pre>{JSON.stringify(this.props.data, null, 2)}</pre> */}
 
-            {/* Date */}
-            <div className="post-date">
-              <div className="date-icon">
-                <DateRangeIcon fontSize="small" />
-              </div>
-              <div>{item.date}</div>
+          {/* Date */}
+          <div className="post-date">
+            <div className="date-icon">
+              <DateRangeIcon fontSize="small" />
             </div>
+            <div>{item.date}</div>
+          </div>
 
-            {/* Post title */}
-            <h1>{item.title}</h1>
+          {/* Post title */}
+          <h1>{item.title}</h1>
 
-            {/* Blurb */}
-            <p className="blurb">{item.blurb}</p>
+          {/* Blurb */}
+          <p className="blurb">{item.blurb}</p>
 
-            {/* Post Meta */}
-            <div className="post-meta">
-              <div className="author">
-                {/* Avatar */}
-                <div className="author-avatar">
-                  <img src={item.author.avatar} alt={item.author.name} loading="lazy" />
-                </div>
-
-                {/* Author Name */}
-                <div className="author-name"> {item.author.name}</div>
+          {/* Post Meta */}
+          <div className="post-meta">
+            <div className="author">
+              {/* Avatar */}
+              <div className="author-avatar">
+                <img src={item.author.avatar} alt={item.author.name} loading="lazy" />
               </div>
-              <div className="post-comment">
-                <div className="comment-icon">
-                  <ChatBubbleOutlineIcon fontSize="small" />
-                </div>
-                <div>{item.comments} Comments</div>
+
+              {/* Author Name */}
+              <div className="author-name"> {item.author.name}</div>
+            </div>
+            <div className="post-comment">
+              <div className="comment-icon">
+                <ChatBubbleOutlineIcon fontSize="small" />
+              </div>
+              <div>
+                {item.comments}{' '}
+                <a href={'#comments-' + item.id}>{item.comments <= 1 ? 'Comment' : 'Comments'}</a>
               </div>
             </div>
+          </div>
 
-            {/* Post Thumbnail */}
-            {item.featured_img && (
-              <div className="post-thumbnail">
-                <img
-                  src={item.featured_img && item.featured_img + '&h=170'}
-                  alt={item.title}
-                  height="170"
-                  loading="lazy"
-                />
-              </div>
-            )}
+          {/* Post Thumbnail */}
+          {img != null && img != false && (
+            <div className="post-thumbnail">
+              <img src={img + '?f=webp&h=220&q=70'} alt={item.title} height="220" loading="lazy" />
+            </div>
+          )}
 
-            {/* CONTENT */}
-            <div className="content" dangerouslySetInnerHTML={{ __html: item.content }}></div>
-          </article>
-        </section>
+          {/* CONTENT */}
+          <div className="content" dangerouslySetInnerHTML={{ __html: item.content }}></div>
+        </article>
 
         {/* COMMENTS */}
-        <section style={{ padding: '15px 15px 25px', background: '#fbfbfb' }}>
+        <section
+          id={'comments-' + item.id}
+          style={{ padding: '15px 15px 25px', background: '#fbfbfb' }}>
           <h4 className="ylc-widgethead">{item.comments} COMMENTS</h4>
           <LazyLoad offset={[-100, 100]} height={290}>
             <Comments postId={item.id} />
           </LazyLoad>
         </section>
 
-        <style jsx global>{`
-          p {
-            font-size: 18px;
-            line-height: 32px;
-            margin: 20px 0;
-
-            & + br {
-              display: none !important;
-            }
-          }
-        `}</style>
-
         <style jsx>{`
           article {
             max-width: 100%;
             width: 100%;
-            overflow-x: hidden;
-            overflow-y: auto;
+            word-break: break-word;
           }
           .post-date {
             color: #696969;
@@ -132,7 +127,8 @@ export default class ArticleDetail extends Component {
 
           p.blurb {
             font-size: 18px;
-            line-height: 24px;
+            line-height: 28px;
+            margin: 10px 0;
           }
 
           .post-meta {
@@ -178,8 +174,10 @@ export default class ArticleDetail extends Component {
 
           .post-thumbnail {
             overflow: hidden;
-            border-radius: 5px;
-            height: 170px;
+            margin-left: -20px;
+            margin-right: -20px;
+            width: auto;
+            height: 220px;
             background: #f5f5f5;
             img {
               width: 100%;

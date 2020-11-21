@@ -32,15 +32,23 @@ export default function PopularPosts(props) {
   return (
     <>
       {data.length > 0 &&
-        data.map((post) => (
-          <PostList
-            id={post.id}
-            title={post.title}
-            thumbnail={post.featured_img + '&h=60&q=50'}
-            permalink={post.permalink}
-            key={'PopularPost-' + post.id}
-          />
-        ))}
+        data.map((post) => {
+          const img =
+            post.featured_img != ''
+              ? post.featured_img
+              : 'https://cdn.statically.io/img/' +
+                process.env.S3_URL +
+                post.ylc_news_data.featured_image
+          return (
+            <PostList
+              id={post.id}
+              title={post.title}
+              thumbnail={img + '?h=60&q=50'}
+              permalink={post.permalink}
+              key={'PopularPost-' + post.id}
+            />
+          )
+        })}
     </>
   )
 }

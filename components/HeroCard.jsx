@@ -9,13 +9,21 @@ export default function HeroCard(props) {
             <a title={props.title}>{props.title}</a>
           </Link>
         </h2>
-        <img
-          src={props.thumbnail + '&h=200&q=40'}
-          width="300"
-          height="200"
-          alt={props.title}
-          loading="lazy"
-        />
+        <Link href={props.permalink}>
+          <a title={props.title}>
+            <img
+              src={props.thumbnail + '?h=200&q=40'}
+              onError={(e) => {
+                e.target.onerror = null
+                e.target.src = '/static/img/photo.svg'
+              }}
+              width="300"
+              height="200"
+              alt={props.title}
+              loading="lazy"
+            />
+          </a>
+        </Link>
       </section>
 
       <style jsx>{`

@@ -96,7 +96,7 @@ describe('<ArticleDetail/>', () => {
     const thumbnail = wrapper.find('.post-thumbnail')
 
     expect(thumbnail.find('img')).toHaveLength(1)
-    expect(thumbnail.find('img').prop('src')).toBe(data.featured_img + '&h=170')
+    expect(thumbnail.find('img').prop('src')).toBe(data.featured_img + '?h=170')
   })
 
   it('should render .content', () => {

@@ -26,7 +26,7 @@ describe('<HeroCard/>', () => {
       <HeroCard {...mainProps} thumbnail={img_url} title={title} permalink={permalink} />
     )
 
-    expect(wrapper.find('img').prop('src')).toBe(img_url + '&h=200')
+    expect(wrapper.find('img').prop('src')).toBe(img_url + '?h=200')
     expect(wrapper.find('h2').find('a').prop('title')).toBe(title)
     expect(wrapper.find('h2').find('Link').prop('href')).toBe(permalink)
   })

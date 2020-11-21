@@ -61,10 +61,11 @@ export default function RecentNews(props) {
             <PostGrid
               id={post.id}
               title={post.title}
-              thumbnail={post.featured_img}
+              thumbnail={post.featured_img + '?h=140&q=50'}
               permalink={post.permalink}
               categories={post.categories}
               blurb={post.blurb}
+              maxWidth={250}
               key={'post-' + post.id}
             />
           </div>
@@ -72,9 +73,8 @@ export default function RecentNews(props) {
 
       <style jsx>{`
         .post-grid--item {
-          width: 80%;
           flex: 0 0 auto;
-          padding: 0 15px 0 0;
+          padding: 0 20px 0 0;
           &:first-of-type {
             padding-left: 15px;
           }

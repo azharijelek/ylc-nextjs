@@ -6,12 +6,13 @@ import Link from 'next/link'
  */
 
 export default function PostGrid(props) {
-  let thumbnail = props.thumbnail != null && `${props.thumbnail}&h=140`
+  let thumbnail = props.thumbnail
   let catLink = props.categories.slug
   let catName = props.categories.name
+  let maxWidth = props.maxWidth ? props.maxWidth : 270
   return (
     <>
-      <article className={'post-grid post-' + props.id}>
+      <article className={'post-grid post-' + props.id} style={{ maxWidth: maxWidth }}>
         <div className="post-grid--thumb">
           <Link href={catLink}>
             <a className="cat-badge">
@@ -21,7 +22,17 @@ export default function PostGrid(props) {
           {props.thumbnail != null && (
             <Link href={props.permalink}>
               <a>
-                <img src={thumbnail} alt={props.title} width="270" height="140" loading="lazy" />
+                <img
+                  src={thumbnail}
+                  alt={props.title}
+                  onError={(e) => {
+                    e.target.onerror = null
+                    e.target.src = '/static/img/photo.svg'
+                  }}
+                  width="270"
+                  height="140"
+                  loading="lazy"
+                />
               </a>
             </Link>
           )}
@@ -71,13 +82,16 @@ export default function PostGrid(props) {
           h4 {
             font-size: 18px;
             margin-top: 10px;
-            line-height: 24px;
+            line-height: 22px;
             margin-bottom: 10px;
           }
           p {
             margin-top: 0;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 22px;
+          }
+          .postDetail {
+            padding: 0 10px;
           }
         }
       `}</style>

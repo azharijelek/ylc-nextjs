@@ -63,8 +63,19 @@ function ylcApp({ Component, pageProps }) {
           font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
+        p {
+          font-size: 18px;
+          line-height: 28px;
+          margin: 28px 0;
+          color: #333;
+
+          & + br {
+            display: none !important;
+          }
+        }
+
         .container {
-          padding: 15px;
+          padding: 20px;
         }
 
         a {
@@ -92,7 +103,7 @@ function ylcApp({ Component, pageProps }) {
           display: flex;
           -moz-box-align: center;
           align-items: center;
-          margin-bottom: 15px !important;
+          margin-bottom: 20px !important;
           margin-top: 0;
         }
 

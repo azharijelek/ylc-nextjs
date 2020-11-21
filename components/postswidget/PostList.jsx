@@ -15,6 +15,10 @@ export default function PostList(props) {
                 <img
                   src={props.thumbnail}
                   alt={props.title}
+                  onError={(e) => {
+                    e.target.onerror = null
+                    e.target.src = '/static/img/photo.svg'
+                  }}
                   width="60"
                   height="60"
                   loading="lazy"
@@ -36,7 +40,7 @@ export default function PostList(props) {
       <style jsx>{`
         .PostList {
           display: flex;
-          margin-bottom: 20px;
+          margin-bottom: 25px;
         }
         .postThumb {
           min-width: 85px;
@@ -54,7 +58,7 @@ export default function PostList(props) {
           width: 100%;
           height: 60px;
           overflow: hidden;
-          border-radius: 4px;
+          border-radius: 7px;
           background: #e0e0e0;
           img {
             object-fit: cover;
