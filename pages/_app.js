@@ -85,7 +85,7 @@ function ylcApp({ Component, pageProps }) {
         article {
           img {
             max-width: 100%;
-            height: auto !important;
+            height: auto;
           }
         }
 
