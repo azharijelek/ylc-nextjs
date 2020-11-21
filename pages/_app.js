@@ -1,11 +1,10 @@
-//import React from 'react'
+import React from 'react'
 import { ThemeProvider } from '@material-ui/core/styles'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import theme from '../theme'
 import fetch from '@/lib/fetchJson'
 import { SWRConfig } from 'swr'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 // export function reportWebVitals(metric) {
@@ -17,15 +16,13 @@ import Head from 'next/head'
  * @param {Component, pageProps} param0
  */
 function ylcApp({ Component, pageProps }) {
-  // React.useEffect(() => {
-  //   // Remove the server-side injected CSS.
-  //   const jssStyles = document.querySelector('#jss-server-side')
-  //   if (jssStyles) {
-  //     jssStyles.parentElement.removeChild(jssStyles)
-  //   }
-  // }, [])
-
-  const router = useRouter()
+  React.useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector('#jss-server-side')
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles)
+    }
+  }, [])
 
   return (
     <>
@@ -46,7 +43,7 @@ function ylcApp({ Component, pageProps }) {
                 console.error(err)
               }
             }}>
-            <NavBar path={router.pathname} />
+            <NavBar />
             <Component {...pageProps} />
             <Footer />
           </SWRConfig>

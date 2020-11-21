@@ -48,9 +48,8 @@ const useStyles = makeStyles((theme) => ({
 
 /**
  * Main Component: NavBar
- * @param {Object} props
  */
-function NavBar(props) {
+function NavBar() {
   const classes = useStyles()
   const router = useRouter()
   const menu = JSON.parse(Menu())
@@ -166,7 +165,7 @@ function NavBar(props) {
             onClick={handleDrawerClose}
             role="button"
             tabIndex={0}>
-            {props.path == '/' ? <HomeLogo /> : <InnerPageLogo />}
+            {router.pathname == '/' ? <HomeLogo /> : <InnerPageLogo />}
           </div>
 
           <IconButton className="btn-search" color="inherit" aria-label="search">
