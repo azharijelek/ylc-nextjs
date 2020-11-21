@@ -74,6 +74,19 @@ function ylcApp({ Component, pageProps }) {
           }
         }
 
+        table {
+          max-width: 100%;
+          td {
+            padding: 10px;
+          }
+        }
+
+        article {
+          img {
+            max-width: 100%;
+          }
+        }
+
         .container {
           padding: 20px;
         }
