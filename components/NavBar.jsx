@@ -129,12 +129,21 @@ function NavBar() {
    * NavLink Component
    * @param {Object} props
    */
-  const NavLink = (props) => {
+  const NavLink = ({ nolink, href, children, className, onClick }) => {
     return (
       <>
-        <Link href={props.href} passHref>
-          <a {...props}>{props.children}</a>
-        </Link>
+        {nolink ? (
+          <a href={href} className={className}>
+            {children}
+          </a>
+        ) : (
+          <Link href={href} passHref>
+            <a href={href} onClick={onClick} className={className}>
+              {children}
+            </a>
+          </Link>
+        )}
+
         <style jsx>{`
           .listlink {
             min-width: 90%;
@@ -224,19 +233,16 @@ function NavBar() {
             return (
               <React.Fragment key={'parent-menu-' + i}>
                 <li
-                  current-link={currentRoute}
-                  parent-link={slug}
                   className={
                     'parentList' +
                     (currentRoute === parentLink || currentRoute.indexOf(parentLink) == 0
                       ? ' current'
                       : '')
                   }>
-                  <NavLink
-                    href={parentLink}
-                    onClick={handleDrawerClose}
-                    className="listlink"
-                    dangerouslySetInnerHTML={{ __html: label }}></NavLink>
+                  <NavLink href={parentLink} onClick={handleDrawerClose} className="listlink">
+                    <span dangerouslySetInnerHTML={{ __html: label }}></span>
+                  </NavLink>
+
                   {/* SUB MENU TOGGLER */}
                   {sub_menu != null && (
                     <div className="toggleChild">
@@ -272,10 +278,12 @@ function NavBar() {
                                 : ''
                             }>
                             <NavLink
+                              nolink
                               href={childLink}
                               onClick={handleDrawerClose}
-                              className="childLink"
-                              dangerouslySetInnerHTML={{ __html: item.label }}></NavLink>
+                              className="childLink">
+                              <span dangerouslySetInnerHTML={{ __html: item.label }}></span>
+                            </NavLink>
                           </li>
                         )
                       })}
