@@ -82,7 +82,7 @@ const Home = (data) => {
             <Box px={2}>
               <h4 className="ylc-widgethead">{cat.name}</h4>
             </Box>
-            <LazyLoad offset={[-100, 100]} height={288}>
+            <LazyLoad offset={[-100, 100]} height={300}>
               <HorizontalScroll>
                 <RecentNews per_page="4" page={1} show_categories={1} cat={cat.slug} />
               </HorizontalScroll>

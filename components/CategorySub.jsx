@@ -153,16 +153,18 @@ export default function SubCategory(props) {
             <Box my={2}>
               <div className="text-center">
                 There is no article found under {parseHtmlEntities(term.name)}.
-                <Button
-                  style={{ marginTop: 20, borderRadius: 50 }}
-                  component="a"
-                  variant="outlined"
-                  color="primary"
-                  href="/"
-                  size="large"
-                  disableElevation>
-                  Back to Home
-                </Button>
+                <Box>
+                  <Button
+                    style={{ marginTop: 20, borderRadius: 50 }}
+                    component="a"
+                    variant="outlined"
+                    color="primary"
+                    href="/"
+                    size="large"
+                    disableElevation>
+                    Back to Home
+                  </Button>
+                </Box>
               </div>
             </Box>
           </Box>
