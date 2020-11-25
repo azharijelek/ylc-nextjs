@@ -87,6 +87,17 @@ function ylcApp({ Component, pageProps }) {
             max-width: 100%;
             height: auto;
           }
+
+          .caption {
+            font-size: 14px;
+            line-height: 24px;
+            font-style: italic;
+            color: #6d6d6d;
+            & + span {
+              font-size: 14px;
+              font-weight: bold;
+            }
+          }
         }
 
         .container {

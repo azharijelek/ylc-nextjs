@@ -111,7 +111,7 @@ export default function Category(props) {
             <Box px={3} mb={3}>
               <h4 className="ylc-widgethead" dangerouslySetInnerHTML={{ __html: cat.name }}></h4>
             </Box>
-            <LazyLoad offset={[-100, 100]} height={288}>
+            <LazyLoad offset={[-100, 100]} height={394}>
               <HorizontalScroll>
                 <RecentNews per_page="4" page={1} show_categories={1} cat={cat.slug} />
               </HorizontalScroll>
