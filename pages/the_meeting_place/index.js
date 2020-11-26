@@ -2,10 +2,12 @@ import Box from '@material-ui/core/Box'
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import HorizontalScroll from '@/components/HorizontalScroll'
+import ForumTrendingPosts from '@/components/ForumTrendingPosts'
 
 export default function TheMeetingPlace() {
   const [fullIntro, setFullIntro] = useState(false)
   const [forumTypes, setForumTypes] = useState([])
+  const [tab, setTab] = useState(null)
 
   useEffect(() => {
     fetchForumFetch()
@@ -27,6 +29,10 @@ export default function TheMeetingPlace() {
     setFullIntro(true)
   }
 
+  const handleTab = (val) => {
+    setTab(val)
+  }
+
   return (
     <>
       <Head>
@@ -35,57 +41,93 @@ export default function TheMeetingPlace() {
       <main className="ylc-outtest-wrapper">
         <div className="forum-nav">
           <HorizontalScroll>
-            <button>Trending</button>
-            <button>Newest</button>
-            <button>Most Alive</button>
-            <button>Forum List</button>
+            <button
+              onClick={() => {
+                handleTab('trending')
+              }}>
+              Trending
+            </button>
+            <button
+              onClick={() => {
+                handleTab('newest')
+              }}>
+              Newest
+            </button>
+            <button
+              onClick={() => {
+                handleTab('most_active')
+              }}>
+              Most Active
+            </button>
+            <button
+              onClick={() => {
+                handleTab('forum_list')
+              }}>
+              Forum List
+            </button>
           </HorizontalScroll>
         </div>
-        <Box px={3} pb={4} mt={2} style={{ minHeight: '100vh' }}>
-          <h1 style={{ textAlign: 'center' }}>The Meeting Place {fullIntro}</h1>
-          <Box my={2} justifyContent="center" display="flex" flexWrap="wrap">
-            <img src="/static/img/forum-home.svg" alt="the meeting place" />
-          </Box>
-
-          {fullIntro != true && (
+        <Box px={2} pb={4} mt={3} style={{ minHeight: '100vh' }}>
+          {/* If tab is NULL */}
+          {tab == null && (
             <>
-              <p style={{ marginBottom: 10 }}>
-                The Meeting Place is a free online forum that provides a safe, secure environment
-                where you can exchange ideas and information.
-              </p>
-              <button onClick={handleReadMore} className="readmore">
-                Read More &raquo;
-              </button>
+              <h1 style={{ textAlign: 'center' }}>The Meeting Place {fullIntro}</h1>
+              <Box my={2} justifyContent="center" display="flex" flexWrap="wrap">
+                <img src="/static/img/forum-home.svg" alt="the meeting place" />
+              </Box>
+
+              {fullIntro != true && (
+                <>
+                  <p style={{ marginBottom: 10 }}>
+                    The Meeting Place is a free online forum that provides a safe, secure
+                    environment where you can exchange ideas and information.
+                  </p>
+                  <button onClick={handleReadMore} className="readmore">
+                    Read More &raquo;
+                  </button>
+                </>
+              )}
+
+              {fullIntro == true && (
+                <>
+                  <p>
+                    The Meeting Place is a free online forum that provides a safe, secure
+                    environment where you can exchange ideas and information. In order to ensure
+                    everyone has fun on the Meeting Place, we have created these easy-to-follow
+                    guidelines. Of course we encourage the sharing of opinions, but it’s important
+                    to remember that no one opinion is right, therefore, no one has the right to put
+                    anyone else’s opinion down. If you don’t agree with someone’s point of view,
+                    please respond with an intelligent rebuttal. It’s okay to say someone’s point is
+                    silly, but it’s not okay to say that the poster is stupid.
+                  </p>
+                  <p>
+                    So, please, follow our community guidelines, have a laugh, and enjoy your time
+                    on the Meeting Place forum.
+                  </p>
+                </>
+              )}
             </>
           )}
 
-          {fullIntro == true && (
+          {/* TRENDING */}
+          {tab == 'trending' && (
             <>
-              <p>
-                The Meeting Place is a free online forum that provides a safe, secure environment
-                where you can exchange ideas and information. In order to ensure everyone has fun on
-                the Meeting Place, we have created these easy-to-follow guidelines. Of course we
-                encourage the sharing of opinions, but it’s important to remember that no one
-                opinion is right, therefore, no one has the right to put anyone else’s opinion down.
-                If you don’t agree with someone’s point of view, please respond with an intelligent
-                rebuttal. It’s okay to say someone’s point is silly, but it’s not okay to say that
-                the poster is stupid.
-              </p>
-              <p>
-                So, please, follow our community guidelines, have a laugh, and enjoy your time on
-                the Meeting Place forum.
-              </p>
+              <h1 className="ylc-widgethead">TRENDING</h1>
+
+              <ForumTrendingPosts />
             </>
           )}
 
-          <pre
-            style={{
-              wordBreak: 'break-all',
-              maxWidth: '100%',
-              overflow: 'hidden'
-            }}>
-            {JSON.stringify(forumTypes, null, 2)}
-          </pre>
+          {tab == 'forum_list' && (
+            <pre
+              style={{
+                wordBreak: 'break-all',
+                maxWidth: '100%',
+                overflow: 'hidden'
+              }}>
+              {JSON.stringify(forumTypes, null, 2)}
+            </pre>
+          )}
         </Box>
       </main>
       <style jsx>{`
