@@ -78,7 +78,12 @@ export default function TheMeetingPlace() {
             </>
           )}
 
-          <pre style={{ wordBreak: 'break-all', maxWidth: '100%', overflow: 'hidden' }}>
+          <pre
+            style={{
+              wordBreak: 'break-all',
+              maxWidth: '100%',
+              overflow: 'hidden'
+            }}>
             {JSON.stringify(forumTypes, null, 2)}
           </pre>
         </Box>

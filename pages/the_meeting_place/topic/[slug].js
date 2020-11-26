@@ -66,6 +66,7 @@ export default function forumTopics({ data }) {
                 </Head>
                 <Box px={2} py={4}>
                   <h1 style={{ margin: '0 0 20px 0' }}>{data.title}</h1>
+                  <div></div>d
                 </Box>
               </>
             )}
