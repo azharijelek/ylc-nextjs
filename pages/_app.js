@@ -53,21 +53,23 @@ function ylcApp({ Component, pageProps }) {
       <style jsx global>{`
         .root {
           flex-grow: 1;
-          padding-top: 60px;
+          padding-top: 57px;
           min-height: 70vh;
+          color: #333;
         }
         body,
         html {
           padding: 0;
           margin: 0;
           font-family: 'Helvetica Neue', Arial, sans-serif;
+          color: #333;
         }
 
         p {
           font-size: 18px;
           line-height: 28px;
           margin: 28px 0;
-          color: #333;
+          color: inherit;
 
           & + br {
             display: none !important;

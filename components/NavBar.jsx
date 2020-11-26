@@ -856,12 +856,12 @@ function NavBar() {
           letter-spacing: 0.5px;
 
           &:hover,
-          &:active {
-            background-color: rgba(0, 0, 0, 0.07);
+          &:active,
+          &.current {
+            background-color: rgba(0, 0, 0, 0.2);
           }
           &.current {
-            background-color: #ed8f1b;
-            border-color: #a91426;
+            border-color: transparent;
           }
 
           .toggleChild {
